@@ -1,0 +1,100 @@
+[
+  {
+    "id": "INC-3001",
+    "title": "Checkout API returning 502s",
+    "team": "Platform",
+    "priority": "P1",
+    "status": "open",
+    "age_hours": 7,
+    "assignee": "amira",
+    "tags": [
+      "api",
+      "Network"
+    ]
+  },
+  {
+    "id": "INC-3002",
+    "title": "Nightly backup job failed",
+    "team": "database",
+    "priority": "P2",
+    "status": "open",
+    "age_hours": 30,
+    "assignee": null,
+    "tags": [
+      "backup"
+    ]
+  },
+  {
+    "id": "INC-3003",
+    "title": "VPN drops for the Berlin office",
+    "team": " network ",
+    "priority": "P2",
+    "status": "in_progress",
+    "age_hours": 12,
+    "assignee": "li",
+    "tags": [
+      "vpn",
+      "network"
+    ]
+  },
+  {
+    "id": "INC-3004",
+    "title": "Disk 91% full on db-03",
+    "team": "DATABASE",
+    "priority": "P3",
+    "status": "open",
+    "age_hours": 80,
+    "assignee": "sofia",
+    "tags": [
+      "storage"
+    ]
+  },
+  {
+    "id": "INC-3005",
+    "title": "TLS certificate expires in 10 days",
+    "team": "platform",
+    "priority": "P3",
+    "status": "resolved",
+    "age_hours": 50,
+    "assignee": "jonas",
+    "tags": [
+      "tls"
+    ]
+  },
+  {
+    "id": "INC-3006",
+    "title": "Shipment tracking page is slow",
+    "team": "Platform",
+    "priority": "P2",
+    "status": "open",
+    "age_hours": 26,
+    "assignee": "",
+    "tags": [
+      "latency",
+      "api"
+    ]
+  },
+  {
+    "id": "INC-3007",
+    "title": "Label printer queue stuck in warehouse 4",
+    "team": "it-support",
+    "priority": "P4",
+    "status": "open",
+    "age_hours": 200,
+    "assignee": null,
+    "tags": []
+  },
+  {
+    "id": "INC-3008",
+    "title": "Replica lag above 30 seconds",
+    "team": "database",
+    "priority": "P1",
+    "status": "OPEN",
+    "age_hours": 3,
+    "assignee": "sofia",
+    "tags": [
+      "replication",
+      "Latency"
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+# Streamlit settings for this project (read from the folder you run streamlit from).
+
+[browser]
+# Streamlit sends anonymous usage statistics unless this is false.
+gatherUsageStats = false
+
+[server]
+# Only this computer can open the UI. Streamlit listens on every network interface by default.
+address = "localhost"

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">One application, several LLM providers</title>
+  <desc id="desc">Your Python code reads the provider, model and API key from environment variables. The openai SDK reaches three providers by changing only its base URL: OpenAI (the course default, gpt-5.6-terra), OpenRouter (a gateway to many vendors' models with one key), and Ollama (models running locally, no key or cost). The separate anthropic SDK calls Anthropic's API for Claude models. The same model has different IDs at different providers.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="560" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">One application, several LLM providers</text>
+  <text x="126" y="76" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">Your code</text>
+  <text x="358" y="76" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">Python SDK</text>
+  <text x="740" y="76" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">Provider (endpoint · example model)</text>
+
+  <!-- ============ App ============ -->
+  <rect x="30" y="206" width="192" height="148" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="126" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Your Python code</text>
+  <text x="126" y="258" text-anchor="middle" font-size="12" fill="#1E3A8A">reads settings from the</text>
+  <text x="126" y="274" text-anchor="middle" font-size="12" fill="#1E3A8A">environment (.env):</text>
+  <text x="126" y="298" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">LLM_PROVIDER</text>
+  <text x="126" y="316" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">LLM_MODEL</text>
+  <text x="126" y="334" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">*_API_KEY</text>
+
+  <line x1="222" y1="250" x2="262" y2="230" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="222" y1="330" x2="262" y2="420" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- ============ SDKs ============ -->
+  <rect x="268" y="96" width="180" height="254" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="358" y="206" text-anchor="middle" font-size="15" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">openai</text>
+  <text x="358" y="230" text-anchor="middle" font-size="12" fill="#1E3A8A">same client, same calls;</text>
+  <text x="358" y="246" text-anchor="middle" font-size="12" fill="#1E3A8A">only base_url and the</text>
+  <text x="358" y="262" text-anchor="middle" font-size="12" fill="#1E3A8A">model ID change</text>
+
+  <rect x="268" y="400" width="180" height="74" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="358" y="432" text-anchor="middle" font-size="15" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">anthropic</text>
+  <text x="358" y="454" text-anchor="middle" font-size="12" fill="#1E3A8A">Claude's native SDK</text>
+
+  <!-- ============ Providers ============ -->
+  <line x1="448" y1="133" x2="534" y2="133" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="448" y1="223" x2="534" y2="223" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="448" y1="313" x2="534" y2="313" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <line x1="448" y1="437" x2="534" y2="437" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <text x="491" y="125" text-anchor="middle" font-size="11" fill="#475569">default</text>
+  <text x="491" y="215" text-anchor="middle" font-size="11" fill="#475569">base_url</text>
+  <text x="491" y="305" text-anchor="middle" font-size="11" fill="#475569">base_url</text>
+
+  <rect x="540" y="96" width="400" height="74" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2.5"/>
+  <text x="556" y="119" font-size="14" font-weight="700" fill="#4C1D95">OpenAI · course default</text>
+  <text x="556" y="139" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#4C1D95">api.openai.com · gpt-5.6-terra</text>
+  <text x="556" y="158" font-size="12" fill="#4C1D95">key: OPENAI_API_KEY · paid per token</text>
+
+  <rect x="540" y="186" width="400" height="74" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="556" y="209" font-size="14" font-weight="700" fill="#4C1D95">OpenRouter · one key, many vendors</text>
+  <text x="556" y="229" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#4C1D95">openrouter.ai/api/v1 · openai/gpt-5.6-terra</text>
+  <text x="556" y="248" font-size="12" fill="#4C1D95">key: OPENROUTER_API_KEY · paid per token</text>
+
+  <rect x="540" y="276" width="400" height="74" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="556" y="299" font-size="14" font-weight="700" fill="#334155">Ollama · runs on your machine</text>
+  <text x="556" y="319" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#334155">localhost:11434/v1 · llama3.2</text>
+  <text x="556" y="338" font-size="12" fill="#334155">no key, no cost; needs RAM and a downloaded model</text>
+
+  <rect x="540" y="400" width="400" height="74" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="556" y="423" font-size="14" font-weight="700" fill="#4C1D95">Anthropic</text>
+  <text x="556" y="443" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#4C1D95">api.anthropic.com · claude-haiku-5-5</text>
+  <text x="556" y="462" font-size="12" fill="#4C1D95">key: ANTHROPIC_API_KEY · paid per token</text>
+
+  <!-- ============ Caveat ============ -->
+  <rect x="30" y="494" width="910" height="52" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="485" y="515" text-anchor="middle" font-size="13" font-weight="600" fill="#92400E">⚠ Model IDs are provider-specific: Claude Haiku 5.5 is claude-haiku-5-5 at Anthropic but</text>
+  <text x="485" y="534" text-anchor="middle" font-size="13" font-weight="600" fill="#92400E">anthropic/claude-haiku-5.5 at OpenRouter. Keep the model ID in configuration, never hard-coded.</text>
+</svg>

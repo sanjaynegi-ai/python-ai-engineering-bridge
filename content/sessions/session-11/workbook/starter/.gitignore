@@ -1,0 +1,21 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Tool caches and generated output
+.pytest_cache/
+.ruff_cache/
+out/
+
+# Local settings
+.env
+
+# The index built by handbook-search ingest
+index/

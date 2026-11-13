@@ -1,0 +1,84 @@
+[
+  {
+    "id": "INC-3004",
+    "title": "Disk 91% full on db-03",
+    "team": "database",
+    "priority": "P3",
+    "status": "open",
+    "age_hours": 104,
+    "assignee": "sofia",
+    "tags": [
+      "storage"
+    ]
+  },
+  {
+    "id": "INC-3009",
+    "title": "Badge readers offline at the Zürich depot",
+    "team": "it-support",
+    "priority": "P2",
+    "status": "open",
+    "age_hours": 28,
+    "assignee": null,
+    "tags": [
+      "access",
+      "network"
+    ]
+  },
+  {
+    "title": "Ticket without an ID",
+    "team": "platform",
+    "priority": "P3",
+    "status": "open",
+    "age_hours": 5,
+    "assignee": null,
+    "tags": []
+  },
+  {
+    "id": "INC-3011",
+    "title": "Monitoring alert storm after upgrade",
+    "team": "platform",
+    "priority": "P2",
+    "status": "open",
+    "age_hours": "12",
+    "assignee": "amira",
+    "tags": [
+      "monitoring"
+    ]
+  },
+  {
+    "id": "INC-3012",
+    "title": "Intermittent DNS failures",
+    "team": "network",
+    "priority": "P9",
+    "status": "open",
+    "age_hours": 5,
+    "assignee": null,
+    "tags": "network"
+  },
+  {
+    "id": "INC-3013",
+    "title": "Load balancer health checks failing",
+    "team": "network",
+    "priority": "P1",
+    "status": "open",
+    "age_hours": true,
+    "assignee": "li",
+    "tags": [
+      "network",
+      "api"
+    ]
+  },
+  {
+    "id": "INC-3010",
+    "title": "Slow queries on the orders table",
+    "team": "database",
+    "priority": "P2",
+    "status": "open",
+    "age_hours": 20,
+    "assignee": "",
+    "tags": [
+      "latency",
+      "sql"
+    ]
+  }
+]

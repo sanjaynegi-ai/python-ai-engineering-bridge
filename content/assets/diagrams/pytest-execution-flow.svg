@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">What pytest does when you run it</title>
+  <desc id="desc">pytest reads its configuration, collects test files and functions and expands parametrize into separate cases, then runs each case: it builds the fixtures the test names as parameters (from conftest.py or built-ins such as tmp_path), calls the test, and tears the fixtures down. Finally it reports each result and exits with 0 if everything passed. Below, one parametrized test shows where each argument comes from.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">What pytest does when you run it</text>
+
+  <!-- stages -->
+  <g font-size="13">
+    <rect x="20" y="58" width="208" height="128" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="34" y="82" font-size="14" font-weight="700" fill="#334155">1  Configure</text>
+    <text x="34" y="104" fill="#334155">read <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">[tool.pytest]</tspan></text>
+    <text x="34" y="124" fill="#334155">in pyproject.toml:</text>
+    <text x="34" y="144" fill="#334155">testpaths, addopts</text>
+
+    <rect x="254" y="58" width="208" height="128" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="268" y="82" font-size="14" font-weight="700" fill="#1E3A8A">2  Collect</text>
+    <text x="268" y="104" fill="#1E3A8A">files <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">test_*.py</tspan>,</text>
+    <text x="268" y="124" fill="#1E3A8A">functions <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">test_*</tspan>;</text>
+    <text x="268" y="144" fill="#1E3A8A">one case per parametrize row</text>
+    <text x="268" y="170" fill="#B91C1C">✗ import error: run stops</text>
+
+    <rect x="488" y="58" width="208" height="128" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="502" y="82" font-size="14" font-weight="700" fill="#1E3A8A">3  Run each case</text>
+    <text x="502" y="104" fill="#1E3A8A">set up the fixtures it names</text>
+    <text x="502" y="124" fill="#1E3A8A">→ call the test function</text>
+    <text x="502" y="144" fill="#1E3A8A">→ tear the fixtures down</text>
+    <text x="502" y="170" fill="#1E3A8A">every case starts fresh</text>
+
+    <rect x="722" y="58" width="218" height="128" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="736" y="82" font-size="14" font-weight="700" fill="#115E59">4  Report</text>
+    <text x="736" y="104" fill="#115E59"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">.</tspan> passed   <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#B91C1C">F</tspan> failed</text>
+    <text x="736" y="124" fill="#115E59"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#B91C1C">E</tspan> error in a fixture</text>
+    <text x="736" y="144" fill="#115E59">failed asserts show values</text>
+    <text x="736" y="170" fill="#115E59">exit code 0 only if all pass</text>
+  </g>
+  <g stroke="#2563EB" stroke-width="2">
+    <line x1="228" y1="122" x2="248" y2="122" marker-end="url(#arrow-blue)"/>
+    <line x1="462" y1="122" x2="482" y2="122" marker-end="url(#arrow-blue)"/>
+    <line x1="696" y1="122" x2="716" y2="122" marker-end="url(#arrow-blue)"/>
+  </g>
+
+  <!-- zoom panel -->
+  <rect x="20" y="210" width="920" height="374" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="40" y="236" font-size="15" font-weight="700" fill="#334155">Zoom in on stage 3: where a test's arguments come from</text>
+
+  <!-- fixtures source -->
+  <rect x="40" y="256" width="270" height="146" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="54" y="278" font-size="14" font-weight="700" fill="#115E59">Fixtures, matched by name</text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="13" fill="#115E59">
+    <text x="54" y="302"># tests/conftest.py</text>
+    <text x="54" y="322">@pytest.fixture</text>
+    <text x="54" y="342">def make_record(): ...</text>
+    <text x="54" y="362">@pytest.fixture</text>
+    <text x="54" y="382">def sla_hours(): ...</text>
+  </g>
+
+  <!-- parametrize source -->
+  <rect x="650" y="256" width="270" height="146" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="664" y="278" font-size="14" font-weight="700" fill="#1E3A8A">Parametrize rows</text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="13" fill="#1E3A8A">
+    <text x="664" y="302">("open",   25, True)</text>
+    <text x="664" y="322">("open",   24, False)</text>
+    <text x="664" y="342">("closed", 500, False)</text>
+  </g>
+  <text x="664" y="372" font-size="13" fill="#1E3A8A">3 rows → 3 separate cases,</text>
+  <text x="664" y="390" font-size="13" fill="#1E3A8A">each reported on its own</text>
+
+  <!-- test function -->
+  <rect x="40" y="440" width="880" height="126" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#1E3A8A">
+    <text x="58" y="468">def test_is_breached(<tspan fill="#115E59" font-weight="700">make_record, sla_hours</tspan>, <tspan font-weight="700">status, age_hours, expected</tspan>):</text>
+    <text x="90" y="494">ticket = Ticket.from_record(make_record(status=status, age_hours=age_hours))</text>
+    <text x="90" y="520">assert ticket.is_breached(sla_hours) is expected</text>
+  </g>
+  <text x="58" y="550" font-size="13" fill="#334155">A plain assert. If it fails, pytest rewrites it to show both sides, e.g. <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#B91C1C">assert True is False</tspan>.</text>
+
+  <path d="M175,402 C175,425 230,440 250,456" fill="none" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <path d="M785,402 C785,425 560,440 520,456" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <text x="330" y="300" font-size="13" fill="#334155">Built-in fixtures need no definition:</text>
+  <g font-size="13" fill="#334155">
+    <text x="330" y="322"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">tmp_path</tspan>  a new empty folder per test</text>
+    <text x="330" y="344"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">capsys</tspan>    captured stdout and stderr</text>
+    <text x="330" y="366"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">monkeypatch</tspan> temporary changes</text>
+  </g>
+</svg>

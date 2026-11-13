@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="470" viewBox="0 0 960 470" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Course roadmap</title>
+  <desc id="desc">Sixteen sessions in four phases over eight weekends. Phase 1, Python for experienced developers, covers sessions 1 to 4 and ends with Milestone 1, Project 01. Phase 2, professional Python applications, covers sessions 5 to 8 and ends with Milestone 2, Project 02. Phase 3, Python for AI applications, covers sessions 9 to 12 and ends with Milestone 3, Project 03. Phase 4, AI-assisted engineering and the RAG capstone, covers sessions 13 to 16 and ends with Milestone 4, the capstone and the readiness assessment.</desc>
+
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="470" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Course roadmap: 8 weekends, 16 sessions, 4 milestones</text>
+
+  <!-- Phase 1 -->
+  <rect x="24" y="60" width="210" height="300" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="129" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Phase 1</text>
+  <text x="129" y="106" text-anchor="middle" font-size="12" fill="#1E3A8A">Python for experienced</text>
+  <text x="129" y="122" text-anchor="middle" font-size="12" fill="#1E3A8A">developers · weekends 1–2</text>
+  <g font-size="12" fill="#1E3A8A">
+    <rect x="38" y="136" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="50" y="160"><tspan font-weight="700">01</tspan>  Runtime and setup</text>
+    <rect x="38" y="184" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="50" y="208"><tspan font-weight="700">02</tspan>  Language essentials</text>
+    <rect x="38" y="232" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="50" y="256"><tspan font-weight="700">03</tspan>  Functions, files, JSON</text>
+    <rect x="38" y="280" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="50" y="304"><tspan font-weight="700">04</tspan>  Packages and testing</text>
+  </g>
+
+  <!-- Phase 2 -->
+  <rect x="258" y="60" width="210" height="300" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="363" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Phase 2</text>
+  <text x="363" y="106" text-anchor="middle" font-size="12" fill="#1E3A8A">Professional Python</text>
+  <text x="363" y="122" text-anchor="middle" font-size="12" fill="#1E3A8A">applications · weekends 3–4</text>
+  <g font-size="12" fill="#1E3A8A">
+    <rect x="272" y="136" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="284" y="160"><tspan font-weight="700">05</tspan>  HTTP and API clients</text>
+    <rect x="272" y="184" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="284" y="208"><tspan font-weight="700">06</tspan>  Pydantic</text>
+    <rect x="272" y="232" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="284" y="256"><tspan font-weight="700">07</tspan>  FastAPI</text>
+    <rect x="272" y="280" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="284" y="304"><tspan font-weight="700">08</tspan>  Asynchronous Python</text>
+  </g>
+
+  <!-- Phase 3 -->
+  <rect x="492" y="60" width="210" height="300" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="597" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#4C1D95">Phase 3</text>
+  <text x="597" y="106" text-anchor="middle" font-size="12" fill="#4C1D95">Python for AI applications</text>
+  <text x="597" y="122" text-anchor="middle" font-size="12" fill="#4C1D95">weekends 5–6</text>
+  <g font-size="12" fill="#4C1D95">
+    <rect x="506" y="136" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="518" y="160"><tspan font-weight="700">09</tspan>  Direct LLM APIs</text>
+    <rect x="506" y="184" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="518" y="208"><tspan font-weight="700">10</tspan>  LangChain</text>
+    <rect x="506" y="232" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="518" y="256"><tspan font-weight="700">11</tspan>  Retrieval and RAG</text>
+    <rect x="506" y="280" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="518" y="304"><tspan font-weight="700">12</tspan>  LangGraph</text>
+  </g>
+
+  <!-- Phase 4 -->
+  <rect x="726" y="60" width="210" height="300" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="831" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#4C1D95">Phase 4</text>
+  <text x="831" y="106" text-anchor="middle" font-size="12" fill="#4C1D95">AI-assisted engineering and</text>
+  <text x="831" y="122" text-anchor="middle" font-size="12" fill="#4C1D95">RAG capstone · weekends 7–8</text>
+  <g font-size="12" fill="#4C1D95">
+    <rect x="740" y="136" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="752" y="160"><tspan font-weight="700">13</tspan>  AI-assisted engineering</text>
+    <rect x="740" y="184" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="752" y="208"><tspan font-weight="700">14</tspan>  Capstone: ingestion</text>
+    <rect x="740" y="232" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="752" y="256"><tspan font-weight="700">15</tspan>  Capstone: application</text>
+    <rect x="740" y="280" width="182" height="40" rx="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="752" y="304"><tspan font-weight="700">16</tspan>  Review and readiness</text>
+  </g>
+
+  <!-- arrows between phases -->
+  <line x1="234" y1="210" x2="254" y2="210" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <line x1="468" y1="210" x2="488" y2="210" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <line x1="702" y1="210" x2="722" y2="210" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- milestones -->
+  <g font-size="12" fill="#115E59">
+    <rect x="38" y="374" width="182" height="54" rx="16" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+    <text x="129" y="396" text-anchor="middle" font-weight="700">✓ Milestone 1</text>
+    <text x="129" y="414" text-anchor="middle">Project 01, with tests</text>
+    <rect x="272" y="374" width="182" height="54" rx="16" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+    <text x="363" y="396" text-anchor="middle" font-weight="700">✓ Milestone 2</text>
+    <text x="363" y="414" text-anchor="middle">Project 02, with tests</text>
+    <rect x="506" y="374" width="182" height="54" rx="16" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+    <text x="597" y="396" text-anchor="middle" font-weight="700">✓ Milestone 3</text>
+    <text x="597" y="414" text-anchor="middle">Project 03, mocked tests</text>
+    <rect x="740" y="374" width="182" height="54" rx="16" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+    <text x="831" y="396" text-anchor="middle" font-weight="700">✓ Milestone 4</text>
+    <text x="831" y="414" text-anchor="middle">Capstone and assessment</text>
+  </g>
+  <text x="480" y="456" text-anchor="middle" font-size="12" fill="#334155">Between weekends: 3–5 hours of notebooks, quizzes and workbook assignments</text>
+</svg>

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">AI-assisted development: who does what</title>
+  <desc id="desc">Six stages in order: Understand, Plan, Implement, Test, Review and Explain. Each stage shows what you do, what the assistant does, and the evidence the stage produces. Understand: you state the goal and ask questions; the assistant explores the code read-only and explains it; the evidence is a summary you checked against the code. Plan: you give requirements, constraints and acceptance criteria; the assistant proposes files, steps and tests; the evidence is a plan you approved. Implement: you keep the steps small and approve commands; the assistant edits files and runs commands; the evidence is a small diff. Test: you run the tests yourself; the assistant writes and runs tests; the evidence is test output and tests that can fail. Review: you read every line and check APIs and security; the assistant reviews the diff in a fresh context; the evidence is findings, fixed or rejected. Explain: you explain the decisions in your own words; the assistant answers your questions; the evidence is notes and a pull request description you wrote. A review that finds a problem goes back to Plan. You own every line you submit.</desc>
+
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">AI-assisted development: who does what</text>
+
+  <!-- legend -->
+  <g font-size="12">
+    <rect x="240" y="52" width="12" height="12" rx="2" fill="#2563EB"/>
+    <text x="258" y="63" fill="#1E3A8A">You</text>
+    <rect x="310" y="52" width="12" height="12" rx="2" fill="#7C3AED"/>
+    <text x="328" y="63" fill="#4C1D95">The assistant</text>
+    <rect x="440" y="52" width="12" height="12" rx="2" fill="#0D9488"/>
+    <text x="458" y="63" fill="#115E59">Evidence the stage produces</text>
+  </g>
+
+  <!-- card template: title, You, Assistant, Evidence -->
+  <g font-size="13">
+    <!-- 1 Understand -->
+    <rect x="30" y="84" width="280" height="168" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+    <text x="46" y="110" font-size="16" font-weight="700" fill="#0F172A">1  Understand</text>
+    <text x="46" y="136" fill="#1E3A8A"><tspan font-weight="700">You:</tspan> state the goal, ask questions</text>
+    <text x="46" y="160" fill="#4C1D95"><tspan font-weight="700">Assistant:</tspan> explores the code</text>
+    <text x="46" y="178" fill="#4C1D95">read-only (plan mode), explains it</text>
+    <text x="46" y="206" fill="#115E59"><tspan font-weight="700">Evidence:</tspan> a summary you checked</text>
+    <text x="46" y="224" fill="#115E59">against the code</text>
+
+    <!-- 2 Plan -->
+    <rect x="340" y="84" width="280" height="168" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+    <text x="356" y="110" font-size="16" font-weight="700" fill="#0F172A">2  Plan</text>
+    <text x="356" y="136" fill="#1E3A8A"><tspan font-weight="700">You:</tspan> requirements, constraints,</text>
+    <text x="356" y="154" fill="#1E3A8A">acceptance criteria</text>
+    <text x="356" y="178" fill="#4C1D95"><tspan font-weight="700">Assistant:</tspan> proposes files, steps</text>
+    <text x="356" y="196" fill="#4C1D95">and tests</text>
+    <text x="356" y="224" fill="#115E59"><tspan font-weight="700">Evidence:</tspan> a plan you approved</text>
+
+    <!-- 3 Implement -->
+    <rect x="650" y="84" width="280" height="168" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+    <text x="666" y="110" font-size="16" font-weight="700" fill="#0F172A">3  Implement</text>
+    <text x="666" y="136" fill="#1E3A8A"><tspan font-weight="700">You:</tspan> small steps; approve commands</text>
+    <text x="666" y="160" fill="#4C1D95"><tspan font-weight="700">Assistant:</tspan> edits files,</text>
+    <text x="666" y="178" fill="#4C1D95">runs commands</text>
+    <text x="666" y="206" fill="#115E59"><tspan font-weight="700">Evidence:</tspan> a small diff you can</text>
+    <text x="666" y="224" fill="#115E59">read in one sitting</text>
+
+    <!-- 4 Test -->
+    <rect x="650" y="300" width="280" height="168" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+    <text x="666" y="326" font-size="16" font-weight="700" fill="#0F172A">4  Test</text>
+    <text x="666" y="352" fill="#1E3A8A"><tspan font-weight="700">You:</tspan> run the tests yourself</text>
+    <text x="666" y="376" fill="#4C1D95"><tspan font-weight="700">Assistant:</tspan> writes tests, runs</text>
+    <text x="666" y="394" fill="#4C1D95">them, fixes failures</text>
+    <text x="666" y="422" fill="#115E59"><tspan font-weight="700">Evidence:</tspan> test output, and tests</text>
+    <text x="666" y="440" fill="#115E59">shown to fail when the code is wrong</text>
+
+    <!-- 5 Review -->
+    <rect x="340" y="300" width="280" height="168" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+    <text x="356" y="326" font-size="16" font-weight="700" fill="#0F172A">5  Review</text>
+    <text x="356" y="352" fill="#1E3A8A"><tspan font-weight="700">You:</tspan> read every line; check APIs,</text>
+    <text x="356" y="370" fill="#1E3A8A">errors, security, privacy</text>
+    <text x="356" y="394" fill="#4C1D95"><tspan font-weight="700">Assistant:</tspan> reviews the diff in a</text>
+    <text x="356" y="412" fill="#4C1D95">fresh context (/code-review)</text>
+    <text x="356" y="440" fill="#115E59"><tspan font-weight="700">Evidence:</tspan> findings, fixed or rejected</text>
+
+    <!-- 6 Explain -->
+    <rect x="30" y="300" width="280" height="168" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+    <text x="46" y="326" font-size="16" font-weight="700" fill="#0F172A">6  Explain</text>
+    <text x="46" y="352" fill="#1E3A8A"><tspan font-weight="700">You:</tspan> explain the decisions in</text>
+    <text x="46" y="370" fill="#1E3A8A">your own words</text>
+    <text x="46" y="394" fill="#4C1D95"><tspan font-weight="700">Assistant:</tspan> answers your questions</text>
+    <text x="46" y="422" fill="#115E59"><tspan font-weight="700">Evidence:</tspan> notes and a pull request</text>
+    <text x="46" y="440" fill="#115E59">description you wrote</text>
+  </g>
+
+  <!-- flow arrows -->
+  <g stroke="#64748B" stroke-width="2" fill="none">
+    <line x1="310" y1="168" x2="336" y2="168" marker-end="url(#arrow-slate)"/>
+    <line x1="620" y1="168" x2="646" y2="168" marker-end="url(#arrow-slate)"/>
+    <line x1="790" y1="252" x2="790" y2="296" marker-end="url(#arrow-slate)"/>
+    <line x1="650" y1="384" x2="624" y2="384" marker-end="url(#arrow-slate)"/>
+    <line x1="340" y1="384" x2="314" y2="384" marker-end="url(#arrow-slate)"/>
+  </g>
+  <!-- loop back from Review to Plan -->
+  <path d="M 480 300 L 480 256" fill="none" stroke="#D97706" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-amber)"/>
+  <text x="490" y="282" font-size="12" font-weight="700" fill="#92400E">a problem? back to Plan</text>
+
+  <!-- ownership -->
+  <rect x="30" y="500" width="900" height="76" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="50" y="530" font-size="15" fill="#92400E"><tspan font-weight="700">You own every line you submit.</tspan> The assistant does more of the typing; you do all of the judging.</text>
+  <text x="50" y="556" font-size="14" fill="#92400E">"The tests pass" and "no issues found" are claims until you have seen the evidence yourself.</text>
+</svg>

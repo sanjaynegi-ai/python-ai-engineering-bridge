@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="620" viewBox="0 0 960 620" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">A Python application calling an LLM API</title>
+  <desc id="desc">The application calls triage(report) on a Triager. The OpenAI implementation uses the provider's SDK, which adds the API key from the environment, serialises a JSON request, applies a timeout, and retries rate limits, server errors and connection failures with backoff. It sends POST /v1/responses over HTTPS to the provider, where the model generates tokens. The response carries a status, the output (a message with text, or a refusal) and usage: input and output tokens, which are what you pay for. The SDK turns the JSON into Python objects; the application validates the output and converts SDK errors into its own error types.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="620" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">A Python application calling an LLM API</text>
+
+  <!-- application -->
+  <rect x="40" y="64" width="250" height="236" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="90" font-size="16" font-weight="700" fill="#1E3A8A">Your application</text>
+  <g font-size="13" fill="#1E3A8A">
+    <text x="56" y="116">service: <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">triage_all(...)</tspan></text>
+    <text x="56" y="138">calls <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">triager.triage(report)</tspan></text>
+    <text x="56" y="168" font-weight="700">OpenAITriager</text>
+    <text x="56" y="190">• instructions + report text</text>
+    <text x="56" y="210">• the output schema (Pydantic)</text>
+    <text x="56" y="230">• validates what comes back</text>
+    <text x="56" y="250">• maps SDK errors to</text>
+    <text x="70" y="270"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">TriageError</tspan> subclasses</text>
+  </g>
+
+  <!-- SDK -->
+  <rect x="340" y="64" width="260" height="236" rx="12" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="356" y="90" font-size="16" font-weight="700" fill="#334155">Provider SDK (<tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">openai</tspan>)</text>
+  <g font-size="13" fill="#334155">
+    <text x="356" y="116">• API key header, from <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">.env</tspan></text>
+    <text x="356" y="138">• Python arguments → JSON</text>
+    <text x="356" y="160">• timeout (default: 10 minutes!)</text>
+    <text x="356" y="182">• retries 408, 409, 429, 5xx and</text>
+    <text x="370" y="200">connection errors, with backoff</text>
+    <text x="356" y="222">• JSON → typed Python objects</text>
+    <text x="356" y="244">• HTTP errors → SDK exceptions:</text>
+    <text x="370" y="262" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="12">RateLimitError, APITimeoutError,</text>
+    <text x="370" y="280" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="12">AuthenticationError ...</text>
+  </g>
+
+  <!-- provider -->
+  <rect x="650" y="64" width="270" height="236" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="666" y="90" font-size="16" font-weight="700" fill="#4C1D95">LLM provider</text>
+  <g font-size="13" fill="#4C1D95">
+    <text x="666" y="116">• checks the key, applies limits</text>
+    <text x="666" y="138">• the model reads the instructions</text>
+    <text x="680" y="156">and input as tokens</text>
+    <text x="666" y="178">• generates output tokens, shaped</text>
+    <text x="680" y="196">by the JSON schema if you sent one</text>
+    <text x="666" y="218">• stops: finished, or out of tokens</text>
+    <text x="680" y="236">(<tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">status: "incomplete"</tspan>)</text>
+    <text x="666" y="258">• counts tokens: that's the bill</text>
+  </g>
+
+  <!-- arrows -->
+  <line x1="290" y1="120" x2="336" y2="120" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="600" y1="120" x2="646" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <text x="623" y="110" text-anchor="middle" font-size="11" fill="#334155">HTTPS</text>
+  <line x1="646" y1="270" x2="604" y2="270" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="336" y1="270" x2="294" y2="270" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- request JSON -->
+  <rect x="40" y="326" width="430" height="200" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="56" y="350" font-size="14" font-weight="700" fill="#334155">The request: <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-weight="400">POST /v1/responses</tspan></text>
+  <g font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#334155">
+    <text x="56" y="376">{</text>
+    <text x="72" y="394">"model": "gpt-5.6-terra",</text>
+    <text x="72" y="412">"instructions": "You triage incident reports ...",</text>
+    <text x="72" y="430">"input": "VPN keeps dropping every few minutes ...",</text>
+    <text x="72" y="448">"max_output_tokens": 2000,</text>
+    <text x="72" y="466">"text": {"format": {"type": "json_schema",</text>
+    <text x="88" y="484">"name": "TriageResult", "strict": true, ...}}</text>
+    <text x="56" y="502">}</text>
+  </g>
+
+  <!-- response JSON -->
+  <rect x="490" y="326" width="430" height="200" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="506" y="350" font-size="14" font-weight="700" fill="#4C1D95">The response</text>
+  <g font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#4C1D95">
+    <text x="506" y="376">{</text>
+    <text x="522" y="394">"model": "gpt-5.6-terra", "status": "completed",</text>
+    <text x="522" y="412">"output": [{"type": "message", "content": [</text>
+    <text x="538" y="430">{"type": "output_text",</text>
+    <text x="538" y="448"> "text": "{\"priority\": \"P2\", ...}"}]}],</text>
+    <text x="522" y="466">"usage": {"input_tokens": 420,</text>
+    <text x="602" y="484">"output_tokens": 60, ...}</text>
+    <text x="506" y="502">}</text>
+  </g>
+
+  <!-- cost -->
+  <rect x="40" y="546" width="880" height="56" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="56" y="570" font-size="13" fill="#92400E"><tspan font-weight="700">⚠ You pay per token</tspan>, input and output (including any hidden reasoning tokens), at the model's price.</text>
+  <text x="56" y="590" font-size="13" fill="#92400E">Every request is also slow (seconds) and can fail: plan for timeouts, retries, refusals and invalid output.</text>
+</svg>

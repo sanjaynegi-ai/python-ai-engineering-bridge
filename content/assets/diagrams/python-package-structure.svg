@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Anatomy of a src-layout package</title>
+  <desc id="desc">The incident-report project: pyproject.toml and uv.lock describe the project; src/incident_report is the package, one module per file, with __init__.py marking it and __main__.py enabling python -m; tests sit outside the package and import it from the virtual environment, where uv sync installed it in editable mode pointing back at src.</desc>
+
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="640" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Anatomy of a src-layout package</text>
+
+  <!-- row highlights -->
+  <rect x="20" y="96" width="440" height="52" rx="6" fill="#F1F5F9"/>
+  <rect x="20" y="150" width="440" height="234" rx="6" fill="#EFF6FF"/>
+  <rect x="20" y="386" width="440" height="104" rx="6" fill="#F0FDFA"/>
+  <rect x="20" y="492" width="440" height="26" rx="6" fill="#F1F5F9"/>
+
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="15" fill="#0F172A">
+    <text x="36" y="88" font-weight="700">incident-report/</text>
+    <text x="36" y="114">├── pyproject.toml</text>
+    <text x="36" y="140">├── uv.lock</text>
+    <text x="36" y="166">├── src/</text>
+    <text x="36" y="192">│   └── <tspan font-weight="700" fill="#1E3A8A">incident_report/</tspan></text>
+    <text x="36" y="218">│       ├── __init__.py</text>
+    <text x="36" y="244">│       ├── __main__.py</text>
+    <text x="36" y="270">│       ├── models.py</text>
+    <text x="36" y="296">│       ├── loading.py</text>
+    <text x="36" y="322">│       ├── summary.py</text>
+    <text x="36" y="348">│       ├── report.py</text>
+    <text x="36" y="374">│       └── cli.py</text>
+    <text x="36" y="404">├── <tspan font-weight="700" fill="#115E59">tests/</tspan></text>
+    <text x="36" y="430">│   ├── conftest.py</text>
+    <text x="36" y="456">│   ├── acceptance/</text>
+    <text x="36" y="482">│   └── unit/</text>
+    <text x="36" y="510">└── .venv/</text>
+  </g>
+
+  <!-- annotations -->
+  <g font-size="13">
+    <rect x="520" y="70" width="420" height="78" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2"/>
+    <text x="536" y="92" font-weight="700" fill="#334155">Project description</text>
+    <text x="536" y="112" fill="#334155">name, dependencies, Ruff and pytest settings, and the</text>
+    <text x="536" y="130" fill="#334155">command <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">incident-report</tspan> → <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">incident_report.cli:main</tspan></text>
+
+    <rect x="520" y="166" width="420" height="78" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="536" y="188" font-weight="700" fill="#1E3A8A">The package: a folder of modules</text>
+    <text x="536" y="208" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">__init__.py</tspan> runs on first import. Import name uses</text>
+    <text x="536" y="226" fill="#1E3A8A">an underscore; the project name uses a hyphen.</text>
+
+    <rect x="520" y="262" width="420" height="96" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="536" y="284" font-weight="700" fill="#1E3A8A">One module per responsibility</text>
+    <text x="536" y="304" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">models.py</tspan> is imported as <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">incident_report.models</tspan>.</text>
+    <text x="536" y="324" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">__main__.py</tspan> makes <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">python -m incident_report</tspan> work;</text>
+    <text x="536" y="344" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">cli.py</tspan> holds the command's <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">main()</tspan>.</text>
+
+    <rect x="520" y="378" width="420" height="96" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="536" y="400" font-weight="700" fill="#115E59">Tests live outside the package</text>
+    <text x="536" y="420" fill="#115E59">pytest imports <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">incident_report</tspan> from .venv, exactly as</text>
+    <text x="536" y="440" fill="#115E59">a user of the package would. <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">conftest.py</tspan> shares</text>
+    <text x="536" y="460" fill="#115E59">fixtures with every test below it.</text>
+
+    <rect x="520" y="492" width="420" height="58" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2"/>
+    <text x="536" y="514" font-weight="700" fill="#334155">Editable install</text>
+    <text x="536" y="534" fill="#334155"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">uv sync</tspan> links .venv to src/, so edits apply at once.</text>
+  </g>
+
+  <g stroke="#64748B" stroke-width="1.5" stroke-dasharray="3 4" fill="none">
+    <line x1="460" y1="122" x2="516" y2="110"/>
+    <line x1="460" y1="200" x2="516" y2="204"/>
+    <line x1="460" y1="300" x2="516" y2="308"/>
+    <line x1="460" y1="430" x2="516" y2="426"/>
+    <line x1="460" y1="505" x2="516" y2="520"/>
+  </g>
+
+  <!-- why src -->
+  <rect x="20" y="568" width="920" height="58" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="40" y="592" font-size="14" font-weight="700" fill="#92400E">⚠ Why the extra src/ folder?</text>
+  <text x="40" y="613" font-size="13" fill="#92400E">Python puts the working folder on sys.path. Without src/, tests could import your local files instead of the installed package and pass by accident.</text>
+</svg>

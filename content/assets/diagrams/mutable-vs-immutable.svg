@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Mutable versus immutable objects</title>
+  <desc id="desc">Left: with an immutable int, open_count += 1 creates a new object 6 and rebinds open_count, while previous still refers to the unchanged 5. Right: with a mutable list, tags.append changes the one list object in place, so the change is visible through both tags and same_tags. A footer lists which built-in types are immutable and which are mutable.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="560" fill="#FFFFFF"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Mutable versus immutable objects</text>
+
+  <!-- ===================== Left: immutable ===================== -->
+  <rect x="20" y="58" width="450" height="352" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="245" y="86" text-anchor="middle" font-size="16" font-weight="700" fill="#115E59">Immutable: changes create a new object</text>
+
+  <rect x="40" y="102" width="410" height="84" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">
+    <text x="56" y="128">open_count = 5</text>
+    <text x="56" y="150">previous = open_count</text>
+    <text x="56" y="172">open_count += 1</text>
+  </g>
+
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="600" fill="#1E3A8A" text-anchor="middle">
+    <rect x="50" y="222" width="140" height="36" rx="16" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="120" y="245">previous</text>
+    <rect x="50" y="306" width="140" height="36" rx="16" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="120" y="329">open_count</text>
+  </g>
+
+  <rect x="320" y="212" width="110" height="56" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+  <text x="375" y="236" text-anchor="middle" font-size="12" fill="#115E59">int</text>
+  <text x="375" y="258" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="18" font-weight="700" fill="#115E59">5</text>
+
+  <rect x="320" y="296" width="110" height="56" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+  <text x="375" y="320" text-anchor="middle" font-size="12" fill="#115E59">int (new)</text>
+  <text x="375" y="342" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="18" font-weight="700" fill="#115E59">6</text>
+
+  <line x1="190" y1="240" x2="314" y2="240" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="190" y1="324" x2="314" y2="324" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <!-- old binding, now gone -->
+  <line x1="190" y1="314" x2="314" y2="254" stroke="#64748B" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow-slate)"/>
+  <text x="196" y="274" font-size="12" fill="#334155">before +=</text>
+
+  <text x="40" y="384" font-size="13" fill="#115E59">✓ The 5 object never changed. <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">open_count</tspan> was</text>
+  <text x="40" y="402" font-size="13" fill="#115E59">   rebound to a new object; <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">previous</tspan> still sees 5.</text>
+
+  <!-- ===================== Right: mutable ===================== -->
+  <rect x="490" y="58" width="450" height="352" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="715" y="86" text-anchor="middle" font-size="16" font-weight="700" fill="#92400E">Mutable: changes happen in place</text>
+
+  <rect x="510" y="102" width="410" height="84" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">
+    <text x="526" y="128">tags = ["network"]</text>
+    <text x="526" y="150">same_tags = tags</text>
+    <text x="526" y="172">tags.append("db")</text>
+  </g>
+
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="600" fill="#1E3A8A" text-anchor="middle">
+    <rect x="520" y="222" width="140" height="36" rx="16" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="590" y="245">tags</text>
+    <rect x="520" y="306" width="140" height="36" rx="16" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="590" y="329">same_tags</text>
+  </g>
+
+  <rect x="740" y="248" width="180" height="70" rx="8" fill="#FFFFFF" stroke="#D97706" stroke-width="2"/>
+  <text x="830" y="270" text-anchor="middle" font-size="12" fill="#92400E">list (one object)</text>
+  <text x="830" y="298" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="700" fill="#92400E">["network", "db"]</text>
+
+  <line x1="660" y1="240" x2="734" y2="270" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="660" y1="324" x2="734" y2="298" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <text x="510" y="384" font-size="13" fill="#92400E">⚠ One object, two names: the change is visible</text>
+  <text x="510" y="402" font-size="13" fill="#92400E">   through <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">same_tags</tspan> too. This is aliasing.</text>
+
+  <!-- ===================== Footer: type families ===================== -->
+  <rect x="20" y="428" width="920" height="116" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="40" y="458" font-size="14" font-weight="700" fill="#115E59">Immutable</text>
+  <text x="150" y="458" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">int · float · bool · str · None · tuple · frozenset · bytes</text>
+  <text x="40" y="488" font-size="14" font-weight="700" fill="#92400E">Mutable</text>
+  <text x="150" y="488" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">list · dict · set · bytearray · most class instances</text>
+  <text x="40" y="524" font-size="13" fill="#334155">Only hashable objects (in practice: immutable ones whose contents are also immutable) can be dict keys or set members.</text>
+</svg>

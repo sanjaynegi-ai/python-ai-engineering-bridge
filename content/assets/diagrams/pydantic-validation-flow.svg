@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">How Pydantic validates input</title>
+  <desc id="desc">Raw input, such as a dict parsed from JSON, passes four stages: each field is converted to its declared type, in lax or strict mode; declared constraints such as ge, pattern and Literal values are checked; field validators clean and normalise individual fields; model validators check rules across fields. The result is a typed model instance. Every failure in every field is collected into one ValidationError, whose errors list gives each problem's location, type and message. A table compares lax and strict conversion.</desc>
+
+  <defs>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">How Pydantic validates input</text>
+
+  <!-- input -->
+  <rect x="20" y="64" width="150" height="132" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="34" y="88" font-size="14" font-weight="700" fill="#334155">Raw input</text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="12" fill="#334155">
+    <text x="34" y="112">{"id": "INC-3004",</text>
+    <text x="34" y="130"> "team": " Network",</text>
+    <text x="34" y="148"> "age_hours": 80,</text>
+    <text x="34" y="166"> "assignee": "  ",</text>
+    <text x="34" y="184"> ...}</text>
+  </g>
+
+  <!-- stages -->
+  <g font-size="12">
+    <rect x="196" y="64" width="160" height="132" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="210" y="88" font-size="14" font-weight="700" fill="#115E59">1  Convert types</text>
+    <text x="210" y="110" fill="#115E59">each field to its</text>
+    <text x="210" y="127" fill="#115E59">annotation: <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">int</tspan>,</text>
+    <text x="210" y="144" fill="#115E59"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">str | None</tspan>, tuples,</text>
+    <text x="210" y="161" fill="#115E59">nested models</text>
+    <text x="210" y="183" fill="#92400E">lax or strict (below)</text>
+
+    <rect x="374" y="64" width="160" height="132" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="388" y="88" font-size="14" font-weight="700" fill="#115E59">2  Constraints</text>
+    <text x="388" y="110" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">Field(ge=0)</text>
+    <text x="388" y="127" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">Field(pattern=...)</text>
+    <text x="388" y="144" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">Field(min_length=1)</text>
+    <text x="388" y="161" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">Literal["P1", ...]</text>
+    <text x="388" y="183" fill="#115E59">declared, not coded</text>
+
+    <rect x="552" y="64" width="160" height="132" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="566" y="88" font-size="14" font-weight="700" fill="#1E3A8A">3  Field validators</text>
+    <text x="566" y="110" fill="#1E3A8A">your code, per field:</text>
+    <text x="566" y="127" fill="#1E3A8A">clean and normalise</text>
+    <text x="566" y="144" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">" Network"</tspan> →</text>
+    <text x="566" y="161" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">"network"</tspan></text>
+    <text x="566" y="183" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">@field_validator</text>
+
+    <rect x="730" y="64" width="210" height="132" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="744" y="88" font-size="14" font-weight="700" fill="#1E3A8A">4  Model validators</text>
+    <text x="744" y="110" fill="#1E3A8A">rules across fields, e.g.</text>
+    <text x="744" y="127" fill="#1E3A8A">"SLA hours must increase</text>
+    <text x="744" y="144" fill="#1E3A8A">from P1 to P4"</text>
+    <text x="744" y="183" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">@model_validator</text>
+  </g>
+  <g stroke="#0D9488" stroke-width="2">
+    <line x1="170" y1="130" x2="190" y2="130" marker-end="url(#arrow-teal)"/>
+    <line x1="356" y1="130" x2="368" y2="130" marker-end="url(#arrow-teal)"/>
+    <line x1="534" y1="130" x2="546" y2="130" marker-end="url(#arrow-teal)"/>
+    <line x1="712" y1="130" x2="724" y2="130" marker-end="url(#arrow-teal)"/>
+  </g>
+
+  <!-- success -->
+  <rect x="552" y="228" width="388" height="78" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="566" y="252" font-size="14" font-weight="700" fill="#115E59">✓ A typed, trustworthy instance</text>
+  <text x="566" y="274" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">Ticket(id='INC-3004', team='network',</text>
+  <text x="566" y="292" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">       age_hours=80, assignee=None, ...)</text>
+  <line x1="835" y1="196" x2="835" y2="222" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- errors -->
+  <rect x="20" y="228" width="510" height="150" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="34" y="252" font-size="14" font-weight="700" fill="#B91C1C">✗ One ValidationError with every problem, not just the first</text>
+  <g font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#B91C1C">
+    <text x="34" y="278">error.errors() →</text>
+    <text x="50" y="298">{"loc": ("priority",),  "type": "literal_error", "msg": ...}</text>
+    <text x="50" y="318">{"loc": ("age_hours",), "type": "int_type",      "msg": ...}</text>
+    <text x="50" y="338">{"loc": ("tags", 1),    "type": "string_type",   "msg": ...}</text>
+  </g>
+  <text x="34" y="366" font-size="12" fill="#B91C1C"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">loc</tspan> says where, <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">type</tspan> is stable for code, <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">msg</tspan> is for people.</text>
+  <g stroke="#DC2626" stroke-width="1.5" stroke-dasharray="5 4">
+    <line x1="276" y1="196" x2="276" y2="222" marker-end="url(#arrow-red)"/>
+    <line x1="454" y1="196" x2="454" y2="222" marker-end="url(#arrow-red)"/>
+    <path d="M600,196 C600,210 560,214 538,234" fill="none" marker-end="url(#arrow-red)"/>
+    <path d="M744,196 C744,216 600,212 538,250" fill="none" marker-end="url(#arrow-red)"/>
+  </g>
+
+  <!-- lax vs strict -->
+  <rect x="20" y="398" width="920" height="186" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="40" y="424" font-size="15" font-weight="700" fill="#92400E">⚠ Lax (default) versus strict conversion, for a field declared <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">int</tspan></text>
+  <g font-size="13" fill="#92400E">
+    <text x="40" y="454" font-weight="700">input</text>
+    <text x="200" y="454" font-weight="700">lax</text>
+    <text x="420" y="454" font-weight="700">strict (Field(strict=True))</text>
+    <line x1="40" y1="462" x2="680" y2="462" stroke="#D97706" stroke-width="1"/>
+    <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">
+      <text x="40" y="484">80</text><text x="200" y="484">80</text><text x="420" y="484">80</text>
+      <text x="40" y="506">"80"</text><text x="200" y="506">80  (converted)</text><text x="420" y="506">✗ int_type</text>
+      <text x="40" y="528">True</text><text x="200" y="528">1   (converted)</text><text x="420" y="528">✗ int_type</text>
+      <text x="40" y="550">80.5</text><text x="200" y="550">✗ int_from_float</text><text x="420" y="550">✗ int_type</text>
+    </g>
+  </g>
+  <text x="700" y="484" font-size="13" fill="#92400E">Lax suits forms and env vars,</text>
+  <text x="700" y="504" font-size="13" fill="#92400E">where everything is text.</text>
+  <text x="700" y="534" font-size="13" fill="#92400E">Strict suits data contracts:</text>
+  <text x="700" y="554" font-size="13" fill="#92400E">"80" in JSON is a bug upstream.</text>
+</svg>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Retrieval-augmented generation: two phases</title>
+  <desc id="desc">RAG has two phases. Ingestion runs when documents change: documents in Markdown and PDF are loaded, split into chunks with metadata, embedded, and stored in a vector store. The query phase runs for every question: the question is embedded with the same model, the vector store returns the most similar chunks, those chunks become numbered sources in the prompt, and the LLM answers from them, citing the sources, or says the answer isn't in the documents. The embedding model must be the same in both phases.</desc>
+
+  <defs>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="520" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Retrieval-augmented generation: two phases</text>
+
+  <!-- ingestion lane -->
+  <rect x="24" y="58" width="912" height="150" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="40" y="82" font-size="15" font-weight="700" fill="#115E59">1  Ingestion: when documents change (offline)</text>
+  <g font-size="13">
+    <rect x="40" y="98" width="150" height="90" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="115" y="124" text-anchor="middle" font-weight="700" fill="#334155">Documents</text>
+    <text x="115" y="146" text-anchor="middle" fill="#334155">runbooks, policies</text>
+    <text x="115" y="166" text-anchor="middle" fill="#334155">Markdown, PDF</text>
+    <rect x="222" y="98" width="150" height="90" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="297" y="124" text-anchor="middle" font-weight="700" fill="#115E59">Load</text>
+    <text x="297" y="146" text-anchor="middle" fill="#115E59">extract text,</text>
+    <text x="297" y="166" text-anchor="middle" fill="#115E59">keep source, page</text>
+    <rect x="404" y="98" width="150" height="90" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="479" y="124" text-anchor="middle" font-weight="700" fill="#115E59">Chunk</text>
+    <text x="479" y="146" text-anchor="middle" fill="#115E59">passages of a few</text>
+    <text x="479" y="166" text-anchor="middle" fill="#115E59">hundred characters</text>
+    <rect x="586" y="98" width="150" height="90" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+    <text x="661" y="124" text-anchor="middle" font-weight="700" fill="#4C1D95">Embed</text>
+    <text x="661" y="146" text-anchor="middle" fill="#4C1D95">one vector</text>
+    <text x="661" y="166" text-anchor="middle" fill="#4C1D95">per chunk</text>
+    <rect x="768" y="98" width="152" height="90" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="844" y="124" text-anchor="middle" font-weight="700" fill="#334155">Vector store</text>
+    <text x="844" y="146" text-anchor="middle" fill="#334155">vectors + text</text>
+    <text x="844" y="166" text-anchor="middle" fill="#334155">+ metadata</text>
+  </g>
+  <line x1="190" y1="143" x2="218" y2="143" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <line x1="372" y1="143" x2="400" y2="143" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <line x1="554" y1="143" x2="582" y2="143" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="736" y1="143" x2="764" y2="143" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- query lane -->
+  <rect x="24" y="250" width="912" height="160" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="40" y="274" font-size="15" font-weight="700" fill="#4C1D95">2  Query: for every question (online)</text>
+  <g font-size="13">
+    <rect x="40" y="290" width="150" height="100" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="115" y="316" text-anchor="middle" font-weight="700" fill="#1E3A8A">Question</text>
+    <text x="115" y="338" text-anchor="middle" fill="#1E3A8A">"the tracking site</text>
+    <text x="115" y="356" text-anchor="middle" fill="#1E3A8A">is down, what do</text>
+    <text x="115" y="374" text-anchor="middle" fill="#1E3A8A">I check first?"</text>
+    <rect x="222" y="290" width="150" height="100" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+    <text x="297" y="316" text-anchor="middle" font-weight="700" fill="#4C1D95">Embed</text>
+    <text x="297" y="338" text-anchor="middle" fill="#4C1D95">the question,</text>
+    <text x="297" y="356" text-anchor="middle" fill="#4C1D95">same model</text>
+    <rect x="404" y="290" width="150" height="100" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="479" y="316" text-anchor="middle" font-weight="700" fill="#115E59">Retrieve</text>
+    <text x="479" y="338" text-anchor="middle" fill="#115E59">the k most</text>
+    <text x="479" y="356" text-anchor="middle" fill="#115E59">similar chunks</text>
+    <rect x="586" y="290" width="150" height="100" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="661" y="316" text-anchor="middle" font-weight="700" fill="#1E3A8A">Build context</text>
+    <text x="661" y="338" text-anchor="middle" fill="#1E3A8A">numbered sources</text>
+    <text x="661" y="356" text-anchor="middle" fill="#1E3A8A">[1], [2], [3]</text>
+    <rect x="768" y="290" width="152" height="100" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+    <text x="844" y="316" text-anchor="middle" font-weight="700" fill="#4C1D95">Generate</text>
+    <text x="844" y="338" text-anchor="middle" fill="#4C1D95">an answer from</text>
+    <text x="844" y="356" text-anchor="middle" fill="#4C1D95">the sources, citing</text>
+    <text x="844" y="374" text-anchor="middle" fill="#4C1D95">them, or "not found"</text>
+  </g>
+  <line x1="190" y1="340" x2="218" y2="340" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="372" y1="340" x2="400" y2="340" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="554" y1="340" x2="582" y2="340" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <line x1="736" y1="340" x2="764" y2="340" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- store feeds retrieve -->
+  <polyline points="844,188 844,226 479,226 479,286" fill="none" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <text x="660" y="220" text-anchor="middle" font-size="12" fill="#334155">search the stored vectors</text>
+
+  <!-- notes -->
+  <rect x="24" y="430" width="440" height="72" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="40" y="454" font-size="13" font-weight="700" fill="#92400E">⚠ One embedding model for both phases</text>
+  <text x="40" y="474" font-size="12" fill="#92400E">Vectors from different models can't be compared. Store the model</text>
+  <text x="40" y="491" font-size="12" fill="#92400E">ID with the vectors, and re-ingest when it changes.</text>
+  <rect x="496" y="430" width="440" height="72" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="512" y="454" font-size="13" font-weight="700" fill="#115E59">✓ The answer is only as good as the retrieval</text>
+  <text x="512" y="474" font-size="12" fill="#115E59">If the right chunk isn't among the k retrieved, the model can't</text>
+  <text x="512" y="491" font-size="12" fill="#115E59">use it. Evaluate retrieval on its own, before generation.</text>
+</svg>

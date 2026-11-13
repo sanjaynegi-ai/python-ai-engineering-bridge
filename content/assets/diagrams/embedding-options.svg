@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">From text to similarity with embeddings</title>
+  <desc id="desc">Documents and a query are sent to an embedding model: either OpenAI's text-embedding-3-small through the API (the course default, 1,536 numbers per text, needs a key, about two cents per million tokens) or fastembed's BAAI/bge-small-en-v1.5 running locally (384 numbers per text, free, a 67 MB one-time download). Each text becomes a vector. Comparing the query vector with each document vector by cosine similarity ranks documents by meaning. Vectors from different models cannot be compared with each other.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="500" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">From text to similarity with embeddings</text>
+
+  <!-- ============ Text in ============ -->
+  <rect x="20" y="150" width="180" height="160" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="110" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Text</text>
+  <text x="110" y="204" text-anchor="middle" font-size="12" fill="#1E3A8A">documents:</text>
+  <text x="110" y="222" text-anchor="middle" font-size="12" fill="#1E3A8A">runbook snippets</text>
+  <text x="110" y="252" text-anchor="middle" font-size="12" fill="#1E3A8A">query:</text>
+  <text x="110" y="270" text-anchor="middle" font-size="12" font-style="italic" fill="#1E3A8A">"the website is</text>
+  <text x="110" y="288" text-anchor="middle" font-size="12" font-style="italic" fill="#1E3A8A">down, what should I check?"</text>
+
+  <line x1="200" y1="200" x2="246" y2="150" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="200" y1="270" x2="246" y2="320" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- ============ Models ============ -->
+  <rect x="252" y="80" width="262" height="124" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2.5"/>
+  <text x="268" y="106" font-size="14" font-weight="700" fill="#4C1D95">OpenAI API · course default</text>
+  <text x="268" y="128" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#4C1D95">text-embedding-3-small</text>
+  <text x="268" y="150" font-size="12" fill="#4C1D95">1,536 numbers per text</text>
+  <text x="268" y="170" font-size="12" fill="#4C1D95">needs OPENAI_API_KEY</text>
+  <text x="268" y="190" font-size="12" fill="#4C1D95">about $0.02 per 1M tokens</text>
+
+  <rect x="252" y="256" width="262" height="124" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="268" y="282" font-size="14" font-weight="700" fill="#334155">fastembed · runs on your machine</text>
+  <text x="268" y="304" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#334155">BAAI/bge-small-en-v1.5</text>
+  <text x="268" y="326" font-size="12" fill="#334155">384 numbers per text</text>
+  <text x="268" y="346" font-size="12" fill="#334155">free, no key, works offline</text>
+  <text x="268" y="366" font-size="12" fill="#334155">67 MB model, downloaded once</text>
+
+  <line x1="514" y1="150" x2="556" y2="210" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <line x1="514" y1="320" x2="556" y2="260" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- ============ Vectors ============ -->
+  <rect x="562" y="160" width="150" height="140" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="637" y="188" text-anchor="middle" font-size="15" font-weight="700" fill="#115E59">Vectors</text>
+  <text x="637" y="214" text-anchor="middle" font-size="12" fill="#115E59">one per text</text>
+  <text x="637" y="242" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">[0.04, -0.11,</text>
+  <text x="637" y="260" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59"> 0.08, …]</text>
+  <text x="637" y="284" text-anchor="middle" font-size="12" fill="#115E59">similar meaning → close</text>
+
+  <line x1="712" y1="230" x2="736" y2="230" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- ============ Ranking ============ -->
+  <rect x="742" y="140" width="200" height="180" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="842" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59">Rank by cosine</text>
+  <text x="842" y="184" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59">similarity to the query</text>
+  <text x="756" y="214" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">0.63 tracking site</text>
+  <text x="756" y="230" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">     errors…</text>
+  <text x="756" y="256" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">0.58 order database…</text>
+  <text x="756" y="282" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#475569">0.37 warehouse</text>
+  <text x="756" y="298" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#475569">     scanners…</text>
+
+  <!-- ============ Caveat ============ -->
+  <rect x="20" y="410" width="922" height="56" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="481" y="433" text-anchor="middle" font-size="13" font-weight="600" fill="#92400E">⚠ Each model has its own vector space, even its own vector length. Never compare vectors from different</text>
+  <text x="481" y="452" text-anchor="middle" font-size="13" font-weight="600" fill="#92400E">models: changing the embedding model means re-embedding every document.</text>
+</svg>

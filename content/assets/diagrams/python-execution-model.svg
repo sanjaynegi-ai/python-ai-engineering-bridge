@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">What happens when Python runs your code</title>
+  <desc id="desc">Source code is compiled automatically to bytecode, which the CPython interpreter executes to produce output. When the running code imports a module, Python searches the directories on sys.path in order: the script's directory, the standard library, then the active environment's site-packages. A found module is loaded once and cached in sys.modules; a module found nowhere raises ModuleNotFoundError.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="540" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">What happens when Python runs your code</text>
+
+  <!-- ============ Row 1: compile and execute ============ -->
+  <rect x="30" y="80" width="180" height="84" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="120" y="112" text-anchor="middle" font-size="15" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">main.py</text>
+  <text x="120" y="136" text-anchor="middle" font-size="13" fill="#1E3A8A">your source code</text>
+
+  <line x1="210" y1="122" x2="266" y2="122" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="240" y="110" text-anchor="middle" font-size="12" fill="#1E3A8A">compile</text>
+
+  <rect x="270" y="80" width="180" height="84" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="360" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Bytecode</text>
+  <text x="360" y="136" text-anchor="middle" font-size="13" fill="#1E3A8A">code objects in memory</text>
+
+  <line x1="450" y1="122" x2="506" y2="122" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="480" y="110" text-anchor="middle" font-size="12" fill="#1E3A8A">execute</text>
+
+  <rect x="510" y="80" width="200" height="84" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="610" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">CPython interpreter</text>
+  <text x="610" y="136" text-anchor="middle" font-size="13" fill="#1E3A8A">runs bytecode line by line</text>
+
+  <line x1="710" y1="122" x2="766" y2="122" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="770" y="80" width="160" height="84" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="850" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#115E59">Output</text>
+  <text x="850" y="136" text-anchor="middle" font-size="13" fill="#115E59">stdout, files, HTTP</text>
+
+  <text x="240" y="194" text-anchor="middle" font-size="12" fill="#475569">Automatic: no separate build step.</text>
+  <text x="240" y="212" text-anchor="middle" font-size="12" fill="#475569">Imported modules are cached as</text>
+  <text x="240" y="230" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#475569">__pycache__/*.pyc</text>
+
+  <!-- ============ Row 2: import resolution ============ -->
+  <line x1="610" y1="164" x2="610" y2="256" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <rect x="620" y="198" width="104" height="24" rx="4" fill="#FFFFFF"/>
+  <text x="626" y="215" font-size="13" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#334155">import rich</text>
+
+  <rect x="270" y="262" width="440" height="190" rx="12" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="490" y="290" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Module search: each entry on sys.path, in order</text>
+
+  <rect x="300" y="306" width="380" height="36" rx="18" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="490" y="329" text-anchor="middle" font-size="13" fill="#334155">1. The directory containing the script</text>
+  <rect x="300" y="352" width="380" height="36" rx="18" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="490" y="375" text-anchor="middle" font-size="13" fill="#334155">2. The standard library (json, pathlib, sys …)</text>
+  <rect x="300" y="398" width="380" height="36" rx="18" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="490" y="421" text-anchor="middle" font-size="13" fill="#1E3A8A">3. site-packages of the running interpreter</text>
+
+  <!-- Outcomes -->
+  <line x1="710" y1="320" x2="756" y2="300" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <rect x="760" y="262" width="180" height="80" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="850" y="290" text-anchor="middle" font-size="13" font-weight="700" fill="#115E59">✓ Found</text>
+  <text x="850" y="310" text-anchor="middle" font-size="12" fill="#115E59">loaded once, cached</text>
+  <text x="850" y="328" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">in sys.modules</text>
+
+  <line x1="710" y1="400" x2="756" y2="410" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+  <rect x="760" y="372" width="180" height="80" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="850" y="400" text-anchor="middle" font-size="13" font-weight="700" fill="#B91C1C">✗ Not found</text>
+  <text x="850" y="424" text-anchor="middle" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#B91C1C">ModuleNotFoundError</text>
+
+  <!-- Caveat -->
+  <rect x="30" y="472" width="900" height="50" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="480" y="493" text-anchor="middle" font-size="13" font-weight="600" fill="#92400E">⚠ Step 3 depends on which interpreter is running. A package installed into .venv is invisible</text>
+  <text x="480" y="512" text-anchor="middle" font-size="13" font-weight="600" fill="#92400E">to the global Python, which is the most common cause of "but I installed it!" errors.</text>
+</svg>

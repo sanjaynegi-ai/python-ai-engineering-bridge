@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">How an exception travels up the call stack</title>
+  <desc id="desc">main calls load_exports, which calls read_export, which calls json.load. json.load raises JSONDecodeError. read_export catches it and raises ExportError from it, keeping the original as the cause. load_exports catches ExportError, records the file as rejected and continues, so main never sees an exception. If no frame had caught it, the exception would leave main, Python would print a traceback and the process would exit with code 1.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFFFF"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">How an exception travels up the call stack</text>
+
+  <text x="200" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">Calls go down</text>
+  <text x="640" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#B91C1C">The exception goes up, until a frame handles it</text>
+
+  <!-- frames -->
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="15" font-weight="700" fill="#1E3A8A">
+    <rect x="60" y="84" width="280" height="60" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="80" y="120">main()</text>
+    <rect x="60" y="184" width="280" height="60" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="80" y="220">load_exports(paths)</text>
+    <rect x="60" y="284" width="280" height="60" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="80" y="320">read_export(path)</text>
+    <rect x="60" y="384" width="280" height="60" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="80" y="420" fill="#334155">json.load(file)</text>
+  </g>
+
+  <line x1="200" y1="144" x2="200" y2="178" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="200" y1="244" x2="200" y2="278" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="200" y1="344" x2="200" y2="378" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- right-hand annotations -->
+  <!-- json.load raises -->
+  <rect x="400" y="384" width="500" height="60" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="416" y="408" font-size="14" font-weight="700" fill="#B91C1C">✗ raises JSONDecodeError</text>
+  <text x="416" y="430" font-size="13" fill="#B91C1C">"Expecting ',' delimiter: line 14 column 5"</text>
+
+  <!-- read_export converts -->
+  <rect x="400" y="284" width="500" height="60" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="416" y="308" font-size="14" font-weight="700" fill="#B91C1C">except json.JSONDecodeError as error:</text>
+  <text x="416" y="330" font-size="13" fill="#B91C1C"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">raise ExportError(...) from error</tspan>   keeps the cause</text>
+
+  <!-- load_exports handles -->
+  <rect x="400" y="184" width="500" height="60" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="416" y="208" font-size="14" font-weight="700" fill="#115E59">✓ except ExportError: handled here</text>
+  <text x="416" y="230" font-size="13" fill="#115E59">records the file as rejected, continues with the next file</text>
+
+  <!-- main sees nothing -->
+  <rect x="400" y="84" width="500" height="60" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="416" y="108" font-size="14" font-weight="700" fill="#115E59">main() never sees an exception</text>
+  <text x="416" y="130" font-size="13" fill="#115E59">it gets a normal return value that includes the rejections</text>
+
+  <!-- red propagation arrows -->
+  <line x1="650" y1="384" x2="650" y2="350" stroke="#DC2626" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-red)"/>
+  <line x1="650" y1="284" x2="650" y2="250" stroke="#DC2626" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-red)"/>
+  <text x="662" y="370" font-size="12" fill="#B91C1C">propagates</text>
+  <text x="662" y="270" font-size="12" fill="#B91C1C">propagates</text>
+
+  <!-- links frame -> annotation -->
+  <line x1="340" y1="414" x2="400" y2="414" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <line x1="340" y1="314" x2="400" y2="314" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <line x1="340" y1="214" x2="400" y2="214" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <line x1="340" y1="114" x2="400" y2="114" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3 4"/>
+
+  <!-- unhandled path -->
+  <rect x="60" y="476" width="840" height="104" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="80" y="504" font-size="14" font-weight="700" fill="#92400E">⚠ If no frame catches it</text>
+  <text x="80" y="528" font-size="13" fill="#92400E">Each frame without a matching <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">except</tspan> ends immediately (its <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">finally</tspan> blocks and <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">with</tspan> exits still run).</text>
+  <text x="80" y="550" font-size="13" fill="#92400E">After main(), Python prints the traceback, "most recent call last": the bottom line is where it was raised,</text>
+  <text x="80" y="570" font-size="13" fill="#92400E">and the frames above it are how execution got there. The process exits with code 1.</text>
+</svg>

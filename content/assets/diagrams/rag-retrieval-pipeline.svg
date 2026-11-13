@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">The retrieval pipeline</title>
+  <desc id="desc">A question is embedded with the same model as the chunks. Its vector is compared with every stored vector by cosine similarity, and the k highest-scoring chunks are kept, provided they score above a minimum. If none does, the application answers that the documents don't cover the question, without calling the LLM. Otherwise the chunks become numbered sources in the prompt, with instructions to answer only from them, cite them by number, and say when they don't contain the answer. The LLM's answer is checked: every cited number must refer to a source that was sent. The response returns the answer with the cited sources' file names and sections.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="560" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">The retrieval pipeline: question to cited answer</text>
+
+  <!-- column of steps -->
+  <rect x="40" y="58" width="560" height="54" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="80" font-size="14" font-weight="700" fill="#1E3A8A">Question</text>
+  <text x="56" y="100" font-size="13" fill="#1E3A8A">"The tracking site shows errors for everyone. What do I check first?"</text>
+  <line x1="320" y1="112" x2="320" y2="130" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <rect x="40" y="134" width="560" height="54" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="56" y="156" font-size="14" font-weight="700" fill="#4C1D95">1  Embed the question</text>
+  <text x="56" y="176" font-size="13" fill="#4C1D95">the same model, and the same normalisation, as the chunks</text>
+  <line x1="320" y1="188" x2="320" y2="206" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="40" y="210" width="560" height="72" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="232" font-size="14" font-weight="700" fill="#115E59">2  Score and select</text>
+  <text x="56" y="252" font-size="13" fill="#115E59">cosine similarity with every chunk; keep the top k (say 3),</text>
+  <text x="56" y="270" font-size="13" fill="#115E59">and only those above a minimum score</text>
+  <line x1="320" y1="282" x2="320" y2="300" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="40" y="304" width="560" height="96" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="326" font-size="14" font-weight="700" fill="#1E3A8A">3  Build the prompt</text>
+  <g font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">
+    <text x="56" y="348">[1] "Then"  [2] "Symptoms"  [3] "Check the load balancer ..."</text>
+    <text x="56" y="366">    all from runbook-tracking-website-errors.md</text>
+    <text x="56" y="384">rules: use only these sources; cite [n]; else say "not found"</text>
+  </g>
+  <line x1="320" y1="400" x2="320" y2="418" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <rect x="40" y="422" width="560" height="54" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="56" y="444" font-size="14" font-weight="700" fill="#4C1D95">4  Generate</text>
+  <text x="56" y="464" font-size="13" fill="#4C1D95">"Check the load balancer first ... [3]. If a deployment caused it, roll back [1]"</text>
+  <line x1="320" y1="476" x2="320" y2="494" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="40" y="498" width="560" height="48" rx="8" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="527" font-size="13" fill="#115E59"><tspan font-weight="700">5  ✓ Check and return:</tspan> every [n] cited was sent; list the cited sources</text>
+
+  <!-- side branches -->
+  <line x1="600" y1="264" x2="646" y2="264" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <rect x="650" y="210" width="286" height="96" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="664" y="234" font-size="14" font-weight="700" fill="#B91C1C">✗ Nothing above the minimum</text>
+  <text x="664" y="256" font-size="12" fill="#B91C1C">"The handbook doesn't cover this."</text>
+  <text x="664" y="276" font-size="12" fill="#B91C1C">No LLM call: cheaper, and no chance</text>
+  <text x="664" y="294" font-size="12" fill="#B91C1C">of an answer from nowhere</text>
+
+  <line x1="600" y1="522" x2="646" y2="522" stroke="#D97706" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-amber)"/>
+  <rect x="650" y="430" width="286" height="116" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="664" y="454" font-size="14" font-weight="700" fill="#92400E">⚠ Grounding is not guaranteed</text>
+  <text x="664" y="476" font-size="12" fill="#92400E">The model can still ignore the sources,</text>
+  <text x="664" y="494" font-size="12" fill="#92400E">cite a number that wasn't sent, or</text>
+  <text x="664" y="512" font-size="12" fill="#92400E">answer an uncovered question.</text>
+  <text x="664" y="530" font-size="12" fill="#92400E">Check citations; evaluate with test questions.</text>
+
+  <rect x="650" y="58" width="286" height="130" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text x="664" y="82" font-size="14" font-weight="700" fill="#334155">Vector store</text>
+  <text x="664" y="104" font-size="12" fill="#334155">vectors, text and metadata for</text>
+  <text x="664" y="122" font-size="12" fill="#334155">every chunk, from ingestion</text>
+  <text x="664" y="146" font-size="12" fill="#334155">search is a matrix product: one</text>
+  <text x="664" y="164" font-size="12" fill="#334155">score per chunk, in milliseconds</text>
+  <line x1="650" y1="168" x2="606" y2="218" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-teal)"/>
+</svg>

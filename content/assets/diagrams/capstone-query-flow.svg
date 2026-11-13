@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="800" viewBox="0 0 960 800" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Answering a question: retrieve, generate, cite</title>
+  <desc id="desc">Three adapters, the FastAPI endpoint POST /ask, the Streamlit UI and the command line, all call the same Assistant.ask, which runs answer_question. Step 1 embeds the question, searches the index for the top k chunks and keeps those scoring at least min_score. If none are left, the answer is "not found" and the language model is never called, so it costs nothing. Step 2 builds the context: each hit becomes a numbered source with its citation. Step 3 sends the instructions, the numbered sources and the question to the language model, which returns structured output: answerable, answer and citations. A timeout or outage raises GeneratorUnavailable, shown as HTTP 503; a rejected key or unknown model raises GeneratorConfigurationError, HTTP 500. If the model says the sources don't answer the question, the answer is "not found", but the model's tokens were spent. Step 4 checks the citations: there must be at least one, and each must be the number of a source that was given. Otherwise InvalidAnswerError, HTTP 502. A valid answer is returned with only the cited sources, each keeping the number used in the answer's text.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="800" fill="#FFFFFF"/>
+  <text x="480" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Answering a question: retrieve, generate, cite</text>
+
+  <!-- adapters -->
+  <g font-size="13" fill="#1E3A8A" text-anchor="middle">
+    <rect x="60" y="52" width="240" height="46" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="180" y="72" font-weight="700">FastAPI</text>
+    <text x="180" y="89" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="12">POST /ask  (api.py)</text>
+    <rect x="360" y="52" width="240" height="46" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="480" y="72" font-weight="700">Streamlit UI</text>
+    <text x="480" y="89" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="12">ui.py</text>
+    <rect x="660" y="52" width="240" height="46" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="780" y="72" font-weight="700">Command line</text>
+    <text x="780" y="89" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="12">ask, evaluate  (cli.py)</text>
+  </g>
+  <line x1="180" y1="98" x2="180" y2="122" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="480" y1="98" x2="480" y2="122" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="780" y1="98" x2="780" y2="122" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="60" y="124" width="840" height="40" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="480" y="149" text-anchor="middle" font-size="13" fill="#334155">all three call the same <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">Assistant.ask(question)</tspan>, which runs <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">answer_question()</tspan></text>
+  <line x1="220" y1="164" x2="220" y2="190" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- 1 retrieve -->
+  <rect x="60" y="192" width="320" height="52" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="76" y="213" font-size="14" font-weight="700" fill="#115E59">1  Retrieve</text>
+  <text x="76" y="233" font-size="12" fill="#115E59">embed the question; top k; keep score ≥ min_score</text>
+  <line x1="220" y1="244" x2="220" y2="260" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <polygon points="220,262 330,300 220,338 110,300" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+  <text x="220" y="297" text-anchor="middle" font-size="12" font-weight="700" fill="#115E59">any hits</text>
+  <text x="220" y="312" text-anchor="middle" font-size="12" font-weight="700" fill="#115E59">left?</text>
+  <line x1="330" y1="300" x2="466" y2="300" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <text x="398" y="292" text-anchor="middle" font-size="12" font-weight="700" fill="#92400E">no</text>
+  <rect x="470" y="274" width="450" height="52" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="486" y="295" font-size="13" font-weight="700" fill="#92400E">⚠ Not found: "I can't find this in the documentation."</text>
+  <text x="486" y="314" font-size="12" fill="#92400E">no sources, and the model is never called: no cost</text>
+
+  <line x1="220" y1="338" x2="220" y2="362" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <text x="230" y="355" font-size="12" font-weight="700" fill="#115E59">yes</text>
+
+  <!-- 2 context -->
+  <rect x="60" y="364" width="320" height="50" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="76" y="385" font-size="14" font-weight="700" fill="#1E3A8A">2  Build the context</text>
+  <text x="76" y="404" font-size="12" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">[1] (runbooks/x.md, Fail over)\n...</text>
+  <line x1="220" y1="414" x2="220" y2="438" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- 3 generate -->
+  <rect x="60" y="440" width="320" height="54" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="76" y="461" font-size="14" font-weight="700" fill="#4C1D95">3  Generate: the LLM</text>
+  <text x="76" y="481" font-size="12" fill="#4C1D95">structured output: answerable, answer, citations</text>
+  <line x1="380" y1="467" x2="466" y2="467" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+  <rect x="470" y="440" width="450" height="54" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="486" y="461" font-size="13" font-weight="700" fill="#B91C1C">✗ GeneratorUnavailable → HTTP 503</text>
+  <text x="486" y="481" font-size="12" fill="#B91C1C">✗ GeneratorConfigurationError (key, model) → HTTP 500</text>
+  <line x1="220" y1="494" x2="220" y2="508" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <polygon points="220,510 330,548 220,586 110,548" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="220" y="552" text-anchor="middle" font-size="12" font-weight="700" fill="#4C1D95">answerable?</text>
+  <line x1="330" y1="548" x2="466" y2="548" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <text x="398" y="540" text-anchor="middle" font-size="12" font-weight="700" fill="#92400E">no</text>
+  <rect x="470" y="522" width="450" height="52" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="486" y="543" font-size="13" font-weight="700" fill="#92400E">⚠ Not found: the sources don't answer it</text>
+  <text x="486" y="562" font-size="12" fill="#92400E">no sources; the model's tokens were spent, and are reported</text>
+
+  <line x1="220" y1="586" x2="220" y2="610" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <text x="230" y="603" font-size="12" font-weight="700" fill="#4C1D95">yes</text>
+
+  <!-- 4 citations -->
+  <rect x="60" y="612" width="320" height="52" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="76" y="633" font-size="14" font-weight="700" fill="#1E3A8A">4  Check the citations</text>
+  <text x="76" y="652" font-size="12" fill="#1E3A8A">at least one; every [n] between 1 and the number given</text>
+  <line x1="380" y1="638" x2="466" y2="638" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+  <text x="423" y="630" text-anchor="middle" font-size="12" font-weight="700" fill="#B91C1C">invalid</text>
+  <rect x="470" y="612" width="450" height="52" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="486" y="633" font-size="13" font-weight="700" fill="#B91C1C">✗ InvalidAnswerError → HTTP 502</text>
+  <text x="486" y="652" font-size="12" fill="#B91C1C">an answer that can't be traced to a source isn't shown</text>
+
+  <line x1="220" y1="664" x2="220" y2="688" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <text x="230" y="681" font-size="12" font-weight="700" fill="#115E59">valid</text>
+
+  <rect x="60" y="690" width="860" height="54" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="76" y="712" font-size="14" font-weight="700" fill="#115E59">✓ Answer: found, the model's answer, and only the cited sources</text>
+  <text x="76" y="732" font-size="12" fill="#115E59">each source keeps its number, so "[2]" in the text matches source 2 · plus the model's name and token counts</text>
+
+  <text x="480" y="776" text-anchor="middle" font-size="12" fill="#334155">Logs record counts and outcomes (hits, sources cited, model), never the question or the answer.</text>
+</svg>

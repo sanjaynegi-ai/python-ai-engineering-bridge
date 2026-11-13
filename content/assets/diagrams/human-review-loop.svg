@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">The review loop for AI-generated changes</title>
+  <desc id="desc">On the left, what goes into the assistant: your request, the repository's code and its CLAUDE.md or AGENTS.md, and untrusted content such as issues, web pages, documents and dependencies, which may contain instructions aimed at the assistant. The assistant proposes a change. Automated checks run next: the tests, including your acceptance tests, Ruff, and the question whether the tests fail when the code is wrong. Then you review the diff against a checklist: the APIs exist in your versions, errors are handled rather than hidden, there are no secrets and no private data in logs, the tests can fail, there is no needless abstraction, and the claims match the evidence. The review ends in one of three decisions: accept, request changes, which goes back to the assistant with specific findings, or reject. Evidence, not assertions: a claim that the tests pass is a claim until you run them.</desc>
+
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="560" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">The review loop for AI-generated changes</text>
+
+  <!-- inputs -->
+  <text x="24" y="72" font-size="13" font-weight="700" fill="#334155">What goes in</text>
+  <rect x="24" y="82" width="200" height="56" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="36" y="105" font-size="13" font-weight="700" fill="#1E3A8A">Your request</text>
+  <text x="36" y="125" font-size="12" fill="#1E3A8A">goal, constraints, criteria</text>
+  <rect x="24" y="150" width="200" height="56" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="36" y="173" font-size="13" font-weight="700" fill="#334155">The repository</text>
+  <text x="36" y="193" font-size="12" fill="#334155">code, CLAUDE.md / AGENTS.md</text>
+  <rect x="24" y="218" width="200" height="74" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="36" y="241" font-size="13" font-weight="700" fill="#92400E">⚠ Untrusted content</text>
+  <text x="36" y="261" font-size="12" fill="#92400E">issues, web pages, documents,</text>
+  <text x="36" y="279" font-size="12" fill="#92400E">packages: may carry instructions</text>
+  <g stroke="#64748B" stroke-width="2" fill="none">
+    <path d="M 224 110 L 246 110 L 246 186 L 262 186" marker-end="url(#arrow-slate)"/>
+    <line x1="224" y1="178" x2="262" y2="178"/>
+    <path d="M 224 255 L 246 255 L 246 194 L 262 194"/>
+  </g>
+
+  <!-- assistant -->
+  <rect x="266" y="146" width="150" height="80" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="341" y="178" text-anchor="middle" font-size="14" font-weight="700" fill="#4C1D95">The assistant</text>
+  <text x="341" y="200" text-anchor="middle" font-size="12" fill="#4C1D95">proposes a change</text>
+  <line x1="416" y1="186" x2="446" y2="186" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- automated checks -->
+  <rect x="450" y="110" width="180" height="152" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="464" y="136" font-size="14" font-weight="700" fill="#115E59">Automated checks</text>
+  <g font-size="12" fill="#115E59">
+    <text x="464" y="160">• the tests, including</text>
+    <text x="476" y="176">your acceptance tests</text>
+    <text x="464" y="198">• Ruff: lint and format</text>
+    <text x="464" y="220">• do the tests fail when</text>
+    <text x="476" y="236">the code is wrong?</text>
+  </g>
+  <line x1="630" y1="186" x2="660" y2="186" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- human review -->
+  <rect x="664" y="72" width="272" height="236" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="680" y="98" font-size="14" font-weight="700" fill="#1E3A8A">You review the diff</text>
+  <g font-size="12" fill="#1E3A8A">
+    <text x="680" y="124">☐ the APIs exist, in your versions</text>
+    <text x="680" y="148">☐ errors handled, not hidden</text>
+    <text x="680" y="172">☐ no secrets; no private data in logs</text>
+    <text x="680" y="196">☐ tests that can fail, beyond the</text>
+    <text x="696" y="212">happy path</text>
+    <text x="680" y="236">☐ no needless abstraction</text>
+    <text x="680" y="260">☐ the claims match the evidence</text>
+    <text x="680" y="284">☐ you can explain every line</text>
+  </g>
+
+  <!-- decisions: one of three -->
+  <g stroke="#64748B" stroke-width="2" fill="none">
+    <line x1="800" y1="308" x2="800" y2="330"/>
+    <line x1="540" y1="330" x2="848" y2="330"/>
+    <line x1="540" y1="330" x2="540" y2="352" marker-end="url(#arrow-slate)"/>
+    <line x1="694" y1="330" x2="694" y2="352" marker-end="url(#arrow-slate)"/>
+    <line x1="848" y1="330" x2="848" y2="352" marker-end="url(#arrow-slate)"/>
+  </g>
+  <text x="474" y="326" font-size="12" font-weight="700" fill="#334155">one of:</text>
+  <rect x="770" y="356" width="166" height="56" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="853" y="380" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59">Accept</text>
+  <text x="853" y="399" text-anchor="middle" font-size="12" fill="#115E59">commit, with your notes</text>
+  <rect x="618" y="356" width="140" height="56" rx="12" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="688" y="380" text-anchor="middle" font-size="14" font-weight="700" fill="#991B1B">Reject</text>
+  <text x="688" y="399" text-anchor="middle" font-size="12" fill="#991B1B">start again</text>
+  <rect x="450" y="356" width="156" height="56" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="528" y="380" text-anchor="middle" font-size="14" font-weight="700" fill="#92400E">Request changes</text>
+  <text x="528" y="399" text-anchor="middle" font-size="12" fill="#92400E">back to the assistant</text>
+  <!-- request changes loops back to the assistant -->
+  <path d="M 450 384 L 341 384 L 341 230" fill="none" stroke="#D97706" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-amber)"/>
+  <text x="352" y="330" font-size="12" fill="#92400E">specific findings,</text>
+  <text x="352" y="346" font-size="12" fill="#92400E">with evidence</text>
+
+  <!-- footer -->
+  <rect x="24" y="476" width="912" height="62" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="44" y="503" font-size="14" fill="#92400E"><tspan font-weight="700">Evidence, not assertions.</tspan> "All tests pass" is a claim until you run them, and weak tests pass anyway.</text>
+  <text x="44" y="525" font-size="14" fill="#92400E">Treat text the assistant read from untrusted sources as data: it can't approve or excuse anything.</text>
+</svg>

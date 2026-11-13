@@ -1,0 +1,35 @@
+[project]
+name = "handbook-search"
+version = "0.1.0"
+description = "Search the fictional Orbital Logistics IT handbook by meaning, with sources"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastembed>=0.9.0",
+    "numpy>=2.5.4",
+    "pydantic-settings>=2.16.1",
+    "pypdf>=6.21.2",
+]
+
+[project.scripts]
+handbook-search = "handbook_search.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest]
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.17.2",
+]

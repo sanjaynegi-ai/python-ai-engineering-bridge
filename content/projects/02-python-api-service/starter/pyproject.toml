@@ -1,0 +1,33 @@
+[project]
+name = "incident-api"
+version = "0.2.0"
+description = "Incident reporting service for the fictional Orbital Logistics on-call team"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.1",
+]
+
+[project.scripts]
+incident-report = "incident_api.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest]
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib"]

@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="660" viewBox="0 0 960 660" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Processing a JSON export safely</title>
+  <desc id="desc">A pipeline from top to bottom: an export file is read as UTF-8 text, parsed with the json module, checked to be a list, and each record is validated. Valid records are transformed and the report is serialised to report.json. Reading can fail with FileNotFoundError or UnicodeDecodeError, parsing with JSONDecodeError, and the shape check when the top level is not a list; all three become an ExportError that skips that file. Records with problems go to a rejected list that is included in the report.</desc>
+
+  <defs>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="660" fill="#FFFFFF"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Processing a JSON export safely</text>
+
+  <g font-size="13">
+    <!-- 1 file -->
+    <rect x="40" y="60" width="380" height="56" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="56" y="84" font-size="15" font-weight="700" fill="#334155">Export file</text>
+    <text x="56" y="104" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#334155">data/exports/tickets-2026-10-21.json</text>
+
+    <!-- 2 read -->
+    <rect x="40" y="144" width="380" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="56" y="168" font-size="15" font-weight="700" fill="#115E59">1  Read text</text>
+    <text x="56" y="188" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">open(path, encoding="utf-8")</text>
+
+    <!-- 3 parse -->
+    <rect x="40" y="228" width="380" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="56" y="252" font-size="15" font-weight="700" fill="#115E59">2  Parse</text>
+    <text x="56" y="272" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">json.load(file)  →  dict / list / str ...</text>
+
+    <!-- 4 shape -->
+    <rect x="40" y="312" width="380" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="56" y="336" font-size="15" font-weight="700" fill="#115E59">3  Check the shape</text>
+    <text x="56" y="356" fill="#115E59">is the top level a list, as the format promises?</text>
+
+    <!-- 5 validate -->
+    <rect x="40" y="396" width="380" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="56" y="420" font-size="15" font-weight="700" fill="#115E59">4  Validate each record</text>
+    <text x="56" y="440" fill="#115E59">required fields, types, allowed values</text>
+
+    <!-- 6 transform -->
+    <rect x="40" y="480" width="380" height="56" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="56" y="504" font-size="15" font-weight="700" fill="#1E3A8A">5  Transform valid records</text>
+    <text x="56" y="524" fill="#1E3A8A">normalise, deduplicate, summarise (Session 02)</text>
+
+    <!-- 7 serialise -->
+    <rect x="40" y="564" width="380" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="56" y="588" font-size="15" font-weight="700" fill="#115E59">6  Serialise the report</text>
+    <text x="56" y="608" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#115E59">json.dump(report, file, indent=2)</text>
+  </g>
+
+  <!-- main flow arrows -->
+  <g stroke="#0D9488" stroke-width="2">
+    <line x1="230" y1="116" x2="230" y2="138" marker-end="url(#arrow-teal)"/>
+    <line x1="230" y1="200" x2="230" y2="222" marker-end="url(#arrow-teal)"/>
+    <line x1="230" y1="284" x2="230" y2="306" marker-end="url(#arrow-teal)"/>
+    <line x1="230" y1="368" x2="230" y2="390" marker-end="url(#arrow-teal)"/>
+    <line x1="230" y1="452" x2="230" y2="474" marker-end="url(#arrow-teal)"/>
+    <line x1="230" y1="536" x2="230" y2="558" marker-end="url(#arrow-teal)"/>
+  </g>
+  <text x="240" y="132" font-size="12" fill="#115E59">bytes → str</text>
+  <text x="240" y="300" font-size="12" fill="#115E59">Python objects</text>
+  <text x="240" y="468" font-size="12" fill="#115E59">valid records only</text>
+
+  <!-- failure boxes -->
+  <g font-size="13" fill="#B91C1C">
+    <rect x="490" y="144" width="250" height="56" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="504" y="168" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">FileNotFoundError</text>
+    <text x="504" y="188" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">UnicodeDecodeError</text>
+
+    <rect x="490" y="228" width="250" height="56" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="504" y="252" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">JSONDecodeError</text>
+    <text x="504" y="272">.msg, .lineno, .colno</text>
+
+    <rect x="490" y="312" width="250" height="56" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="504" y="336" font-weight="700">✗ Top level is not a list</text>
+    <text x="504" y="356">valid JSON, wrong shape</text>
+  </g>
+  <g stroke="#DC2626" stroke-width="2" stroke-dasharray="7 5">
+    <line x1="420" y1="172" x2="484" y2="172" marker-end="url(#arrow-red)"/>
+    <line x1="420" y1="256" x2="484" y2="256" marker-end="url(#arrow-red)"/>
+    <line x1="420" y1="340" x2="484" y2="340" marker-end="url(#arrow-red)"/>
+    <line x1="740" y1="172" x2="774" y2="210" marker-end="url(#arrow-red)"/>
+    <line x1="740" y1="256" x2="774" y2="256" marker-end="url(#arrow-red)"/>
+    <line x1="740" y1="340" x2="774" y2="302" marker-end="url(#arrow-red)"/>
+  </g>
+
+  <!-- ExportError -->
+  <rect x="780" y="144" width="160" height="224" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <g font-size="13" fill="#92400E">
+    <text x="860" y="186" text-anchor="middle" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">ExportError</text>
+    <text x="860" y="208" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">from error</text>
+    <text x="860" y="248" text-anchor="middle">This file is skipped</text>
+    <text x="860" y="268" text-anchor="middle">and reported.</text>
+    <text x="860" y="300" text-anchor="middle">Other files still</text>
+    <text x="860" y="320" text-anchor="middle">load.</text>
+  </g>
+
+  <!-- record problems -->
+  <rect x="490" y="396" width="450" height="56" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="504" y="420" font-size="14" font-weight="700" fill="#92400E">⚠ Records with problems → rejected list</text>
+  <text x="504" y="440" font-size="13" fill="#92400E">file, index, id and problems; the rest of the file still counts</text>
+  <line x1="420" y1="424" x2="484" y2="424" stroke="#D97706" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-amber)"/>
+  <path d="M715,452 C715,560 600,592 426,592" fill="none" stroke="#D97706" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-amber)"/>
+  <text x="728" y="504" font-size="12" fill="#92400E">included in the report</text>
+
+  <!-- output -->
+  <rect x="780" y="564" width="160" height="56" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="860" y="597" text-anchor="middle" font-size="14" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#334155">report.json</text>
+  <line x1="420" y1="610" x2="774" y2="610" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+</svg>

@@ -1,0 +1,45 @@
+[project]
+name = "python-ai-engineering-bridge"
+version = "0.1.0"
+description = "Course environment for the SkillUp Python to AI Engineering Bridge notebooks"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=1.15.0",
+    "fastembed>=0.9.0",
+    "ipykernel>=7.4.0",
+    "ipywidgets>=8.1.9",
+    "jupyterlab>=4.6.4",
+    "openai>=3.35.1",
+    "python-dotenv>=1.2.4",
+]
+
+[tool.uv]
+package = false
+# `uv sync` installs these groups as well as the dependencies above.
+default-groups = ["dev", "web", "ai", "rag"]
+
+[dependency-groups]
+ai = [
+    "langchain>=1.4.7",
+    "langchain-anthropic>=1.7.6",
+    "langchain-core>=1.6.13",
+    "langchain-openai>=1.7.2",
+]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.17.1",
+]
+rag = [
+    "chromadb>=1.5.9",
+    "langchain-text-splitters>=1.1.3",
+    "pypdf>=6.21.2",
+]
+web = [
+    "fastapi>=0.159.1",
+    "httpx>=0.28.1",
+    "httpx2>=2.16.0",
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.1",
+    "respx>=0.23.1",
+]

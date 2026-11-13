@@ -1,0 +1,20 @@
+{"question": "How do I promote the orders database replica?", "expected_sources": ["runbooks/database-failover.md"]}
+{"question": "The tracking website shows errors for every customer. What should I check first?", "expected_sources": ["runbooks/tracking-website-errors.md"]}
+{"question": "How long do we have to resolve a P2 incident?", "expected_sources": ["policies/sla-and-priorities.pdf"]}
+{"question": "How often must the public status page be updated during a P1?", "expected_sources": ["policies/incident-communication.pdf", "runbooks/tracking-website-errors.md", "guides/incident-commander-checklist.md"]}
+{"question": "How often do API keys have to be rotated?", "expected_sources": ["policies/api-credentials.md"]}
+{"question": "Who approves an emergency change?", "expected_sources": ["policies/change-management.md"]}
+{"question": "Can we deploy a normal change in mid-December?", "expected_sources": ["policies/change-management.md"]}
+{"question": "How long are application logs kept?", "expected_sources": ["policies/data-retention.md"]}
+{"question": "What is the maximum number of consecutive weeks someone can be on call?", "expected_sources": ["policies/on-call-rota.pdf"]}
+{"question": "A server's disk is 96 percent full. Is that a P2, and can I delete the database files?", "expected_sources": ["runbooks/disk-space-alerts.md"]}
+{"question": "Order confirmations are delayed and mq-orders has a growing backlog. What do I do?", "expected_sources": ["runbooks/message-queue-backlog.md"]}
+{"question": "The handheld scanners in two warehouses can't upload scans. How serious is that?", "expected_sources": ["runbooks/warehouse-scanner-outage.md"]}
+{"question": "Customers have stopped receiving shipment notification emails.", "expected_sources": ["runbooks/email-delivery-failures.md"]}
+{"question": "Why did the warehouse scanners stop working in August?", "expected_sources": ["postmortems/2026-08-warehouse-scanner-outage.md"]}
+{"question": "When does the certificate monitor warn about a certificate that is about to expire?", "expected_sources": ["runbooks/certificate-expiry.md", "postmortems/2026-08-warehouse-scanner-outage.md"]}
+{"question": "What should a new engineer do before their first on-call week?", "expected_sources": ["guides/new-starter-it-setup.md", "policies/on-call-rota.pdf"]}
+{"question": "What's on the cafeteria menu this week?", "expected_sources": []}
+{"question": "What will the weather be in Zurich tomorrow?", "expected_sources": []}
+{"question": "How many vacation days do new employees get?", "expected_sources": []}
+{"question": "Which laptop model should I buy for my home office?", "expected_sources": []}

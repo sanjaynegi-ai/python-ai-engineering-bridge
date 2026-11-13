@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="620" viewBox="0 0 960 620" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">What happens when you call a function</title>
+  <desc id="desc">Calling summarise pushes a new frame onto the call stack. Its parameters tickets and sla_hours are bound to the same objects the caller passed, without copying. Local names such as open_tickets live only in that frame. On return, the result object is handed back and bound to count in the caller's frame, and the function's frame is discarded.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="620" fill="#FFFFFF"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">What happens when you call a function</text>
+
+  <!-- ===================== Code panel ===================== -->
+  <rect x="20" y="56" width="470" height="150" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">
+    <text x="40" y="86">def summarise(tickets, *, sla_hours):</text>
+    <text x="74" y="108">open_tickets = [t for t in tickets</text>
+    <text x="242" y="130">if is_open(t)]</text>
+    <text x="74" y="152">return len(open_tickets)</text>
+    <text x="40" y="186">count = summarise(exports, sla_hours=SLA)</text>
+  </g>
+
+  <!-- ===================== Steps panel ===================== -->
+  <rect x="510" y="56" width="430" height="150" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <g font-size="14" fill="#1E3A8A">
+    <text x="530" y="86"><tspan font-weight="700">1  Call:</tspan> a new frame is pushed; parameters</text>
+    <text x="552" y="106">are bound to the caller's objects (no copy)</text>
+    <text x="530" y="134"><tspan font-weight="700">2  Run:</tspan> local names live in that frame only</text>
+    <text x="530" y="162"><tspan font-weight="700">3  Return:</tspan> the result object goes back;</text>
+    <text x="552" y="182">the frame and its local names are discarded</text>
+  </g>
+
+  <!-- ===================== Call stack ===================== -->
+  <rect x="20" y="226" width="400" height="378" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="220" y="252" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Call stack (newest on top)</text>
+
+  <!-- summarise frame -->
+  <rect x="40" y="266" width="360" height="164" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="288" font-size="13" font-weight="700" fill="#1E3A8A">frame: summarise()   <tspan font-weight="400">(parameters and locals)</tspan></text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="600" fill="#1E3A8A" text-anchor="middle">
+    <rect x="56" y="300" width="150" height="32" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="131" y="321">tickets</text>
+    <rect x="56" y="342" width="150" height="32" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="131" y="363">sla_hours</text>
+    <rect x="56" y="384" width="150" height="32" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="131" y="405">open_tickets</text>
+  </g>
+
+  <!-- module frame -->
+  <rect x="40" y="446" width="360" height="146" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="468" font-size="13" font-weight="700" fill="#1E3A8A">frame: module (the caller)</text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="600" fill="#1E3A8A" text-anchor="middle">
+    <rect x="56" y="480" width="150" height="32" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="131" y="501">exports</text>
+    <rect x="56" y="518" width="150" height="32" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="131" y="539">SLA</text>
+    <rect x="56" y="556" width="150" height="32" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="131" y="577">count</text>
+  </g>
+
+  <!-- call / return arrows between frames -->
+
+  <!-- ===================== Objects ===================== -->
+  <rect x="510" y="226" width="430" height="378" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="725" y="252" text-anchor="middle" font-size="15" font-weight="700" fill="#115E59">Objects</text>
+
+  <g font-size="13" fill="#115E59">
+    <rect x="650" y="276" width="270" height="48" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+    <text x="664" y="296" font-weight="700">list of tickets</text>
+    <text x="664" y="314">one object, two names</text>
+
+    <rect x="650" y="344" width="270" height="48" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+    <text x="664" y="364" font-weight="700">dict of SLA hours</text>
+    <text x="664" y="382">one object, two names</text>
+
+    <rect x="650" y="412" width="270" height="56" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="664" y="434" font-weight="700" fill="#92400E">list of open tickets</text>
+    <text x="664" y="454" fill="#92400E">freed after return: no names left</text>
+
+    <rect x="650" y="540" width="270" height="48" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+    <text x="664" y="560" font-weight="700">int 3</text>
+    <text x="664" y="578">the returned value</text>
+  </g>
+
+  <!-- name -> object arrows -->
+  <path d="M206,316 C420,316 520,300 644,300" fill="none" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <path d="M206,496 C440,496 520,318 644,306" fill="none" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <path d="M206,358 C420,358 520,368 644,368" fill="none" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <path d="M206,534 C450,534 530,384 644,374" fill="none" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <path d="M206,400 C420,400 520,440 644,440" fill="none" stroke="#64748B" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow-slate)"/>
+  <path d="M206,572 C420,572 520,564 644,564" fill="none" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+</svg>

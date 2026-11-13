@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Choosing a collection</title>
+  <desc id="desc">A decision guide. If you look values up by a key, use a dict. Otherwise, if you only need membership tests or uniqueness, use a set. Otherwise, if the data is a fixed group of fields that should not change, or must be a dict key, use a tuple. Otherwise use a list. A warning notes that membership tests on a list scan every element.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="640" fill="#FFFFFF"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Choosing a collection</text>
+
+  <!-- start -->
+  <rect x="80" y="58" width="340" height="44" rx="22" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="250" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">How will the code use this data?</text>
+  <line x1="250" y1="102" x2="250" y2="124" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Q1 -->
+  <rect x="40" y="130" width="420" height="76" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="250" y="162" text-anchor="middle" font-size="15" font-weight="600" fill="#1E3A8A">Look values up by a key?</text>
+  <text x="250" y="186" text-anchor="middle" font-size="13" fill="#1E3A8A">ticket by ID, count by team, config by name</text>
+
+  <!-- Q2 -->
+  <rect x="40" y="250" width="420" height="76" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="250" y="282" text-anchor="middle" font-size="15" font-weight="600" fill="#1E3A8A">Only ask "is it there?", or need uniqueness?</text>
+  <text x="250" y="306" text-anchor="middle" font-size="13" fill="#1E3A8A">seen IDs, allowed values, distinct tags</text>
+
+  <!-- Q3 -->
+  <rect x="40" y="370" width="420" height="76" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="250" y="402" text-anchor="middle" font-size="15" font-weight="600" fill="#1E3A8A">A fixed group of fields that shouldn't change?</text>
+  <text x="250" y="426" text-anchor="middle" font-size="13" fill="#1E3A8A">a pair or record, a composite dict key</text>
+
+  <!-- Otherwise -->
+  <rect x="40" y="490" width="420" height="76" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="250" y="522" text-anchor="middle" font-size="15" font-weight="600" fill="#1E3A8A">Otherwise: an ordered sequence</text>
+  <text x="250" y="546" text-anchor="middle" font-size="13" fill="#1E3A8A">you append to, sort, slice or loop over</text>
+
+  <!-- no arrows -->
+  <line x1="250" y1="206" x2="250" y2="244" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="262" y="230" font-size="13" font-weight="600" fill="#1E3A8A">no</text>
+  <line x1="250" y1="326" x2="250" y2="364" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="262" y="350" font-size="13" font-weight="600" fill="#1E3A8A">no</text>
+  <line x1="250" y1="446" x2="250" y2="484" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="262" y="470" font-size="13" font-weight="600" fill="#1E3A8A">no</text>
+
+  <!-- yes arrows -->
+  <line x1="460" y1="168" x2="534" y2="168" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <text x="478" y="160" font-size="13" font-weight="600" fill="#115E59">yes</text>
+  <line x1="460" y1="288" x2="534" y2="288" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <text x="478" y="280" font-size="13" font-weight="600" fill="#115E59">yes</text>
+  <line x1="460" y1="408" x2="534" y2="408" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <text x="478" y="400" font-size="13" font-weight="600" fill="#115E59">yes</text>
+  <line x1="460" y1="528" x2="534" y2="528" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- results -->
+  <g font-size="13" fill="#115E59">
+    <rect x="540" y="130" width="380" height="76" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="556" y="156" font-size="16" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">dict</text>
+    <text x="610" y="156" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">{"INC-1042": ticket}</text>
+    <text x="556" y="180">Fast lookup by key (average O(1)).</text>
+    <text x="556" y="198">Keys unique and hashable; insertion order kept.</text>
+
+    <rect x="540" y="250" width="380" height="76" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="556" y="276" font-size="16" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">set</text>
+    <text x="610" y="276" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">{"network", "database"}</text>
+    <text x="556" y="300">Fast membership test (average O(1)).</text>
+    <text x="556" y="318">No duplicates; no order; no indexing.</text>
+
+    <rect x="540" y="370" width="380" height="76" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="556" y="396" font-size="16" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">tuple</text>
+    <text x="620" y="396" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">("platform", "P1")</text>
+    <text x="556" y="420">Immutable; unpacks neatly into names.</text>
+    <text x="556" y="438">Hashable if its items are, so it can be a key.</text>
+
+    <rect x="540" y="490" width="380" height="76" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="556" y="516" font-size="16" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">list</text>
+    <text x="610" y="516" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">[ticket_1, ticket_2, ...]</text>
+    <text x="556" y="540">Ordered, mutable, allows duplicates.</text>
+    <text x="556" y="558">Index and slice cheaply; search by scanning.</text>
+  </g>
+
+  <!-- warning -->
+  <rect x="40" y="584" width="880" height="44" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="58" y="612" font-size="14" fill="#92400E"><tspan font-weight="700">⚠ Common mistake:</tspan> <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">if ticket_id in ticket_ids_list</tspan> inside a loop scans the whole list each time. Build a set once.</text>
+</svg>

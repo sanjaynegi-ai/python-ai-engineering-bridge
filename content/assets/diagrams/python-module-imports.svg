@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="620" viewBox="0 0 960 620" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">How Python finds and loads a module</title>
+  <desc id="desc">Left: resolving import incident_report.loading. Python first checks sys.modules and reuses a module already loaded. Otherwise it searches the sys.path entries in order (the script's folder, the standard library, then the virtual environment's site-packages, which points at src), runs the module once and caches it. If nothing matches, ModuleNotFoundError. Right: the import graph of the incident_report package; every arrow points towards models, and there are no cycles.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="620" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">How Python finds and loads a module</text>
+
+  <!-- ================= Left: resolution ================= -->
+  <rect x="20" y="56" width="450" height="472" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="245" y="82" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Resolving one import</text>
+
+  <rect x="80" y="96" width="330" height="36" rx="16" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="245" y="119" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="700" fill="#1E3A8A">import incident_report.loading</text>
+
+  <rect x="40" y="152" width="410" height="56" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="175" font-size="14" font-weight="700" fill="#1E3A8A">1  Already in sys.modules?</text>
+  <text x="56" y="196" font-size="13" fill="#1E3A8A">yes: reuse that object; its code does not run again</text>
+
+  <rect x="40" y="228" width="410" height="146" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="251" font-size="14" font-weight="700" fill="#1E3A8A">2  No: search sys.path, in order; first match wins</text>
+  <g font-size="13" fill="#334155">
+    <rect x="56" y="264" width="378" height="28" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="68" y="283">the script's folder (cwd for <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">-m</tspan> and the REPL)</text>
+    <rect x="56" y="298" width="378" height="28" rx="6" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text x="68" y="317">the standard library (<tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">json</tspan>, <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">pathlib</tspan> ...)</text>
+    <rect x="56" y="332" width="378" height="28" rx="6" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text x="68" y="351">.venv site-packages (→ src/, via uv sync)</text>
+  </g>
+
+  <rect x="40" y="394" width="410" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="417" font-size="14" font-weight="700" fill="#115E59">3  Found: run its top-level code once</text>
+  <text x="56" y="438" font-size="13" fill="#115E59">(the package's __init__.py first), then cache it</text>
+
+  <rect x="40" y="466" width="410" height="48" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="56" y="495" font-size="13" font-weight="700" fill="#B91C1C">✗ No match anywhere: ModuleNotFoundError</text>
+
+  <g stroke="#2563EB" stroke-width="2">
+    <line x1="245" y1="132" x2="245" y2="146" marker-end="url(#arrow-blue)"/>
+    <line x1="245" y1="208" x2="245" y2="222" marker-end="url(#arrow-blue)"/>
+  </g>
+  <line x1="245" y1="374" x2="245" y2="388" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <line x1="440" y1="374" x2="440" y2="460" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+
+  <!-- ================= Right: import graph ================= -->
+  <rect x="490" y="56" width="450" height="472" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="715" y="82" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">Who imports whom in incident_report</text>
+
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="700" fill="#1E3A8A" text-anchor="middle">
+    <rect x="655" y="104" width="120" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="715" y="128">cli</text>
+    <rect x="525" y="214" width="120" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="585" y="238">loading</text>
+    <rect x="785" y="214" width="120" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="845" y="238">report</text>
+    <rect x="785" y="324" width="120" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="845" y="348">summary</text>
+    <rect x="525" y="324" width="120" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="585" y="348">errors</text>
+    <rect x="655" y="434" width="120" height="38" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="715" y="458" fill="#115E59">models</text>
+  </g>
+
+  <g stroke="#2563EB" stroke-width="2" fill="none">
+    <line x1="690" y1="142" x2="610" y2="208" marker-end="url(#arrow-blue)"/>
+    <line x1="740" y1="142" x2="820" y2="208" marker-end="url(#arrow-blue)"/>
+    <path d="M655,123 C510,123 505,300 522,334" marker-end="url(#arrow-blue)"/>
+    <line x1="585" y1="252" x2="585" y2="318" marker-end="url(#arrow-blue)"/>
+    <line x1="610" y1="252" x2="695" y2="428" marker-end="url(#arrow-blue)"/>
+    <line x1="845" y1="252" x2="845" y2="318" marker-end="url(#arrow-blue)"/>
+    <line x1="820" y1="252" x2="735" y2="428" marker-end="url(#arrow-blue)"/>
+    <line x1="820" y1="362" x2="760" y2="428" marker-end="url(#arrow-blue)"/>
+  </g>
+  <text x="510" y="500" font-size="13" fill="#115E59">✓ Every arrow points down towards models: no cycles.</text>
+
+  <!-- shadowing warning -->
+  <rect x="20" y="546" width="920" height="60" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="40" y="570" font-size="14" font-weight="700" fill="#92400E">⚠ The script's folder is searched first</text>
+  <text x="40" y="592" font-size="13" fill="#92400E">A file of your own named <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">json.py</tspan> or <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">logging.py</tspan> hides the standard-library module of the same name. This is called shadowing.</text>
+</svg>

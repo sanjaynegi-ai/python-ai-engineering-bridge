@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">The Internal Knowledge Assistant: architecture</title>
+  <desc id="desc">The capstone has two halves that share one index. Ingestion, built in Session 14, is orchestrated by ingest() in ingestion.py, which calls four modules in turn: documents.py finds the .md and .pdf files under data/docs, fingerprints them with a content hash and loads their text; chunking.py splits each file into chunks with metadata; embedding.py turns chunk texts into vectors behind an Embedder protocol, with fastembed for real use and a hashing embedder for tests; store.py keeps chunks, metadata and vectors in a local Chroma database in the index folder, and is the only module that imports chromadb. Only new and changed files are loaded and embedded, and a file that fails keeps its previous chunks. Answering, built in Session 15, reads the same index: a question from FastAPI or Streamlit is embedded and searched, the hits become numbered sources in a prompt, an LLM writes a grounded answer, and the answer is returned with its sources, or "not found". Models, settings, errors and the command line are shared.</desc>
+
+  <defs>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="640" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">The Internal Knowledge Assistant: architecture</text>
+  <text x="480" y="60" text-anchor="middle" font-size="13" fill="#334155">Each box is a module. Two halves share one index: Session 14 fills it, Session 15 answers from it.</text>
+
+  <!-- Ingestion panel -->
+  <rect x="24" y="76" width="912" height="274" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="40" y="100" font-size="15" font-weight="700" fill="#1E3A8A">Ingestion (Session 14): knowledge-assistant ingest</text>
+
+  <!-- orchestrator -->
+  <rect x="300" y="110" width="380" height="50" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="490" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">ingestion.py</tspan>   ingest()</text>
+  <text x="490" y="150" text-anchor="middle" font-size="12" fill="#1E3A8A">compares content hashes, decides what to do with each file</text>
+  <line x1="330" y1="160" x2="290" y2="188" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <line x1="463" y1="160" x2="463" y2="188" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <line x1="600" y1="160" x2="630" y2="188" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <line x1="660" y1="160" x2="800" y2="188" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="282" y="174" text-anchor="end" font-size="12" fill="#1E3A8A">calls</text>
+
+  <!-- pipeline row -->
+  <rect x="40" y="190" width="140" height="100" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="110" y="212" text-anchor="middle" font-size="14" font-weight="700" fill="#334155" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">data/docs/</text>
+  <g font-size="12" fill="#334155" text-anchor="middle">
+    <text x="110" y="234">runbooks, policies,</text>
+    <text x="110" y="252">postmortems, guides</text>
+    <text x="110" y="276">.md and .pdf files</text>
+  </g>
+  <line x1="180" y1="240" x2="200" y2="240" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <rect x="204" y="190" width="164" height="100" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="286" y="212" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">documents.py</text>
+  <g font-size="12" fill="#1E3A8A" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">
+    <text x="286" y="236">discover()</text>
+    <text x="286" y="256">content_hash()</text>
+    <text x="286" y="276">load_document()</text>
+  </g>
+  <line x1="368" y1="240" x2="384" y2="240" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="388" y="190" width="150" height="100" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="463" y="212" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">chunking.py</text>
+  <text x="463" y="236" text-anchor="middle" font-size="12" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">chunk_document()</text>
+  <g font-size="12" fill="#1E3A8A" text-anchor="middle">
+    <text x="463" y="256">sections, size, overlap,</text>
+    <text x="463" y="276">metadata, content hash</text>
+  </g>
+  <line x1="538" y1="240" x2="558" y2="240" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="562" y="190" width="150" height="100" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="637" y="212" text-anchor="middle" font-size="14" font-weight="700" fill="#4C1D95" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">embedding.py</text>
+  <g font-size="12" fill="#4C1D95" text-anchor="middle">
+    <text x="637" y="236">Embedder protocol</text>
+    <text x="637" y="256">fastembed: real model</text>
+    <text x="637" y="276">hashing: tests, free</text>
+  </g>
+  <line x1="712" y1="240" x2="732" y2="240" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <rect x="736" y="190" width="184" height="100" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="828" y="212" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">store.py</tspan>  ChunkStore</text>
+  <g font-size="12" fill="#115E59" text-anchor="middle">
+    <text x="828" y="236" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">replace() remove()</text>
+    <text x="828" y="256" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">sources() search()</text>
+    <text x="828" y="278">the only Chroma user</text>
+  </g>
+  <line x1="828" y1="290" x2="828" y2="300" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="744" y="302" width="168" height="32" rx="16" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="828" y="323" text-anchor="middle" font-size="12" fill="#334155"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">index/</tspan>  Chroma, on disk</text>
+
+  <rect x="40" y="302" width="672" height="32" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="56" y="323" font-size="12" fill="#92400E">⚠  Only new and changed files are loaded and embedded. A file that fails keeps its previous chunks.</text>
+
+  <!-- connector to answering -->
+  <path d="M 828 334 L 828 372 L 330 372 L 330 434" fill="none" stroke="#0D9488" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-teal)"/>
+  <text x="580" y="366" text-anchor="middle" font-size="12" fill="#115E59">the same index, read only</text>
+
+  <!-- Answering panel -->
+  <rect x="24" y="390" width="912" height="190" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="40" y="414" font-size="15" font-weight="700" fill="#334155">Answering (Session 15)</text>
+
+  <rect x="40" y="436" width="170" height="84" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="125" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">Question</text>
+  <g font-size="12" fill="#1E3A8A" text-anchor="middle">
+    <text x="125" y="482">FastAPI endpoint,</text>
+    <text x="125" y="500">Streamlit UI</text>
+  </g>
+  <line x1="210" y1="478" x2="230" y2="478" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="234" y="436" width="160" height="84" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="314" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59">Retrieve</text>
+  <g font-size="12" fill="#115E59" text-anchor="middle">
+    <text x="314" y="482">embed the question,</text>
+    <text x="314" y="500" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">store.search()</text>
+  </g>
+  <line x1="394" y1="478" x2="414" y2="478" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="418" y="436" width="160" height="84" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="498" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">Build the prompt</text>
+  <g font-size="12" fill="#1E3A8A" text-anchor="middle">
+    <text x="498" y="482">hits become numbered</text>
+    <text x="498" y="500">sources: [1], [2] ...</text>
+  </g>
+  <line x1="578" y1="478" x2="598" y2="478" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="602" y="436" width="140" height="84" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="672" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#4C1D95">LLM</text>
+  <g font-size="12" fill="#4C1D95" text-anchor="middle">
+    <text x="672" y="482">answers only from</text>
+    <text x="672" y="500">the sources</text>
+  </g>
+  <line x1="742" y1="478" x2="762" y2="478" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <rect x="766" y="436" width="154" height="84" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="843" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59">Answer + sources</text>
+  <g font-size="12" fill="#115E59" text-anchor="middle">
+    <text x="843" y="482">✓ cited files and pages,</text>
+    <text x="843" y="500">or "not found"</text>
+  </g>
+
+  <text x="40" y="560" font-size="12" fill="#334155">Session 15 adds these modules on top of Session 14's. Nothing in ingestion changes when answering is added.</text>
+
+  <!-- shared -->
+  <rect x="24" y="594" width="912" height="34" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="616" text-anchor="middle" font-size="12" fill="#334155">Shared by both halves:  <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">models.py</tspan> (Document, Chunk, Hit, IndexConfig, IngestReport) · <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">settings.py</tspan> · <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">errors.py</tspan> · <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">cli.py</tspan></text>
+</svg>

@@ -1,0 +1,84 @@
+# -----------------------------------------------------------------------------
+# Publication boundary
+# -----------------------------------------------------------------------------
+# This repository is published for learners. Ignore every root-level resource
+# by default, then explicitly include only the public landing page and course
+# content. New authoring folders therefore remain private unless deliberately
+# reviewed and added to this allowlist.
+/*
+!/.gitignore
+!/README.md
+!/content/
+
+# Authoring instructions and internal resources (explicit for clarity)
+/AGENTS.md
+/CLAUDE.md
+/planning/
+/solutions/
+/tools/
+
+# Release assembly, rendered previews, manifests, and staging output
+/release/
+
+# -----------------------------------------------------------------------------
+# Local secrets and machine-specific configuration
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# -----------------------------------------------------------------------------
+# Python environments, caches, and generated files
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.python_history
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.pyright/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Packaging and build output
+build/
+dist/
+site/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+
+# Jupyter-generated state
+.ipynb_checkpoints/
+
+# Logs, temporary files, and local databases
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.sqlite
+*.sqlite3
+
+# Editor and operating-system metadata
+.idea/
+.vscode/
+.vs/
+.DS_Store
+Thumbs.db
+Desktop.ini
+

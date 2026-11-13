@@ -1,0 +1,15 @@
+{"question": "The tracking site shows errors for everyone. What do I check first?", "expected_sources": ["runbook-tracking-website-errors.md"]}
+{"question": "How often must we rotate API keys?", "expected_sources": ["policy-api-credentials.md"]}
+{"question": "Someone clicked a link in a phishing email but typed nothing. What now?", "expected_sources": ["guide-phishing-response.md"]}
+{"question": "How long do we have to resolve a P2 incident?", "expected_sources": ["sla-and-priorities.pdf"]}
+{"question": "The backup failed three nights in a row. What priority is that?", "expected_sources": ["runbook-backup-failures.md"]}
+{"question": "How often must the status page be updated during a P1?", "expected_sources": ["policy-incident-communication.pdf", "runbook-tracking-website-errors.md"]}
+{"question": "Who gets paged if nobody answers?", "expected_sources": ["on-call-handbook.md"]}
+{"question": "The Berlin office VPN keeps disconnecting.", "expected_sources": ["runbook-vpn-outage.md"]}
+{"question": "What caused the checkout outage in September?", "expected_sources": ["postmortem-2026-09-checkout-outage.md"]}
+{"question": "How do I get a replacement building badge?", "expected_sources": ["policy-access-requests.md"]}
+{"question": "Internal hostnames won't resolve, but external sites work.", "expected_sources": ["runbook-dns-resolution.md"]}
+{"question": "How do I promote the orders database replica?", "expected_sources": ["runbook-database-failover.md"]}
+{"question": "What's on the cafeteria menu this week?", "expected_sources": []}
+{"question": "What will the weather be in Zurich tomorrow?", "expected_sources": []}
+{"question": "How many vacation days do new employees get?", "expected_sources": []}

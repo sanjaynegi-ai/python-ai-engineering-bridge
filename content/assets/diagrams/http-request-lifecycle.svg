@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">The life of one HTTP request in HTTPX</title>
+  <desc id="desc">A request goes through five phases: get a connection from the pool, connect (DNS, TCP, TLS), send the request, wait for and read the response, then check the status and parse the body. Each of the first four phases has its own timeout and its own exception. A response always arrives as a Response object; only raise_for_status turns a 4xx or 5xx into an exception. Below, the HTTPX exception family: transport problems are RequestErrors, bad status codes are HTTPStatusErrors, and both are HTTPErrors.</desc>
+
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">The life of one HTTP request in HTTPX</text>
+
+  <!-- your code -->
+  <rect x="20" y="56" width="920" height="40" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="36" y="82" font-size="14" fill="#1E3A8A"><tspan font-weight="700">Your code:</tspan> <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">response = client.get("/assets/db-03")</tspan>  blocks until the response arrives, or an exception is raised</text>
+  <line x1="105" y1="96" x2="105" y2="118" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- phases -->
+  <g font-size="13">
+    <rect x="20" y="124" width="170" height="78" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="34" y="148" font-size="14" font-weight="700" fill="#334155">1  Connection</text>
+    <text x="34" y="168" fill="#334155">reuse one from the</text>
+    <text x="34" y="186" fill="#334155">client's pool, or open one</text>
+
+    <rect x="207" y="124" width="170" height="78" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="221" y="148" font-size="14" font-weight="700" fill="#334155">2  Connect</text>
+    <text x="221" y="168" fill="#334155">DNS lookup, TCP,</text>
+    <text x="221" y="186" fill="#334155">TLS handshake (https)</text>
+
+    <rect x="394" y="124" width="170" height="78" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="408" y="148" font-size="14" font-weight="700" fill="#334155">3  Send</text>
+    <text x="408" y="168" fill="#334155">method, URL, headers</text>
+    <text x="408" y="186" fill="#334155">(token), JSON body</text>
+
+    <rect x="581" y="124" width="170" height="78" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+    <text x="595" y="148" font-size="14" font-weight="700" fill="#334155">4  Receive</text>
+    <text x="595" y="168" fill="#334155">wait while the server</text>
+    <text x="595" y="186" fill="#334155">works; read the reply</text>
+
+    <rect x="768" y="124" width="172" height="78" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text x="782" y="148" font-size="14" font-weight="700" fill="#115E59">5  Response</text>
+    <text x="782" y="168" fill="#115E59">check the status code,</text>
+    <text x="782" y="186" fill="#115E59">then parse <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">.json()</tspan></text>
+  </g>
+  <g stroke="#64748B" stroke-width="2">
+    <line x1="190" y1="163" x2="201" y2="163" marker-end="url(#arrow-slate)"/>
+    <line x1="377" y1="163" x2="388" y2="163" marker-end="url(#arrow-slate)"/>
+    <line x1="564" y1="163" x2="575" y2="163" marker-end="url(#arrow-slate)"/>
+    <line x1="751" y1="163" x2="762" y2="163" marker-end="url(#arrow-slate)"/>
+  </g>
+
+  <!-- timeouts -->
+  <g font-size="13" fill="#92400E" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">
+    <rect x="45" y="216" width="120" height="26" rx="13" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="105" y="234" text-anchor="middle">pool timeout</text>
+    <rect x="227" y="216" width="130" height="26" rx="13" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="292" y="234" text-anchor="middle">connect timeout</text>
+    <rect x="419" y="216" width="120" height="26" rx="13" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="479" y="234" text-anchor="middle">write timeout</text>
+    <rect x="606" y="216" width="120" height="26" rx="13" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="666" y="234" text-anchor="middle">read timeout</text>
+  </g>
+
+  <!-- failures -->
+  <g font-size="12" fill="#B91C1C" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">
+    <rect x="20" y="264" width="170" height="52" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="34" y="295">PoolTimeout</text>
+    <rect x="207" y="264" width="170" height="52" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="221" y="286">ConnectTimeout</text>
+    <text x="221" y="304">ConnectError</text>
+    <rect x="394" y="264" width="170" height="52" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="408" y="286">WriteTimeout</text>
+    <text x="408" y="304">WriteError</text>
+    <rect x="581" y="264" width="170" height="52" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="595" y="286">ReadTimeout</text>
+    <text x="595" y="304">RemoteProtocolError</text>
+    <rect x="768" y="264" width="172" height="52" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="782" y="286">HTTPStatusError</text>
+    <text x="782" y="304">JSONDecodeError</text>
+  </g>
+  <g stroke="#DC2626" stroke-width="1.5" stroke-dasharray="5 4">
+    <line x1="105" y1="242" x2="105" y2="258" marker-end="url(#arrow-red)"/>
+    <line x1="292" y1="242" x2="292" y2="258" marker-end="url(#arrow-red)"/>
+    <line x1="479" y1="242" x2="479" y2="258" marker-end="url(#arrow-red)"/>
+    <line x1="666" y1="242" x2="666" y2="258" marker-end="url(#arrow-red)"/>
+    <line x1="854" y1="202" x2="854" y2="258" marker-end="url(#arrow-red)"/>
+  </g>
+  <text x="768" y="334" font-size="12" fill="#B91C1C">only if you call raise_for_status()</text>
+  <text x="768" y="350" font-size="12" fill="#B91C1C">or .json() on a non-JSON body</text>
+
+  <!-- exception family -->
+  <rect x="20" y="370" width="920" height="214" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text x="40" y="396" font-size="15" font-weight="700" fill="#334155">The HTTPX exception family: catch the level you can handle</text>
+  <g>
+    <text x="40" y="428" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" font-weight="700" fill="#334155">httpx.HTTPError</text>
+    <text x="60" y="456" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">├── RequestError</text>
+    <text x="212" y="456" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#334155">no usable response at all</text>
+    <text x="60" y="482" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">│</text>
+    <text x="100" y="482" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">└── TransportError</text>
+    <text x="60" y="508" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">│</text>
+    <text x="140" y="508" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">├── TimeoutException</text>
+    <text x="326" y="508" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#334155">Pool/Connect/Write/ReadTimeout</text>
+    <text x="60" y="534" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">│</text>
+    <text x="140" y="534" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">└── NetworkError</text>
+    <text x="292" y="534" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#334155">ConnectError, ReadError ...</text>
+    <text x="60" y="562" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#334155">└── HTTPStatusError</text>
+    <text x="237" y="562" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#334155">a response arrived, but with a 4xx or 5xx status</text>
+  </g>
+  <rect x="620" y="412" width="300" height="74" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="634" y="434" font-size="13" font-weight="700" fill="#92400E">⚠ Timeouts</text>
+  <text x="634" y="454" font-size="13" fill="#92400E">HTTPX defaults to 5 seconds per phase.</text>
+  <text x="634" y="474" font-size="13" fill="#92400E">requests has no default: it can wait forever.</text>
+</svg>

@@ -1,0 +1,15 @@
+{
+  "exported_by": "legacy-helpdesk",
+  "tickets": [
+    {
+      "id": "INC-2999",
+      "title": "Old ticket from the legacy system",
+      "team": "platform",
+      "priority": "P4",
+      "status": "closed",
+      "age_hours": 900,
+      "assignee": null,
+      "tags": []
+    }
+  ]
+}

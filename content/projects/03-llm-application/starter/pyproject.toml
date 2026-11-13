@@ -1,0 +1,34 @@
+[project]
+name = "incident-triage"
+version = "0.1.0"
+description = "LLM-assisted triage of incident reports for the fictional Orbital Logistics on-call team"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai>=3.36.1",
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.1",
+]
+
+[project.scripts]
+incident-triage = "incident_triage.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest]
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+]

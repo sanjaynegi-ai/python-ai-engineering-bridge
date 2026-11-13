@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="680" viewBox="0 0 960 680" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Incremental ingestion: what happens to each file</title>
+  <desc id="desc">An ingestion run starts from two lists: the sources on disk, from discover(), and the sources the index holds with the content hash each was built from, from store.sources(). For each source on disk, the file's SHA-256 content hash is computed and compared with the indexed hash. If they match, the file is unchanged and is skipped: not read, chunked or embedded. Otherwise it is loaded and chunked. If that raises DocumentError or yields no chunks, the file is reported as failed, the other files carry on, and the index keeps the file's previous chunks. Otherwise its chunks are embedded and store.replace() makes them the source's only chunks, and the file counts as added if it is new or updated if it changed. Then every source in the index that is no longer on disk is removed; a renamed file is removed and added. Any other exception, such as an embedder outage, stops the run: finished files stay indexed and the current file keeps its old chunks, because it is embedded before anything is replaced, so running again carries on. The content hash covers only the file; the index also records its configuration, and a different embedding model, chunk size or overlap is refused until the index is rebuilt.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="680" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Incremental ingestion: what happens to each file</text>
+
+  <!-- inputs -->
+  <rect x="40" y="62" width="400" height="56" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="240" y="85" text-anchor="middle" font-size="14" font-weight="700" fill="#334155" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">discover(folder)</text>
+  <text x="240" y="106" text-anchor="middle" font-size="12" fill="#334155">the sources on disk: runbooks/vpn-outage.md → its path</text>
+
+  <rect x="500" y="62" width="420" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="710" y="85" text-anchor="middle" font-size="14" font-weight="700" fill="#115E59" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">store.sources()</text>
+  <text x="710" y="106" text-anchor="middle" font-size="12" fill="#115E59">what the index holds: each source → the hash it was built from</text>
+
+  <!-- per-file panel -->
+  <rect x="24" y="140" width="640" height="456" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="196" y="164" font-size="15" font-weight="700" fill="#1E3A8A">For each source on disk</text>
+
+  <line x1="175" y1="118" x2="175" y2="172" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <rect x="60" y="174" width="230" height="48" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="175" y="194" text-anchor="middle" font-size="13" font-weight="700" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">content_hash(path)</text>
+  <text x="175" y="212" text-anchor="middle" font-size="12" fill="#1E3A8A">SHA-256 of the file's bytes</text>
+  <line x1="175" y1="222" x2="175" y2="238" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- indexed hash feeds the comparison -->
+  <line x1="560" y1="118" x2="236" y2="257" stroke="#0D9488" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-teal)"/>
+  <text x="416" y="168" font-size="12" fill="#115E59">the indexed hash</text>
+
+  <!-- decision 1 -->
+  <polygon points="175,240 285,280 175,320 65,280" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="175" y="277" text-anchor="middle" font-size="12" font-weight="700" fill="#1E3A8A">same hash as</text>
+  <text x="175" y="293" text-anchor="middle" font-size="12" font-weight="700" fill="#1E3A8A">in the index?</text>
+
+  <line x1="285" y1="280" x2="326" y2="280" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <text x="304" y="272" text-anchor="middle" font-size="12" font-weight="700" fill="#115E59">yes</text>
+  <rect x="330" y="252" width="314" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="346" y="275" font-size="13" font-weight="700" fill="#115E59">✓ unchanged: skip it</text>
+  <text x="346" y="295" font-size="12" fill="#115E59">not read, not chunked, not embedded</text>
+
+  <line x1="175" y1="320" x2="175" y2="352" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="186" y="341" font-size="12" font-weight="700" fill="#1E3A8A">no: new or changed</text>
+
+  <rect x="60" y="354" width="230" height="52" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="175" y="376" text-anchor="middle" font-size="13" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">load_document()</text>
+  <text x="175" y="396" text-anchor="middle" font-size="13" fill="#1E3A8A" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">chunk_document()</text>
+  <line x1="175" y1="406" x2="175" y2="420" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- decision 2 -->
+  <polygon points="175,422 285,462 175,502 65,462" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+  <text x="175" y="459" text-anchor="middle" font-size="12" font-weight="700" fill="#1E3A8A">DocumentError,</text>
+  <text x="175" y="475" text-anchor="middle" font-size="12" font-weight="700" fill="#1E3A8A">or no chunks?</text>
+
+  <line x1="285" y1="462" x2="326" y2="462" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+  <text x="304" y="454" text-anchor="middle" font-size="12" font-weight="700" fill="#B91C1C">yes</text>
+  <rect x="330" y="430" width="314" height="64" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="346" y="452" font-size="13" font-weight="700" fill="#B91C1C">✗ failed: reported, the rest carry on</text>
+  <text x="346" y="470" font-size="12" fill="#B91C1C">the index keeps the file's previous chunks;</text>
+  <text x="346" y="486" font-size="12" fill="#B91C1C">the log names the source, never the text</text>
+
+  <line x1="175" y1="502" x2="175" y2="522" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="186" y="516" font-size="12" font-weight="700" fill="#1E3A8A">no</text>
+
+  <rect x="60" y="524" width="230" height="52" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="175" y="546" text-anchor="middle" font-size="13" font-weight="700" fill="#4C1D95">embed the chunks</text>
+  <text x="175" y="566" text-anchor="middle" font-size="12" fill="#4C1D95">before touching the index</text>
+  <line x1="290" y1="550" x2="326" y2="550" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <rect x="330" y="520" width="314" height="60" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="346" y="542" font-size="13" font-weight="700" fill="#115E59" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">store.replace(source, ...)</text>
+  <text x="346" y="563" font-size="12" fill="#115E59">✓ added (new) or updated (changed)</text>
+
+  <!-- right column -->
+  <rect x="690" y="140" width="246" height="128" rx="12" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text x="706" y="164" font-size="14" font-weight="700" fill="#334155">Then, for each source</text>
+  <text x="706" y="182" font-size="14" font-weight="700" fill="#334155">indexed but not on disk</text>
+  <text x="706" y="206" font-size="12" fill="#334155" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">store.remove(source)</text>
+  <text x="706" y="228" font-size="12" fill="#334155">→ removed. A renamed file is</text>
+  <text x="706" y="246" font-size="12" fill="#334155">removed and added.</text>
+
+  <rect x="690" y="290" width="246" height="150" rx="12" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="706" y="314" font-size="14" font-weight="700" fill="#B91C1C">✗ Any other exception</text>
+  <g font-size="12" fill="#B91C1C">
+    <text x="706" y="336">An embedder outage, say. It stops</text>
+    <text x="706" y="354">the run, but nothing is half-done:</text>
+    <text x="706" y="376">· finished files stay indexed</text>
+    <text x="706" y="394">· the current file keeps its old</text>
+    <text x="706" y="410">   chunks (embedded first)</text>
+    <text x="706" y="430">· run again: it carries on</text>
+  </g>
+
+  <rect x="690" y="462" width="246" height="134" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="706" y="486" font-size="14" font-weight="700" fill="#92400E">⚠ The hash covers the file only</text>
+  <g font-size="12" fill="#92400E">
+    <text x="706" y="508">Change the model, chunk size or</text>
+    <text x="706" y="526">overlap, and every hash still</text>
+    <text x="706" y="544">matches. So the index records its</text>
+    <text x="706" y="562">IndexConfig, and refuses another:</text>
+    <text x="706" y="580" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">ingest --rebuild</text>
+  </g>
+
+  <text x="480" y="628" text-anchor="middle" font-size="13" fill="#334155">A second run over unchanged files embeds nothing: the work is proportional to what changed, not to the size of the corpus.</text>
+  <text x="480" y="652" text-anchor="middle" font-size="12" fill="#334155">Every run ends with a report: added, updated, unchanged, removed and failed sources.</text>
+</svg>

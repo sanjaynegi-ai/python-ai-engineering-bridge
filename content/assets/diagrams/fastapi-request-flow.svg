@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="700" viewBox="0 0 960 700" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Life of a request in FastAPI</title>
+  <desc id="desc">A client sends POST /tickets with a JSON body. Uvicorn, the ASGI server, accepts the connection and calls the FastAPI application. FastAPI matches the route, or answers 404 or 405. It resolves dependencies such as get_service. It validates the path, query and body with Pydantic, or answers 422 listing every problem without calling the route. It calls the route function, which calls the service; a domain exception raised there is turned into 404 or 409 by an exception handler, and any other exception becomes a 500. Finally the return value is validated against the response model, serialised to JSON and sent with the route's status code, 201 here.</desc>
+
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="700" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Life of a request in FastAPI</text>
+
+  <!-- client -->
+  <rect x="40" y="58" width="560" height="56" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="56" y="81" font-size="15" font-weight="700" fill="#334155">Client: <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-weight="400">POST /tickets</tspan> with a JSON body</text>
+  <text x="56" y="102" font-size="13" fill="#334155">curl, a browser on /docs, another team's service, or TestClient in your tests</text>
+  <line x1="320" y1="114" x2="320" y2="134" stroke="#64748B" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- uvicorn -->
+  <rect x="40" y="138" width="560" height="56" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <text x="56" y="161" font-size="15" font-weight="700" fill="#334155">Uvicorn: the ASGI server</text>
+  <text x="56" y="182" font-size="13" fill="#334155">accepts the connection, parses HTTP, and calls the FastAPI app</text>
+  <line x1="320" y1="194" x2="320" y2="214" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- FastAPI panel -->
+  <rect x="24" y="206" width="592" height="410" rx="12" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="604" y="226" text-anchor="end" font-size="12" font-weight="700" fill="#1E3A8A">inside FastAPI</text>
+
+  <!-- 1 routing -->
+  <rect x="40" y="232" width="560" height="56" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="255" font-size="15" font-weight="700" fill="#1E3A8A">1  Routing</text>
+  <text x="56" y="276" font-size="13" fill="#1E3A8A">match the method and path against the registered routes</text>
+  <line x1="320" y1="288" x2="320" y2="308" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- 2 dependencies -->
+  <rect x="40" y="312" width="560" height="56" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="335" font-size="15" font-weight="700" fill="#1E3A8A">2  Dependencies</text>
+  <text x="56" y="356" font-size="13" fill="#1E3A8A">call each <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">Depends(...)</tspan> function, e.g. <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">get_service(request)</tspan> → TicketService</text>
+  <line x1="320" y1="368" x2="320" y2="388" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- 3 validation -->
+  <rect x="40" y="392" width="560" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="415" font-size="15" font-weight="700" fill="#115E59">3  Request validation with Pydantic</text>
+  <text x="56" y="436" font-size="13" fill="#115E59">path, query and body converted to the declared types; every problem collected</text>
+  <line x1="320" y1="448" x2="320" y2="468" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- 4 route -->
+  <rect x="40" y="472" width="560" height="56" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="495" font-size="15" font-weight="700" fill="#1E3A8A">4  Your route function</text>
+  <text x="56" y="516" font-size="13" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#1E3A8A">create_ticket(ticket, service) → service.add(ticket)</text>
+  <line x1="320" y1="528" x2="320" y2="548" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- 5 response model -->
+  <rect x="40" y="552" width="560" height="56" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="575" font-size="15" font-weight="700" fill="#115E59">5  Response model</text>
+  <text x="56" y="596" font-size="13" fill="#115E59">the return value is validated as TicketOut, then serialised to JSON</text>
+  <line x1="320" y1="608" x2="320" y2="632" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- response -->
+  <rect x="40" y="636" width="560" height="48" rx="8" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="665" font-size="14" fill="#115E59"><tspan font-weight="700">✓ Response:</tspan> <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">201 Created</tspan> and the ticket as JSON, back through Uvicorn</text>
+
+  <!-- failure: routing -->
+  <line x1="600" y1="260" x2="646" y2="260" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <rect x="650" y="232" width="270" height="56" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="664" y="255" font-size="14" font-weight="700" fill="#B91C1C">✗ 404 Not Found</text>
+  <text x="664" y="276" font-size="13" fill="#B91C1C">or 405 Method Not Allowed</text>
+
+  <!-- failure: validation -->
+  <line x1="600" y1="420" x2="646" y2="420" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <rect x="650" y="378" width="270" height="84" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="664" y="401" font-size="14" font-weight="700" fill="#B91C1C">✗ 422 Unprocessable Content</text>
+  <text x="664" y="422" font-size="13" fill="#B91C1C"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">detail</tspan>: one entry per problem,</text>
+  <text x="664" y="440" font-size="13" fill="#B91C1C">with <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">loc</tspan>, <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">msg</tspan> and <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">type</tspan></text>
+  <text x="664" y="456" font-size="12" font-style="italic" fill="#B91C1C">your route is never called</text>
+
+  <!-- failure: domain exceptions -->
+  <line x1="600" y1="500" x2="646" y2="500" stroke="#D97706" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-amber)"/>
+  <rect x="650" y="472" width="270" height="84" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="664" y="495" font-size="14" font-weight="700" fill="#92400E">⚠ Exception handlers</text>
+  <text x="664" y="516" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#92400E">DuplicateTicketError → 409</text>
+  <text x="664" y="534" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#92400E">TicketNotFoundError → 404</text>
+  <text x="664" y="550" font-size="12" font-style="italic" fill="#92400E">a JSON body with a clear detail</text>
+
+  <polyline points="600,518 628,518 628,612 646,612" fill="none" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <rect x="650" y="584" width="270" height="56" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="664" y="607" font-size="14" font-weight="700" fill="#B91C1C">✗ 500 Internal Server Error</text>
+  <text x="664" y="628" font-size="13" fill="#B91C1C">any exception with no handler</text>
+</svg>

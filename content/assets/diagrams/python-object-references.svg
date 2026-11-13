@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">Names refer to objects</title>
+  <desc id="desc">Three names: ticket and alias both refer to the same dict object, while snapshot refers to a second dict created by ticket.copy(). Both dicts refer to one shared tags list, because a shallow copy copies only the outer container.</desc>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <!-- Opaque background keeps the diagram readable on GitHub dark mode -->
+  <rect width="960" height="600" fill="#FFFFFF"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Names refer to objects</text>
+
+  <!-- ===================== Code panel ===================== -->
+  <rect x="20" y="56" width="920" height="96" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="15" fill="#334155">
+    <text x="44" y="86">ticket = {"id": "INC-1042", "status": "open", "tags": ["network"]}</text>
+    <text x="44" y="111">alias = ticket<tspan x="314" fill="#64748B"># a second name for the SAME object</tspan></text>
+    <text x="44" y="136">snapshot = ticket.copy()<tspan x="314" fill="#64748B"># a NEW dict, but a shallow copy</tspan></text>
+  </g>
+
+  <!-- ===================== Names column ===================== -->
+  <rect x="20" y="172" width="200" height="320" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="120" y="198" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Names</text>
+  <text x="120" y="216" text-anchor="middle" font-size="12" fill="#1E3A8A">labels in a namespace</text>
+
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="15" font-weight="600" fill="#1E3A8A" text-anchor="middle">
+    <rect x="45" y="232" width="150" height="36" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="120" y="255">ticket</text>
+    <rect x="45" y="296" width="150" height="36" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="120" y="319">alias</text>
+    <rect x="45" y="404" width="150" height="36" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="120" y="427">snapshot</text>
+  </g>
+
+  <!-- ===================== Objects panel ===================== -->
+  <rect x="250" y="172" width="690" height="320" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="595" y="198" text-anchor="middle" font-size="15" font-weight="700" fill="#115E59">Objects</text>
+  <text x="595" y="216" text-anchor="middle" font-size="12" fill="#115E59">each has an identity (id), a type and a value</text>
+
+  <!-- dict A -->
+  <rect x="300" y="228" width="300" height="112" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+  <rect x="300" y="228" width="300" height="26" rx="8" fill="#CCFBF1"/>
+  <text x="314" y="246" font-size="13" font-weight="700" fill="#115E59">dict  ·  id A</text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="13" fill="#115E59">
+    <text x="314" y="276">"id":     "INC-1042"</text>
+    <text x="314" y="300">"status": "open"</text>
+    <text x="314" y="324">"tags":   ●</text>
+  </g>
+
+  <!-- dict B -->
+  <rect x="300" y="368" width="300" height="112" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+  <rect x="300" y="368" width="300" height="26" rx="8" fill="#CCFBF1"/>
+  <text x="314" y="386" font-size="13" font-weight="700" fill="#115E59">dict  ·  id B  (the copy)</text>
+  <g font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="13" fill="#115E59">
+    <text x="314" y="416">"id":     "INC-1042"</text>
+    <text x="314" y="440">"status": "open"</text>
+    <text x="314" y="464">"tags":   ●</text>
+  </g>
+
+  <!-- shared list -->
+  <rect x="712" y="316" width="200" height="76" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+  <text x="726" y="338" font-size="13" font-weight="700" fill="#92400E">list  ·  id C  (shared)</text>
+  <text x="726" y="368" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="14" fill="#92400E">["network"]</text>
+
+  <!-- name -> object arrows -->
+  <line x1="195" y1="250" x2="294" y2="262" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="195" y1="314" x2="294" y2="300" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="195" y1="422" x2="294" y2="424" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- dict.tags -> shared list -->
+  <path d="M412,320 C540,320 640,340 706,346" fill="none" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <path d="M412,460 C560,460 650,390 706,370" fill="none" stroke="#D97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+  <!-- ===================== Caveat callout ===================== -->
+  <rect x="20" y="512" width="920" height="72" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="44" y="540" font-size="14" font-weight="700" fill="#92400E">⚠ Shallow copy: new outer dict, same inner list.</text>
+  <text x="44" y="564" font-size="14" fill="#92400E">
+    <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">snapshot["tags"].append("db")</tspan> is visible through <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">ticket</tspan>. Use <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">copy.deepcopy()</tspan> when nested data must be independent.</text>
+</svg>

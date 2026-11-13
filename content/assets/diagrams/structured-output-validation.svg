@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" style="font-variant-ligatures: none" aria-labelledby="title desc" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="title">From model output to a validated TriageResult</title>
+  <desc id="desc">The request carries a strict JSON schema generated from the TriageResult Pydantic model, which constrains what the model can generate. The model's reply then passes four checks in the application. If the model refused, the result is LLMRefusal. If the text is not complete, valid JSON, for example because it was cut off at max_output_tokens, the result is LLMInvalidOutput. The JSON is validated against the model's types and allowed values, and then against business rules written as field validators, such as a summary of at most 160 characters; failures there are also LLMInvalidOutput. Only output that passes every check becomes a TriageResult the rest of the application can trust.</desc>
+
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#FFFFFF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">From model output to a validated TriageResult</text>
+
+  <!-- schema -->
+  <rect x="40" y="60" width="560" height="64" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="56" y="84" font-size="15" font-weight="700" fill="#1E3A8A">0  The request carries the contract</text>
+  <text x="56" y="106" font-size="13" fill="#1E3A8A"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">TriageResult</tspan> → strict JSON schema: types, allowed values, every field required</text>
+  <line x1="320" y1="124" x2="320" y2="146" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- model -->
+  <rect x="40" y="150" width="560" height="56" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="56" y="174" font-size="15" font-weight="700" fill="#4C1D95">The model generates, shaped by the schema</text>
+  <text x="56" y="195" font-size="13" fill="#4C1D95">shaped, not guaranteed: it can still refuse, run out of tokens, or break other rules</text>
+  <line x1="320" y1="206" x2="320" y2="228" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- checks panel -->
+  <rect x="24" y="222" width="592" height="290" rx="12" fill="#F8FAFC" stroke="#0D9488" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="604" y="242" text-anchor="end" font-size="12" font-weight="700" fill="#115E59">in your code: trust, but verify</text>
+
+  <rect x="40" y="248" width="560" height="50" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="270" font-size="14" font-weight="700" fill="#115E59">1  An answer, or a refusal?</text>
+  <text x="56" y="289" font-size="12" fill="#115E59">a refusal is a content part of type "refusal"; the parsed output is then None</text>
+  <line x1="320" y1="298" x2="320" y2="314" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="40" y="318" width="560" height="50" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="340" font-size="14" font-weight="700" fill="#115E59">2  Complete, valid JSON?</text>
+  <text x="56" y="359" font-size="12" fill="#115E59">output cut off at <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">max_output_tokens</tspan> is half a JSON object</text>
+  <line x1="320" y1="368" x2="320" y2="384" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="40" y="388" width="560" height="50" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="410" font-size="14" font-weight="700" fill="#115E59">3  The schema: types and allowed values</text>
+  <text x="56" y="429" font-size="12" fill="#115E59"><tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">priority</tspan> in P1–P4, <tspan font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">team</tspan> a known team, every field present</text>
+  <line x1="320" y1="438" x2="320" y2="454" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="40" y="458" width="560" height="50" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="480" font-size="14" font-weight="700" fill="#115E59">4  Business rules (field validators)</text>
+  <text x="56" y="499" font-size="12" fill="#115E59">summary ≤ 160 characters and not blank; at most 5 tags, cleaned</text>
+  <line x1="320" y1="508" x2="320" y2="532" stroke="#0D9488" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <rect x="40" y="536" width="560" height="48" rx="8" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+  <text x="56" y="565" font-size="14" fill="#115E59"><tspan font-weight="700">✓ TriageResult</tspan>: typed, validated, safe for the rest of the code to use</text>
+
+  <!-- failures -->
+  <line x1="600" y1="273" x2="646" y2="273" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <rect x="650" y="248" width="270" height="50" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="664" y="270" font-size="14" font-weight="700" fill="#B91C1C">✗ LLMRefusal</text>
+  <text x="664" y="289" font-size="12" fill="#B91C1C">record it; a person looks at the report</text>
+
+  <polyline points="600,343 630,343 630,413 600,413" fill="none" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4"/>
+  <polyline points="600,483 630,483 630,413" fill="none" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4"/>
+  <line x1="630" y1="413" x2="646" y2="413" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <rect x="650" y="370" width="270" height="86" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="664" y="393" font-size="14" font-weight="700" fill="#B91C1C">✗ LLMInvalidOutput</text>
+  <text x="664" y="413" font-size="12" fill="#B91C1C">with the failing field in the message;</text>
+  <text x="664" y="431" font-size="12" fill="#B91C1C">maybe retry once, or raise the token</text>
+  <text x="664" y="449" font-size="12" fill="#B91C1C">limit if it was truncated</text>
+
+  <rect x="650" y="60" width="270" height="146" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="664" y="84" font-size="14" font-weight="700" fill="#92400E">⚠ Why check again?</text>
+  <text x="664" y="106" font-size="12" fill="#92400E">Rules written as validators (lengths,</text>
+  <text x="664" y="124" font-size="12" fill="#92400E">cleaning, limits) aren't part of the</text>
+  <text x="664" y="142" font-size="12" fill="#92400E">schema the model sees: only Pydantic</text>
+  <text x="664" y="160" font-size="12" fill="#92400E">checks them, on arrival. And only</text>
+  <text x="664" y="178" font-size="12" fill="#92400E">valid data should reach the rest of</text>
+  <text x="664" y="196" font-size="12" fill="#92400E">the application, whoever produced it.</text>
+</svg>

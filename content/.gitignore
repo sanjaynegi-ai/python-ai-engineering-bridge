@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local secrets: copy .env.example to .env and never commit .env
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tool caches
+.ruff_cache/
+.pytest_cache/
