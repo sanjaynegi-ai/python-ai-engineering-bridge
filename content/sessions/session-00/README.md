@@ -1,14 +1,14 @@
 # Session 00: Induction — Python to GenAI Engineering
 
-**Orientation** · Self-study guide · 90–120 minutes · **Not part of the sixteen assessed sessions**
+**Orientation** · **Start here before Session 01**
 
-## 1. Session overview
+## Session overview
 
 You already know how to design, build and debug software. This course closes a narrower gap: how Python expresses familiar engineering ideas, and how those ideas are used to build reliable AI applications.
 
 This induction previews the complete journey. It explains how language models became large language models, follows text from words to tokens and vectors, compares four ways to run a model, and introduces RAG, agents, agentic RAG, loop engineering and harness engineering. The aim is orientation—not premature mastery. Later sessions implement each important idea properly.
 
-## 2. Why this bridge exists
+## Why this bridge exists
 
 Experienced Java, C#, JavaScript/TypeScript and automation engineers do not need programming explained from first principles. They need to become productive in Python's ecosystem and conventions:
 
@@ -19,7 +19,7 @@ Experienced Java, C#, JavaScript/TypeScript and automation engineers do not need
 - call LLMs directly before deciding whether a framework helps;
 - build and explain a small grounded AI application.
 
-## 3. Learning objectives
+## Learning objectives
 
 After this guide, you should be able to:
 
@@ -32,7 +32,7 @@ After this guide, you should be able to:
 7. **Calculate** cosine similarity and connect it to retrieval.
 8. **Distinguish** an agent loop from the harness that constrains it.
 
-## 4. Course roadmap
+## Course roadmap
 
 ![Course bridge roadmap](../../assets/diagrams/course-bridge-roadmap.svg)
 
@@ -44,7 +44,7 @@ After this guide, you should be able to:
 - Sessions 14–16 integrate those capabilities into an Internal Knowledge Assistant.
 - Session 13 makes AI-assisted development explicit, although responsible assistant use can begin earlier.
 
-## 5. Technologies you will encounter
+## Technologies you will encounter
 
 | Area | Tools and ideas |
 |---|---|
@@ -57,13 +57,13 @@ After this guide, you should be able to:
 | Product surface | FastAPI plus Streamlit; Gradio as a lightweight alternative |
 | Engineering quality | testing, evaluation, logging, security and human review |
 
-## 6. What you will build
+## What you will build
 
 The projects progress from a Python data processor to an API service, then an LLM-powered application, and finally an **Internal Knowledge Assistant**. The capstone ingests Markdown and PDF documents, retrieves relevant passages, generates grounded answers with sources, exposes a FastAPI API, and provides a Streamlit UI.
 
 LangChain will help with selected model and retrieval integrations. It is a tool, not the architecture. Plain Python remains the right choice when the workflow is simple.
 
-## 7. Self-study path
+## Self-study path
 
 1. Work through [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb).
 2. Run the notebook setup cells. They install into the active local or Google Colab kernel and load provider settings from `.env`.
@@ -73,16 +73,8 @@ LangChain will help with selected model and retrieval integrations. It is a tool
 6. Write the short [application design brief](workbook/assignment.md).
 7. Keep this guide as a map; use Sessions 09–12 for implementation depth.
 
-## 8. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Course and GenAI orientation | 60–75 minutes |
-| Optional provider experiments | 20–40 minutes |
-| Practice quiz | 20 minutes |
-| Design brief | 45–60 minutes |
-
-## 9. Common mistakes
+## Common mistakes
 
 | Mistake | Better mental model |
 |---|---|
@@ -93,7 +85,7 @@ LangChain will help with selected model and retrieval integrations. It is a tool
 | More autonomy is always better | Prefer a deterministic workflow when the path is known. |
 | A framework removes provider differences | It reduces boilerplate, but capabilities, errors and semantics still differ. |
 
-## 10. Reflection and interview prompts
+## Reflection and interview prompts
 
 1. Which parts of the course are new concepts, and which are familiar engineering expressed through Python?
 2. When would you choose local inference over a hosted API?
@@ -101,6 +93,25 @@ LangChain will help with selected model and retrieval integrations. It is a tool
 4. Why can cosine similarity retrieve a semantically useful but lexically different passage?
 5. What belongs inside an agent's loop, and what belongs in its harness?
 
-## 11. Next session
+## Next session
 
 [Session 01](../session-01/README.md) starts with the Python runtime, isolated environments and a reproducible `uv` project.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

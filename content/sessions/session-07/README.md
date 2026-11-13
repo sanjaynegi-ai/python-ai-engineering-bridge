@@ -1,20 +1,20 @@
 # Session 07: FastAPI
 
-**Phase 2: Professional Python Applications** · Weekend 4 · 2-hour live session · **Project 02, stage 2**
+**Phase 2: Professional Python Applications** · **Project 02, stage 2**
 
-## 1. Session overview
+## Session overview
 
 In Session 05 you called an HTTP API, and in Session 06 you described data with Pydantic. This session works from the other side: you'll **serve** an API with **FastAPI**. Endpoints are typed Python functions; FastAPI reads their parameters from the path, query string and body, validates them with your Pydantic models, and turns return values and exceptions into HTTP responses, with OpenAPI documentation generated from the same code.
 
 The workbook puts Project 02 behind HTTP. Other teams can look up, list and create tickets and read the report, while the command line keeps working on the same domain code.
 
-## 2. Why this matters
+## Why this matters
 
 Nearly every AI application you'll build is exposed as an API: a retrieval service, an extraction endpoint, an agent behind a chat UI. FastAPI is a common choice for those in Python, and the RAG capstone in Sessions 14 and 15 is a FastAPI application.
 
 The framework itself is quick to learn. The engineering judgment around it takes longer, and it's what this session practises: which status code for which failure, what belongs in a route and what in a service, how to keep internal fields out of responses, and how to test an API without a server.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Sessions 01–06. In particular, Session 05's HTTP status codes and clients, and Session 06's models, `ValidationError` and settings.
 
@@ -24,7 +24,7 @@ The framework itself is quick to learn. The engineering judgment around it takes
 2. Finish the Session 06 workbook and tag it `session-06`. This session's workbook adds to that project.
 3. Run `uv run python -c "from incident_api.models import Ticket; import json; print(json.dumps(Ticket.model_json_schema(), indent=2))"` in your project, if you haven't already. You'll see it again in `/docs`.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -35,16 +35,8 @@ By the end of this session you will be able to:
 5. **Test** endpoints with `TestClient`, and **verify** the generated OpenAPI document.
 6. **Explain** the limitations of in-memory state in a web service.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision on your own) | 60 minutes |
-| Practice quiz | 35 minutes |
-| Workbook assignment (Project 02, stage 2) | 2.5–3 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -59,28 +51,9 @@ By the end of this session you will be able to:
 | `fastapi dev` / `fastapi run`, Uvicorn and ASGI | Working knowledge |
 | `def` versus `async def` endpoints | Awareness (Session 08) |
 
-### Live session plan
 
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 15 min | Three teams that need live incident data; what a file share can't do |
-| Visual explanation and demo | 25 min | The life of a request; parameters, `422`s, response models filtering a leaky record |
-| Guided coding | 50 min | Together: copy the Session 07 files, add FastAPI, build the service layer and the first read endpoints until `test_service.py` passes and `/tickets` responds |
-| Debugging challenge | 15 min | A `500` that should be a `404`, a test broken by a leftover override, and a client used without `with` |
-| Recap and assignment briefing | 15 min | Key takeaways; the remaining milestones; running `fastapi dev` and `/docs` |
 
-## 7. Live demonstration
-
-The instructor will:
-
-1. Build a one-route app and call it with `TestClient`, then compare it with Spring Boot, ASP.NET Core and Express.
-2. Send three invalid requests and read the `422` bodies, then show an unknown id producing a `500`.
-3. Return an internal record directly, see the private fields leak, and fix it with a response model.
-4. Replace `HTTPException` with a domain exception and a handler.
-5. Inject a service with `Depends`, guard a route with an API-key dependency, and swap the service in a test.
-6. Start the workbook's service with `fastapi dev` and explore `/docs`.
-
-## 8. Guided exercises
+## Guided exercises
 
 1. [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb):
    - **First endpoint:** `TestClient`, and the framework comparison.
@@ -94,19 +67,19 @@ The instructor will:
    - **Documentation:** reading the generated OpenAPI document.
 2. [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb): 10 self-check questions.
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: Project 02 becomes a service**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Add a `TicketService` without HTTP, API schemas, and five endpoints to your Session 06 project: health, report, list with filters and paging, get one, and create. `404`, `409` and `422` are each returned where they belong, and are documented in `/docs`. 63 new acceptance tests are provided, one file per milestone, and you write at least 10 of your own. The new files are in [`projects/02-python-api-service/session-07`](../../projects/02-python-api-service/README.md).
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - The `incident-api` project with `service.py`, `schemas.py` and `api.py`, tagged `session-07`.
 - `uv run pytest` passing: 116 acceptance tests, unchanged, plus your own.
 - `NOTES.md` with your design notes, the run-through observations and your reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -121,20 +94,20 @@ Add a `TicketService` without HTTP, API schemas, and five endpoints to your Sess
 | Silently ignoring unknown query parameters | A filter model with `extra="forbid"` |
 | Undocumented `404`/`409` | `responses={...}` on the route |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Which layer should decide that a duplicate ticket is a `409`: the model, the service, the route, or a handler? Why?
 2. What did the service layer cost you in this assignment, and what did it buy you?
 3. Your API keeps data in memory. What would break first if three teams started using it tomorrow?
 4. How is FastAPI's dependency injection different from the container you use in your main language, and which do you prefer for testing?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. Walk through what happens when a request reaches a FastAPI endpoint.
 2. What's the difference between `422` and `400`, and between `404` and `409`?
@@ -144,7 +117,7 @@ Practise answering these out loud, in two minutes or less each:
 6. What's the difference between `def` and `async def` endpoints in FastAPI?
 7. How would you structure a FastAPI service that several developers work on?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 08: Asynchronous Python** explains `async` and `await`, the event loop, and concurrent HTTP calls with `httpx.AsyncClient`. In the workbook, the incident service will enrich tickets with data from the Asset Inventory API from Session 05, calling it concurrently.
 
@@ -153,3 +126,22 @@ Before the session:
 - Finish this workbook and tag it `session-07`.
 - Have your Session 05 `asset-lookup` project at hand; its client is the starting point for the asynchronous version.
 - Reread Part 9 of this session's concepts notebook: `def` versus `async def` is where Session 08 starts.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

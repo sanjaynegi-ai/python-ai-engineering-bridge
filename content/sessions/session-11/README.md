@@ -1,8 +1,8 @@
 # Session 11: Retrieval and RAG Fundamentals
 
-**Phase 3: Python for AI Applications** · Weekend 6 · 2-hour live session
+**Phase 3: Python for AI Applications**
 
-## 1. Session overview
+## Session overview
 
 An LLM knows nothing about your company's runbooks, policies or last month's postmortem. **Retrieval-augmented generation (RAG)** fixes that without retraining anything: before asking the model, search your own documents for the passages that answer the question, put them in the prompt as numbered sources, and require the answer to cite them.
 
@@ -10,23 +10,23 @@ This session builds that pipeline from plain Python, so nothing is hidden: loadi
 
 The workbook builds `handbook-search`, the retrieval half of a RAG application, as a tested command-line tool.
 
-## 2. Why this matters
+## Why this matters
 
 RAG is the most common way companies put LLMs to work on their own data, and most of its failures are **retrieval** failures: the right passage was never found, was cut in half, or lost its source along the way. Those are ordinary data-engineering problems, and they're where an experienced engineer adds the most value.
 
 Building the pipeline by hand first means you'll understand what LangChain's loaders, splitters and retrievers do, and what a vector database adds, before you depend on them in the capstone (Sessions 14–16).
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Sessions 01–10. In particular, files and JSON (Session 03), package structure and pytest (Session 04), settings with Pydantic (Session 06), and grounded prompts and structured output (Session 09).
 
-**Before the session:**
+Before you begin:
 
 1. In the course repository, run `git pull` and `uv sync`. It adds a `rag` group to the notebook kernel: `pypdf`, `chromadb` and `langchain-text-splitters`. The environment grows by about 170 MB.
-2. **Optional, but recommended:** download the embedding model before the session, so a slow network doesn't hold you up. In Session 01's concepts notebook, Part 9, set `RUN_FASTEMBED = True` and run the cell. It downloads about 67 MB into `~/.cache/fastembed` (or your `FASTEMBED_CACHE_PATH`), once. The notebooks don't need the model (they use recorded vectors), but the workbook does, and it uses the same cache.
+2. **Optional, but recommended:** download the embedding model before continuing, so a slow network doesn't interrupt the workbook. In Session 01's concepts notebook, Part 9, set `RUN_FASTEMBED = True` and run the cell. It downloads about 67 MB into `~/.cache/fastembed` (or your `FASTEMBED_CACHE_PATH`), once. The notebooks don't need the model (they use recorded vectors), but the workbook does, and it uses the same cache.
 3. Finish the Session 10 workbook and tag it `session-10`.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -38,17 +38,8 @@ By the end of this session you will be able to:
 6. **Diagnose** retrieval failures: off-topic questions, wrong chunk sizes, missing metadata and garbled text.
 7. **Evaluate** retrieval with hit rate and rejection rate, and **choose** a minimum score from evidence.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision on your own) | 75 minutes |
-| Vector-store notebook | 45 minutes |
-| Practice quiz | 35 minutes |
-| Workbook assignment | 2.5–3 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -65,29 +56,9 @@ By the end of this session you will be able to:
 | Chroma as an embedded vector database | Awareness |
 | Indirect prompt injection through documents | Awareness |
 
-### Live session plan
 
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 25 min | "Why doesn't the model know our runbooks?" Search before answering; the two phases; what an embedding is |
-| Visual explanation and demo | 25 min | Load, chunk, embed and search the handbook; embedding search against keyword search; a grounded answer with sources |
-| Guided coding | 40 min | Together: the vector store's `add` and `search`, persistence with the model check, then filtering by file |
-| Debugging challenge | 15 min | An off-topic question that gets confident results, chunks that are too small, and a citation to a source that wasn't sent |
-| Recap and assignment briefing | 15 min | Key takeaways; the evaluation set; how the capstone builds on this |
 
-## 7. Live demonstration
-
-The instructor will:
-
-1. Load the synthetic Orbital Logistics handbook, Markdown and PDF, and inspect the extracted text.
-2. Chunk it at section headings, with overlap, and show the metadata each chunk carries.
-3. Embed the chunks, search for a question, and compare the results with keyword search.
-4. Build a prompt with numbered sources, get an answer, and verify its citations.
-5. Ask a question the handbook doesn't cover, and show why search still returns something.
-6. Run an evaluation set, then choose a minimum score from the measured scores.
-7. Build the vector store by hand, save and load it, and compare it with Chroma.
-
-## 8. Guided exercises
+## Guided exercises
 
 1. [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb) (offline by default; live embedding and LLM calls are opt-in):
    - **The shape of RAG:** the architecture diagram, and the two phases.
@@ -100,19 +71,19 @@ The instructor will:
 2. [`notebooks/03-building-a-vector-store.ipynb`](notebooks/03-building-a-vector-store.ipynb): the vector store by hand, how brute force scales, persistence and the model check, metadata filtering, and the same with Chroma.
 3. [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb): 11 self-check questions.
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: search the IT handbook**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Build `handbook-search`, a command-line tool that ingests the handbook and returns the passages that answer a question, with their sources. Make 63 acceptance tests pass, then measure retrieval with the real embedding model, debug a miss, and choose your settings from the evidence.
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - The `handbook-search` project, tagged `session-11`.
 - `uv run pytest` passing offline: 63 acceptance tests, unchanged, plus at least 8 of your own.
 - `EVALUATION.md` with your measurements, a debugging walk-through and your chosen settings; `NOTES.md` with your predictions and reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -126,20 +97,20 @@ Build `handbook-search`, a command-line tool that ingests the handbook and retur
 | Tuning on a handful of hand-picked questions | An evaluation set with answerable **and** unanswerable questions, and both rates |
 | Putting retrieved text in the system message | Sources in the user message, marked as data |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Which retrieval failure from this session would be hardest to notice in production, and how would you detect it?
 2. When would fine-tuning a model, or simply putting a whole document in the prompt, be a better choice than RAG?
 3. How would you keep the index in sync with documents that change every day?
 4. What would you need to change before indexing documents that not every employee is allowed to read?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. What is RAG, and what problem does it solve?
 2. Walk me through what happens between a user's question and the answer in a RAG application.
@@ -150,11 +121,30 @@ Practise answering these out loud, in two minutes or less each:
 7. When would you use a vector database rather than an in-memory index?
 8. What is indirect prompt injection, and how do you reduce the risk in RAG?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 12: Introduction to LangGraph** turns a straight-line pipeline into a small stateful workflow: typed state, nodes, edges and conditional routing. It finishes **Project 03** (`incident-triage`) with a validation-and-routing workflow.
 
-Before the session:
+Before continuing:
 
 - Finish this workbook and tag `session-11`.
 - Make sure your Session 10 `incident-triage` project still passes its tests: Session 12 builds on it.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

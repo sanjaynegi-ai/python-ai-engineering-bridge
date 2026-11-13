@@ -1,20 +1,20 @@
 # Session 02: Python Language Essentials
 
-**Phase 1: Python for Experienced Developers** · Weekend 1 · 2-hour live session
+**Phase 1: Python for Experienced Developers**
 
-## 1. Session overview
+## Session overview
 
 You already know variables, conditions, loops and collections. This session is about how **Python** expresses them: where your instincts from Java, C# or TypeScript carry over, and where they quietly mislead you.
 
 We start with the mental model behind most surprises in Python code: variables are **names attached to objects**, and some objects can change while others can't. Then we cover the everyday toolkit (strings, numbers, truthiness, loops, comprehensions and slicing) and spend the second half on Python's four built-in collections. You'll finish by transforming a messy export of business records into a clean summary, the kind of code every later session depends on.
 
-## 2. Why this matters
+## Why this matters
 
 Almost everything you'll build in this course moves data around: JSON from files and APIs, validated models, LLM outputs, document chunks. Bugs in that code are rarely syntax errors. They're a function that changes data it was handed, a "copy" that shares a nested list, a valid `0` treated as missing, or a lookup that scans a list 100,000 times.
 
 These bugs come from Python rules that *look* familiar. Learning them precisely now means you can read other people's Python with confidence, and write data-transformation code that is correct the first time. It's also what interviewers probe when they ask about mutability, `is` versus `==`, or choosing between a list and a set.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Session 01 completed. You can create a uv project, run code with `uv run`, and open the course notebooks on the course `.venv` kernel.
 
@@ -26,7 +26,7 @@ These bugs come from Python rules that *look* familiar. Learning them precisely 
 
 No new tools or packages are needed. Everything in this session uses the standard library.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -38,17 +38,8 @@ By the end of this session you will be able to:
 6. **Implement** a multi-step transformation over nested business records (normalise, deduplicate, filter, group, aggregate, rank) without mutating the input.
 7. **Debug** aliasing and mutation bugs using Observe → Hypothesize → Inspect → Fix → Verify.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision on your own) | 50 minutes |
-| Collections deep-dive notebook (revision on your own) | 50 minutes |
-| Practice quiz | 35 minutes |
-| Workbook assignment | 2 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -66,28 +57,9 @@ By the end of this session you will be able to:
 | `collections.Counter` and `defaultdict` | Independent implementation |
 | `match` statements, `namedtuple` | Awareness |
 
-### Live session plan
 
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 15 min | The two dashboard bugs: data that changed although nobody wrote to it, and a valid `0` treated as missing |
-| Visual explanation and demo | 25 min | Names and objects; mutable versus immutable; truthiness and `is`; choosing a collection, with a live timing of list versus set lookups |
-| Guided coding | 45 min | Comprehensions, slicing, sorting, `Counter` and `defaultdict`, building up to the morning-summary pipeline in the deep-dive notebook |
-| Debugging challenge | 20 min | The deep-dive notebook's "report that lies": three bugs, found with Observe → Hypothesize → Inspect → Fix → Verify |
-| Recap and assignment briefing | 15 min | Key takeaways; set up the workbook project and run the checker together |
 
-## 7. Live demonstration
-
-The instructor will:
-
-1. Change a dict through one name and show the change through another, then use `id()` and `is` to prove there is one object.
-2. Show a shallow copy leaking a change through a shared nested list, and fix it with `copy.deepcopy()`.
-3. Contrast `+=` on a list with `+=` on an integer, using the mutable-versus-immutable diagram.
-4. Demonstrate `0` disappearing from a truthiness filter, and fix it with `is None`.
-5. Time `x in list` against `x in set` on 100,000 ticket IDs.
-6. Build the per-team summary step by step: dedupe with a set, group with `defaultdict`, aggregate with comprehensions, rank with a tuple sort key.
-
-## 8. Guided exercises
+## Guided exercises
 
 Work through the notebooks in this order, during and after the session:
 
@@ -101,20 +73,20 @@ Work through the notebooks in this order, during and after the session:
    - **Debugging lab:** a report helper with three bugs.
 3. [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb): 12 self-check questions on everything above.
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: the morning incident summary**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Clean a messy export of 16 synthetic incident tickets (inconsistent case and whitespace, duplicate records, blank assignees), then report open tickets, SLA breaches and unassigned work per team, plus the most common tags. You implement eight small functions against provided starter files, and a checker script tells you which requirements pass.
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - A uv project containing `ticket_summary.py` with every function implemented, plus the unchanged `sample_tickets.py` and `check_summary.py`.
 - `uv run check_summary.py` reporting 16 of 16 checks passed.
 - `uv run ticket_summary.py` printing the report shown in the workbook.
 - `NOTES.md` with your data-quality findings, bug analysis and reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -130,20 +102,20 @@ Clean a messy export of 16 synthetic incident tickets (inconsistent case and whi
 | `{}` for an empty set | `set()` |
 | A helper that sorts or edits the caller's data | Return new data; leave inputs untouched |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Which Python behaviour from this session would most likely have caused a production bug in your first month, coming from your main language?
 2. Java and C# distinguish value types from reference types. Python doesn't. What does Python lose and gain with "everything is an object"?
 3. When is mutating data in place the right choice, despite the risks? What would you document in that case?
 4. Comprehensions versus loops: where do you draw the line, and how would you explain that line in a code review?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. Is Python pass-by-value or pass-by-reference? Explain precisely what happens when you pass a list to a function.
 2. What's the difference between a shallow copy and a deep copy? Give an example where the difference causes a bug.
@@ -153,7 +125,7 @@ Practise answering these out loud, in two minutes or less each:
 6. What does `dict.fromkeys(["a", "b"], [])` return, and what goes wrong if you then append to one of the lists?
 7. Explain the difference between `sorted(items)` and `items.sort()`. Which would you use inside a helper function, and why?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 03: Functions, Exceptions, Files and JSON** covers designing functions (positional, keyword-only and default arguments, including the mutable-default trap that follows directly from this session), type hints, exceptions and tracebacks, context managers, and reading and writing JSON files.
 
@@ -161,3 +133,22 @@ Before the session:
 
 - Finish the Session 02 workbook. Session 03's assignment reads ticket data from JSON files instead of a Python module, and your functions will carry over.
 - Revisit Part 1 of `01-concepts.ipynb` (names and objects). The mutable-default-argument trap in Session 03 is the same idea in a new place.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

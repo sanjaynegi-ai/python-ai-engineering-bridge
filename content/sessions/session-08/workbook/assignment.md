@@ -1,7 +1,6 @@
 # Session 08 Assignment: The On-Call Dashboard, Concurrently
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2.5–3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb) and [`03-async-debugging-lab.ipynb`](../notebooks/03-async-debugging-lab.ipynb); your Session 07 work on Project 02; your Session 05 `asset-lookup` client
 **Project:** **Project 02: Python API Service** (`incident-api`), stage 3 of 3. **Completing this workbook completes Project 02 (Milestone 2).**
 
@@ -124,7 +123,7 @@ Exactly one of `assets` and `inventory_error` is set. Without a configured token
 
 ## Implementation milestones
 
-### Milestone 1: Predict (10 min)
+### Milestone 1: Predict
 
 Before writing code, answer in `NOTES.md`:
 
@@ -134,7 +133,7 @@ Before writing code, answer in `NOTES.md`:
 
 You'll check your answers in Milestone 6.
 
-### Milestone 2: Settings and errors (15 min)
+### Milestone 2: Settings and errors
 
 1. In `errors.py`, add `InventoryError`, and two subclasses of it: `InventoryUnavailable` and `InventoryAuthError` (the same family as Session 05's).
 2. In `settings.py`, add four fields, read from `INCIDENT_INVENTORY_*` variables:
@@ -150,7 +149,7 @@ You'll check your answers in Milestone 6.
 uv run pytest tests/acceptance/test_inventory_settings.py
 ```
 
-### Milestone 3: The asynchronous client (40 min)
+### Milestone 3: The asynchronous client
 
 In `inventory.py`:
 
@@ -177,7 +176,7 @@ uv run pytest tests/acceptance/test_inventory.py
 
 17 tests, all `async def`. Open the file and notice `pytestmark = pytest.mark.asyncio` at the top. Then read `FakeInventory` in `tests/conftest.py`: it counts the requests in flight, which is how the next milestone's tests prove concurrency without measuring time.
 
-### Milestone 4: Concurrency, deadlines and partial failure (35 min)
+### Milestone 4: Concurrency, deadlines and partial failure
 
 In `dashboard.py`, implement the three functions, following their docstrings:
 
@@ -191,7 +190,7 @@ uv run pytest tests/acceptance/test_dashboard.py
 
 Read the test names before you start: they're the requirements in executable form. `test_unexpected_exceptions_are_not_swallowed` fails if you catch `Exception`; `test_a_slow_team_is_cut_off_at_its_deadline` fails if you put one deadline around the whole `gather` instead of one per team. Make sure you understand why each design would be wrong.
 
-### Milestone 5: The endpoint and the shared client (25 min)
+### Milestone 5: The endpoint and the shared client
 
 In `api.py`:
 
@@ -206,7 +205,7 @@ uv run pytest
 
 All 164 acceptance tests should pass. Note that the endpoint tests use the synchronous `TestClient`, as in Session 07, even though the endpoint is `async def`: `TestClient` runs the app's event loop for you.
 
-### Milestone 6: Run it and measure (20 min)
+### Milestone 6: Run it and measure
 
 In one terminal, start the fake inventory with half a second of latency:
 
@@ -243,7 +242,7 @@ Measure again (about **2.3 s** on the test machine), run `uv run pytest tests/ac
 
 Record all your measurements and observations in `NOTES.md`, next to your Milestone 1 predictions.
 
-### Milestone 7: Your own tests (25 min)
+### Milestone 7: Your own tests
 
 Create `tests/unit/test_async.py` with at least **8** async test cases (`pytestmark = pytest.mark.asyncio`). The `fake_inventory` fixture is available to them. Ideas:
 
@@ -257,7 +256,7 @@ Create `tests/unit/test_async.py` with at least **8** async test cases (`pytestm
 
 As before, prove that two of your tests can fail, and record the failures in `NOTES.md`.
 
-### Milestone 8: Project 02 complete (15 min)
+### Milestone 8: Project 02 complete
 
 This is the end of Project 02. Update your project's `README.md` so that a new team member could run it: the endpoints (including `/dashboard`), the settings, how to run the fake inventory, and the known limitations (in-memory tickets, one process). Then:
 
@@ -336,3 +335,22 @@ The submission must include:
 - [ ] `NOTES.md` with your predictions, measurements, milestone answers and the reflection
 - [ ] An updated `README.md` for the finished service
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

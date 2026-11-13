@@ -1,20 +1,20 @@
 # Session 06: Pydantic and Data Validation
 
-**Phase 2: Professional Python Applications** · Weekend 3 · 2-hour live session · **Project 02 begins**
+**Phase 2: Professional Python Applications** · **Project 02 begins**
 
-## 1. Session overview
+## Session overview
 
 Since Session 03 you've validated data by hand: ticket records, configuration files, API responses and settings. This session replaces all of it with **Pydantic**: you declare what valid data looks like, as a class with type hints, and Pydantic validates, converts, normalises, reports errors and serialises it. **pydantic-settings** does the same for configuration from environment variables.
 
 The workbook starts **Project 02**, the incident service, by rebuilding Project 01's data layer with Pydantic models. In Session 07 those same models become a FastAPI service's request and response schemas.
 
-## 2. Why this matters
+## Why this matters
 
 Every boundary in an AI application needs a data contract: records from files, HTTP requests and responses, configuration, and above all **LLM output**, which arrives as "almost JSON" more often than anyone would like. Pydantic is the standard tool for those contracts in Python. FastAPI, the OpenAI and Anthropic SDKs, LangChain and many others are built on it.
 
 Knowing it well means you can read those libraries' types, write models that fail loudly at the edge instead of quietly in the middle, and turn validation errors into messages people can act on.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Sessions 01–05. In particular, Session 03's hand validation and Session 05's settings and secrets.
 
@@ -23,7 +23,7 @@ Knowing it well means you can read those libraries' types, write models that fai
 1. In the course repository, run `uv sync`. It adds Pydantic and pydantic-settings to the notebook kernel.
 2. Have the Project 01 checkpoint (`projects/01-python-data-processor/checkpoint/`) or your own Project 01 at hand, for comparison.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -35,16 +35,8 @@ By the end of this session you will be able to:
 6. **Load** typed configuration, including secrets, from environment variables and `.env` with `pydantic-settings`, and **handle** both kinds of settings failure.
 7. **Decide** when to use a Pydantic model and when a dataclass.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision on your own) | 60 minutes |
-| Practice quiz | 35 minutes |
-| Workbook assignment (Project 02, part 1) | 2–2.5 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -58,28 +50,9 @@ By the end of this session you will be able to:
 | `BaseSettings`, `env_prefix`, `.env`, `SecretStr`, `SettingsError` | Independent implementation |
 | Alias generators, JSON Schema, advanced configuration | Working knowledge |
 
-### Live session plan
 
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 20 min | Three hand-written validators and a fourth on the way; one product request (a `region` field) as the test case |
-| Visual explanation and demo | 25 min | The validation stages; collecting every error; lax versus strict; nested models and their JSON |
-| Guided coding | 40 min | Start Project 02 together: copy the starter, write the `Ticket` model until `test_ticket.py` passes |
-| Debugging challenge | 20 min | A validator that erases data, a "required" field that isn't, and a settings value that crashes the CLI |
-| Recap and assignment briefing | 15 min | Key takeaways; the remaining Project 02 milestones |
 
-## 7. Live demonstration
-
-The instructor will:
-
-1. Validate a dict into a model, show `"2"` becoming `2`, and show three errors reported at once.
-2. Add the product owner's `region` field in one line, with a `Literal` and a default.
-3. Run the same inputs through a lax and a strict `int` field.
-4. Write field validators that normalise team names and tags, and a model validator for a cross-field rule.
-5. Dump a nested report to JSON, exclude a section, and read it back with `model_validate_json`.
-6. Load settings from a `.env` file and the environment, show `SecretStr` hiding a token, and trigger both a `ValidationError` and a `SettingsError`.
-
-## 8. Guided exercises
+## Guided exercises
 
 1. [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb):
    - **First model:** conversion, and one error per problem.
@@ -91,19 +64,19 @@ The instructor will:
    - **Settings:** environment and `.env` precedence, `SecretStr`, two kinds of failure.
 2. [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb): 10 self-check questions.
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: Project 02 begins, contracts with Pydantic**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Starting from the Project 01 checkpoint, replace hand validation with a `Ticket` model, build rejections from `ValidationError`, turn the report into nested models, and replace `config.json` with `pydantic-settings`, all while producing exactly the same report. 53 acceptance tests are provided, one file per milestone, and you write at least 10 of your own. The starter is in [`projects/02-python-api-service`](../../projects/02-python-api-service/README.md).
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - The `incident-api` project with `models.py`, `settings.py`, `report.py` and `load_exports` implemented, tagged `session-06`.
 - `uv run pytest` passing: 53 acceptance tests, unchanged, plus at least 10 of your own.
 - `NOTES.md` comparing the hand-written and declarative versions, with your reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -117,20 +90,20 @@ Starting from the Project 01 checkpoint, replace hand validation with a `Ticket`
 | Secrets as `str` in settings | `SecretStr` |
 | Catching only `ValidationError` around `Settings()` | Also catch `pydantic_settings.SettingsError` |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Which of your hand-written validators from Sessions 03–05 would have benefited most from Pydantic, and why?
 2. Where is the line between a validation rule and business logic? Should "SLA hours must increase" live in the settings model, or in the code that uses it?
 3. When could strict mode cause problems in production, and how would you notice?
 4. What would you need to change if an exporting system started sending a new field?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. What does Pydantic do that dataclasses don't? When would you use each?
 2. Explain lax versus strict validation, with an example of when each is right.
@@ -140,7 +113,7 @@ Practise answering these out loud, in two minutes or less each:
 6. What are aliases for, and when do you need them?
 7. Your service receives JSON from a partner that occasionally sends numbers as strings. What do you do?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 07: FastAPI** puts your Project 02 models behind an HTTP API: routes, path and query parameters, request and response models, dependency injection, error handling, automatic documentation, and tests with `TestClient`.
 
@@ -148,3 +121,22 @@ Before the session:
 
 - Finish this workbook and tag it. Session 07 adds an `api` module to the same project.
 - Run `uv run python -c "from incident_api.models import Ticket; import json; print(json.dumps(Ticket.model_json_schema(), indent=2))"` in your project, and look at the output. FastAPI will publish exactly that as API documentation.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

@@ -42,3 +42,22 @@ Official documentation first. Each link says *why* it's worth your time, so you 
 | [`typing.TypedDict`](https://docs.python.org/3/library/typing.html#typing.TypedDict) | The state schema: `total=False`, and how type checkers treat optional keys |
 | [`typing.Annotated`](https://docs.python.org/3/library/typing.html#typing.Annotated) | The syntax LangGraph uses to attach a reducer to a key |
 | [Mermaid](https://mermaid.js.org/) | The diagram language `draw_mermaid()` produces, and where it renders |
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

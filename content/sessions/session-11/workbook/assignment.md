@@ -1,7 +1,6 @@
 # Session 11 Assignment: Search the IT Handbook
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2.5–3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), [`03-building-a-vector-store.ipynb`](../notebooks/03-building-a-vector-store.ipynb), and the settings, CLI and testing patterns from Sessions 05–06
 **Project:** `handbook-search`, a standalone project. The RAG capstone (Sessions 14–16) builds on the same ideas.
 
@@ -92,7 +91,7 @@ The notebooks contain working versions of several of these pieces. You may rerea
 
 ## Implementation milestones
 
-### Milestone 1: Predict (10 min)
+### Milestone 1: Predict
 
 Open `data/questions.jsonl` and skim two or three handbook documents. In `NOTES.md`, predict:
 
@@ -100,7 +99,7 @@ Open `data/questions.jsonl` and skim two or three handbook documents. In `NOTES.
 2. Whether the `HashingEmbedder` used by the tests will find "The Berlin office VPN keeps disconnecting." in `runbook-vpn-outage.md`. What does it need for a match?
 3. What should happen when someone edits a Markdown file after `ingest` and then runs `query`.
 
-### Milestone 2: Loading (20 min)
+### Milestone 2: Loading
 
 Implement `load_pdf` and `load_documents` in `loading.py`, following their docstrings.
 
@@ -111,7 +110,7 @@ Implement `load_pdf` and `load_documents` in `loading.py`, following their docst
 uv run pytest tests/acceptance/test_loading.py
 ```
 
-### Milestone 3: Chunking (35 min)
+### Milestone 3: Chunking
 
 Implement the three functions in `chunking.py`. The docstrings are the specification; the tests show the edge cases.
 
@@ -125,7 +124,7 @@ Before running the tests, work through `test_split_text_overlaps_neighbours` on 
 uv run pytest tests/acceptance/test_chunking.py
 ```
 
-### Milestone 4: The vector store (35 min)
+### Milestone 4: The vector store
 
 Implement `VectorStore` in `store.py`. Use NumPy, as in the vector-store notebook; you choose how to keep the vectors and chunks internally.
 
@@ -137,7 +136,7 @@ Implement `VectorStore` in `store.py`. Use NumPy, as in the vector-store noteboo
 uv run pytest tests/acceptance/test_store.py
 ```
 
-### Milestone 5: Retrieval and citations (15 min)
+### Milestone 5: Retrieval and citations
 
 Implement `retrieve`, `build_context` and `cited_numbers` in `retrieval.py`. `build_context` produces the numbered sources you would put into an LLM prompt; `cited_numbers` checks an answer's `[n]` citations against them, as in Part 5 of the concepts notebook.
 
@@ -145,7 +144,7 @@ Implement `retrieve`, `build_context` and `cited_numbers` in `retrieval.py`. `bu
 uv run pytest tests/acceptance/test_retrieval.py
 ```
 
-### Milestone 6: Evaluation, end to end (15 min)
+### Milestone 6: Evaluation, end to end
 
 Implement `evaluate`, then run the whole tool with the real model:
 
@@ -158,7 +157,7 @@ uv run handbook-search evaluate data/questions.jsonl
 
 The first `ingest` downloads the model. Check your Milestone 1 predictions against the evaluation output.
 
-### Milestone 7: Measure, debug and tune (35 min)
+### Milestone 7: Measure, debug and tune
 
 Record everything in `EVALUATION.md`.
 
@@ -177,7 +176,7 @@ Record everything in `EVALUATION.md`.
 
 End with the settings you'd ship, and why.
 
-### Milestone 8: Your own tests (25 min)
+### Milestone 8: Your own tests
 
 Create `tests/unit/` with at least **8** test cases that cover behaviour the acceptance tests don't. Ideas:
 
@@ -192,7 +191,7 @@ Create `tests/unit/` with at least **8** test cases that cover behaviour the acc
 
 As before, **prove that two of your tests can fail**: break the code they cover, record the failure in `NOTES.md`, and restore it.
 
-### Milestone 9: Quality gate (5 min)
+### Milestone 9: Quality gate
 
 ```bash
 uv run ruff format .
@@ -274,3 +273,22 @@ The submission must include:
 - [ ] `EVALUATION.md` with your measurements, debugging walk-through and chosen settings
 - [ ] `NOTES.md` with your predictions, the two failing-test proofs, and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

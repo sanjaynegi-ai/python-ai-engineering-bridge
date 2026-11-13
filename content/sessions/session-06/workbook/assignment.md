@@ -1,7 +1,6 @@
 # Session 06 Assignment: Project 02 Begins, Contracts with Pydantic
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2–2.5 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and the Project 01 checkpoint
 **Project:** this starts **Project 02: Python API Service** (`incident-api`), which grows through Sessions 07 and 08.
 
@@ -86,7 +85,7 @@ What's provided, and what's yours:
 
 ## Implementation milestones
 
-### Milestone 1: Read what you're replacing (15 min)
+### Milestone 1: Read what you're replacing
 
 Open the Project 01 checkpoint's `loading.py` and `models.py` (or your own Project 01). In `NOTES.md`:
 
@@ -96,7 +95,7 @@ Open the Project 01 checkpoint's `loading.py` and `models.py` (or your own Proje
 
 Keep the list; you'll tick it off as you go.
 
-### Milestone 2: The `Ticket` model (35 min)
+### Milestone 2: The `Ticket` model
 
 In `models.py`, write `class Ticket(BaseModel)`:
 
@@ -125,7 +124,7 @@ uv run pytest tests/acceptance/test_ticket.py
 
 25 tests. When they pass, tick off the rules in your Milestone 1 list.
 
-### Milestone 3: Settings (20 min)
+### Milestone 3: Settings
 
 Replace `config.json` with `class Settings(BaseSettings)` in `settings.py`, as its docstring describes:
 
@@ -139,7 +138,7 @@ uv run pytest tests/acceptance/test_settings.py
 
 One of these tests sets a variable that isn't valid JSON. Note which exception that raises, and why the provided `cli.py` catches it separately from `ValidationError`. Answer in `NOTES.md`.
 
-### Milestone 4: Rejections and loading (25 min)
+### Milestone 4: Rejections and loading
 
 Add `class Rejection(BaseModel)` to `models.py`: frozen; `file: str`; `record: int | None = None`; `id: str | None = None`; `problems: list[str]`.
 
@@ -154,7 +153,7 @@ Then write `load_exports(paths)` in `loading.py`. It's Project 01's version with
 uv run pytest tests/acceptance/test_rejection_and_loading.py
 ```
 
-### Milestone 5: Report models (25 min)
+### Milestone 5: Report models
 
 Add the report models to `models.py`. Their field names are exactly the keys of Project 01's report:
 
@@ -174,7 +173,7 @@ Then implement `build_report` and `write_report` in `report.py`:
 uv run pytest tests/acceptance/test_report.py
 ```
 
-### Milestone 6: Run it (10 min)
+### Milestone 6: Run it
 
 ```bash
 uv run pytest                          # all 53 acceptance tests
@@ -197,7 +196,7 @@ Remove-Item Env:INCIDENT_SLA_HOURS
 
 Both should exit with `2` and a readable message. Record the outputs in `NOTES.md`.
 
-### Milestone 7: Your own tests (25 min)
+### Milestone 7: Your own tests
 
 Create `tests/unit/` and write at least **10** test cases. Ideas:
 
@@ -211,7 +210,7 @@ Create `tests/unit/` and write at least **10** test cases. Ideas:
 
 As before, prove that two of your tests can fail, and record the failures in `NOTES.md`.
 
-### Milestone 8: Measure the change (10 min)
+### Milestone 8: Measure the change
 
 In `NOTES.md`, compare with Milestone 1:
 
@@ -219,7 +218,7 @@ In `NOTES.md`, compare with Milestone 1:
 2. Which rules became **declarations** (types, `Field`, `Literal`), and which still needed **code** (validators)?
 3. How did the rejection messages change? Pick one rejected record and compare the Project 01 message with the new one. Which is better for the data owner, and why?
 
-### Milestone 9: Quality gate (5 min)
+### Milestone 9: Quality gate
 
 ```bash
 uv run ruff format .
@@ -290,3 +289,22 @@ The submission must include:
 - [ ] `tests/acceptance/` unchanged, and your `tests/unit/` with at least 10 test cases
 - [ ] `NOTES.md` with your milestone answers and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

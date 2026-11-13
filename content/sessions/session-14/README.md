@@ -1,20 +1,20 @@
 # Session 14: RAG Capstone, Ingestion
 
-**Phase 4: AI-Assisted Engineering and RAG Capstone** · Weekend 7 · 2-hour live session
+**Phase 4: AI-Assisted Engineering and RAG Capstone**
 
-## 1. Session overview
+## Session overview
 
 This session starts the capstone: the **Internal Knowledge Assistant**, a RAG application that answers questions about Orbital Logistics' IT documentation, with sources. Over Sessions 14 to 16 you build it, extend it and present it.
 
 This week is **ingestion**. Session 11 taught every building block (loading, chunking, embedding, a vector store); the capstone turns them into software that runs every night without supervision. That means doing only the work that changed, replacing edited documents correctly, surviving broken files, recording how the index was built, and never logging a document's contents. You design the module boundaries first, then build the pipeline against 72 acceptance tests, with an AI assistant if you choose.
 
-## 2. Why this matters
+## Why this matters
 
 Most RAG demos end at "it answered one question". Production systems fail in the places a demo never visits: a runbook edited yesterday still answering with last month's text, a deleted policy that keeps being cited, a nightly job that re-embeds 3,000 files for one typo, a corrupt PDF that stops the whole run, or a log that copies confidential documents into a central log store.
 
 Ingestion is where those problems are cheapest to prevent. The habits involved (content fingerprints, idempotent writes, failure isolation, safe logging) aren't specific to AI: they're the same ones behind every reliable sync job, cache or ETL pipeline you've worked on. This session applies them in Python, with a vector database.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Sessions 01–13, especially Session 11 (chunking, embeddings, Chroma), Session 04 (packages and tests), Session 09 (protocols and fakes) and Session 13 (the AI-assisted workflow).
 
@@ -24,7 +24,7 @@ Ingestion is where those problems are cheapest to prevent. The habits involved (
 - The embedding model from Session 11, already cached, or about 67 MB to download on the first real run. The tests never need it.
 - Claude Code or an approved assistant, if you use one for the AI-assisted milestones.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -34,16 +34,8 @@ By the end of this session you will be able to:
 4. **Handle** corrupt, empty, non-UTF-8 and scanned files per file, without losing other files or a document's previous version.
 5. **Log** ingestion without leaking document contents, and **test** that with a canary.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision) | 45 minutes |
-| Practice quiz | 30 minutes |
-| Workbook assignment | 3 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -56,45 +48,27 @@ By the end of this session you will be able to:
 | Logging without leaking; canary tests | Independent implementation |
 | `Protocol`-based boundaries and fakes for testing | Independent implementation |
 
-### Live session plan
 
-| Time | Activity |
-|---|---|
-| 0:00–0:15 | **Problem and intuition.** The nightly job, the edited runbook, the half-saved PDF. Ingestion as a sync job: added, updated, unchanged, removed, failed |
-| 0:15–0:35 | **Demonstration.** The architecture diagram and its boundaries. Notebook Parts 1–3 live: hashes versus times, duplicates from random IDs, the silent `add`, stale chunks after `upsert`, `None` metadata |
-| 0:35–1:35 | **Guided build.** Milestone 1 (design, 15 min, individually, then compared in pairs). Then Milestones 2 and 3 against their tests, with or without an assistant |
-| 1:35–1:50 | **Debugging.** The `except Exception` trap (notebook Part 5), and the canary that catches pypdf's log (Part 6) |
-| 1:50–2:00 | **Recap and assignment briefing.** What "unchanged" doesn't cover; Milestones 4–6 |
 
-## 7. Live demonstration
-
-The instructor runs the notebook's demonstrations against an in-memory Chroma database:
-
-1. Two runs of a naive ingestion with random IDs double the index, and search returns the same passage twice.
-2. With stable IDs, an edited runbook ingested with `add`: no error, no update.
-3. `upsert` after the runbook shrinks: two stale chunks remain.
-4. The same chunk metadata through `add` (rejected) and `upsert` (key silently dropped).
-5. The finished reference pipeline (not distributed) on the real corpus: first run, second run (24 unchanged), an edit, a deletion and a broken PDF.
-
-## 8. Guided exercises
+## Guided exercises
 
 - **Notebook Part 1, Predict:** does a CRLF copy of a file have the same hash? What does that cost?
 - **Notebook Part 2, Challenge:** "delete then add" versus "upsert then delete the leftovers": what does a search see if the process dies in between?
 - **Notebook Part 5, Modify:** narrow `except Exception` and watch the real bug surface.
 - **Milestone 1 in pairs:** compare your module responsibilities and your three decisions. Where do you disagree, and what would settle it?
 
-## 9. Independent assignment
+## Independent assignment
 
 [`workbook/assignment.md`](workbook/assignment.md): **Capstone ingestion.** Copy the Project 04 starter, design the pipeline in `ARCHITECTURE.md` (Independent), then implement `documents.py`, `chunking.py`, `store.py` and `ingestion.py` against 72 acceptance tests (AI-assisted), add your own tests, and run the pipeline for real, breaking it on purpose.
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - Your `knowledge-assistant` repository, tagged `session-14`, with all 72 acceptance tests passing and Ruff clean.
 - At least three unit tests of your own.
 - `ARCHITECTURE.md`: modules, the path of one changed file, your decisions, known limitations, and your reflection.
 - The output of the Milestone 6 runs.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Consequence | Better |
 |---|---|---|
@@ -108,11 +82,11 @@ The instructor runs the notebook's demonstrations against an in-memory Chroma da
 | Deleting before embedding | An embedder outage erases a document | Embed first, then replace |
 | Logging chunk text or full paths | Document contents and usernames in log storage | Log sources and counts; test with a canary |
 
-## 12. Reading resources
+## Reading resources
 
 [`resources/references.md`](resources/references.md): `hashlib`, `pathlib` and `logging`; Chroma's add, update, delete and metadata-filtering pages; pypdf's errors; the LangChain text splitters; and further reading on idempotent pipelines.
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Which inputs decide what's in your index, and which of them does a content hash cover?
 2. Your ingestion keeps a broken file's previous chunks, or deletes them. Who is better served by that choice, and who isn't?
@@ -120,7 +94,7 @@ The instructor runs the notebook's demonstrations against an in-memory Chroma da
 4. If the corpus grew from 24 files to 24,000, which part of your design would hurt first?
 5. If you used an assistant: which of its suggestions did you reject, and why?
 
-## 14. Interview questions
+## Interview questions
 
 1. "How do you keep a vector index in sync with a document store that changes daily?"
 2. "A user edited a document, but the RAG system still answers with the old text. How would you investigate?"
@@ -129,13 +103,32 @@ The instructor runs the notebook's demonstrations against an in-memory Chroma da
 5. "How do you stop a nightly ingestion job from failing on one bad file, without hiding real bugs?"
 6. "How would you test that a pipeline never logs sensitive content?"
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 15: RAG capstone, application** answers questions from the index you built: retrieval, a grounded prompt, an LLM answer with sources, "not found in the sources" for unanswerable questions, a FastAPI service, a Streamlit UI, and a small evaluation set.
 
-Before the session:
+Before continuing:
 
 - Finish this workbook, with all 72 tests passing, and tag `session-14`.
 - Run `knowledge-assistant ingest` with the real embedder, so your index is ready.
 - Check that your LLM key from Session 09 still works. Session 15's tests won't need it, but the real assistant will.
 - Reread Session 11's `build_context` and `cited_numbers`, and Session 09's structured-output validation: next week combines them.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

@@ -1,7 +1,6 @@
 # Session 05 Assignment: An Asset Inventory Client
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2–2.5 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and the package structure and pytest skills from Session 04
 
 ---
@@ -92,7 +91,7 @@ Six tests already pass. They test the provided `Asset` model; everything else fa
 
 ## Implementation milestones
 
-### Milestone 1: Explore the API by hand (15 min)
+### Milestone 1: Explore the API by hand
 
 Start the fake server in its own terminal, and leave it running for the rest of the assignment:
 
@@ -109,7 +108,7 @@ In a second terminal, open an interactive session with `uv run python` and use H
 
 Watch the server terminal while you do this: it prints one line per request.
 
-### Milestone 2: `settings.py` (20 min)
+### Milestone 2: `settings.py`
 
 Implement `load_settings` as its docstring describes. Two details matter:
 
@@ -120,7 +119,7 @@ Implement `load_settings` as its docstring describes. Two details matter:
 uv run pytest tests/acceptance/test_settings_and_models.py
 ```
 
-### Milestone 3: The client and `get_asset` (35 min)
+### Milestone 3: The client and `get_asset`
 
 - `__init__` creates **one** `httpx.Client` and keeps it in an attribute such as `self._http`.
 - `from_settings` is a `@classmethod`, like `Ticket.from_record` in Session 04.
@@ -131,13 +130,13 @@ uv run pytest tests/acceptance/test_settings_and_models.py
 
 Run `uv run pytest tests/acceptance/test_client.py` as you go. The pagination and note tests keep failing until Milestones 4 and 5; everything else in that file should pass by the end of this milestone.
 
-### Milestone 4: `list_assets` and pagination (20 min)
+### Milestone 4: `list_assets` and pagination
 
 Request page 1, then page 2, and so on, collecting `items`, until you have `total` assets **or** a page comes back empty. (Why both conditions? What could go wrong if you relied on `total` alone?)
 
 Build `params` as a dict, and add `team` only when it isn't `None`.
 
-### Milestone 5: `add_note` (15 min)
+### Milestone 5: `add_note`
 
 `POST` the JSON body `{"text": ..., "ticket_id": ...}`. `201` returns the new note's integer `id`; `404` is `AssetNotFound`; anything else unexpected, such as `422`, is `InventoryError`, not "unavailable".
 
@@ -145,7 +144,7 @@ Build `params` as a dict, and add `team` only when it isn't `None`.
 
 All acceptance tests should now pass. Commit.
 
-### Milestone 6: Use the real thing (10 min)
+### Milestone 6: Use the real thing
 
 With the fake server running:
 
@@ -166,7 +165,7 @@ Check each exit code against the table in the README. Then:
 
 Record the outputs and exit codes in `NOTES.md`.
 
-### Milestone 7: Your own tests (30 min)
+### Milestone 7: Your own tests
 
 Create `tests/unit/` and write **at least 10** test cases with respx (use the `inventory` and `client` fixtures from `conftest.py`). Cover things the acceptance tests don't, for example:
 
@@ -180,13 +179,13 @@ Create `tests/unit/` and write **at least 10** test cases with respx (use the `i
 
 As in Session 04, **prove two of your tests can fail**: break the code they cover, record the failure in `NOTES.md`, and restore it.
 
-### Milestone 8: Security check (10 min)
+### Milestone 8: Security check
 
 1. `git status` and `git ls-files`: `.env` must not appear in either. `git check-ignore .env` must print `.env`.
 2. Search your source and tests for the real token value: `git grep -n "local-dev-token" -- src tests`. It must print nothing; the fake server and the README may mention it, your code may not.
 3. Trigger each error path from Milestone 6 again and read every message: none may contain the token.
 
-### Milestone 9: Quality gate (5 min)
+### Milestone 9: Quality gate
 
 ```bash
 uv run ruff format .
@@ -258,3 +257,22 @@ The submission must include:
 - [ ] `.env.example`, but **not** `.env`
 - [ ] `NOTES.md` with your milestone answers and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

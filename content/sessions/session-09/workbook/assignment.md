@@ -1,7 +1,6 @@
 # Session 09 Assignment: Project 03 Begins, LLM-Assisted Triage
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2.5–3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb); Sessions 05 (HTTP clients and errors), 06 (Pydantic) and 08 (partial failure)
 **Project:** this starts **Project 03: LLM-Powered Application** (`incident-triage`), which grows in Sessions 10 and 12.
 
@@ -91,7 +90,7 @@ Most tests fail, as expected. A few pass already, including the three in `test_f
 
 ## Implementation milestones
 
-### Milestone 1: Explore (15 min)
+### Milestone 1: Explore
 
 The command doesn't run yet: it needs the models, settings and batch service you write in Milestones 2 to 4. So start by reading.
 
@@ -99,7 +98,7 @@ The command doesn't run yet: it needs the models, settings and batch service you
 2. Read `prompts.py`, `errors.py` and `cli.py`, then `FakeOpenAI` in `tests/conftest.py`.
 3. In `NOTES.md`: predict how the keyword rules will triage `RPT-1009`, `RPT-1010` and `RPT-1011`, and what a good triage of each would be. You'll check your predictions in Milestone 5.
 
-### Milestone 2: The contracts (25 min)
+### Milestone 2: The contracts
 
 **`TriageResult`**, frozen:
 
@@ -132,7 +131,7 @@ Give the fields a `Field(description=...)` where it helps the model: description
 uv run pytest tests/acceptance/test_models.py tests/acceptance/test_settings.py
 ```
 
-### Milestone 3: `OpenAITriager` (60 min)
+### Milestone 3: `OpenAITriager`
 
 **`from_settings(settings, *, http_client=None)`** builds an `OpenAI` client from the settings: key, base URL, timeout and max retries, and passes `http_client` through (the tests use it to replace the network). Without a key, raise `LLMConfigurationError` mentioning `OPENAI_API_KEY`, before any request.
 
@@ -162,7 +161,7 @@ uv run pytest tests/acceptance/test_llm.py
 
 28 tests. Read the test names first: they're the specification. Then work through them a group at a time: the request, the result, the failures, the configuration.
 
-### Milestone 4: The batch (20 min)
+### Milestone 4: The batch
 
 Implement `triage_all(triager, reports, *, input_usd_per_million=None, output_usd_per_million=None)`, following its docstring: one `TriageOutcome` per report, in order; a `TriageError` for one report is recorded and the run continues; `LLMConfigurationError` stops the run; any other exception propagates. Total the tokens of the successful triages. The cost is `None` unless **both** prices are set.
 
@@ -173,7 +172,7 @@ uv run pytest
 
 The service tests use a `ScriptedTriager`, not the OpenAI SDK: `triage_all` depends only on the protocol. In `NOTES.md`, explain what the service tests prove that the `fake_openai` tests don't, and the other way round.
 
-### Milestone 5: Run it (15 min)
+### Milestone 5: Run it
 
 First the offline baseline, which needs no key:
 
@@ -193,7 +192,7 @@ Twelve short requests cost a small fraction of a US dollar with a small model; c
 
 **Without a key**, set `OPENAI_API_KEY=not-a-real-key` for one run and record what happens, then remove it. Then answer the same comparison questions from what you expect, and come back to them if you get access to a key later.
 
-### Milestone 6: Your own tests (20 min)
+### Milestone 6: Your own tests
 
 Create `tests/unit/` with at least **8** test cases, at least 3 using `fake_openai`. Ideas:
 
@@ -207,7 +206,7 @@ Create `tests/unit/` with at least **8** test cases, at least 3 using `fake_open
 
 As before, prove that two of your tests can fail, and record the failures in `NOTES.md`.
 
-### Milestone 7: Quality gate (5 min)
+### Milestone 7: Quality gate
 
 ```bash
 uv run ruff format .
@@ -282,3 +281,22 @@ The submission must include:
 - [ ] `tests/` unchanged except for your new `tests/unit/` with at least 8 test cases
 - [ ] `NOTES.md` with your milestone answers, the comparison and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

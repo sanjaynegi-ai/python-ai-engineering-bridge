@@ -1,24 +1,24 @@
 # Session 01: Python Runtime and Professional Setup
 
-**Phase 1: Python for Experienced Developers** · Weekend 1 · 2-hour live session
+**Phase 1: Python for Experienced Developers**
 
-## 1. Session overview
+## Session overview
 
 You already know how to write software. This session makes sure Python's *tooling* never gets in your way. You'll learn what really happens when Python runs your code, why Python projects need isolated environments, and how to create, run and reproduce a professional Python project with **uv**.
 
 By the end you will have a working, version-controlled project that any teammate can clone and run with a single command. That's the setup every later session builds on.
 
-## 2. Why this matters
+## Why this matters
 
 Most of the time experienced developers lose in their first weeks with Python isn't spent on the language. It goes on environment problems: `ModuleNotFoundError` for a package you just installed, code that works on one laptop and not another, or an upgrade for one project that breaks another. These problems come from one Python-specific default: **packages install globally unless you opt into isolation.**
 
 Understanding the runtime and environment model now saves you hours in every later session, from FastAPI services to RAG applications. It is also exactly what you'll need to explain when you debug someone else's broken setup in an AI engineering team.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** professional experience in at least one language (Java, C#, JavaScript/TypeScript or similar), and comfort with a terminal and Git. No Python knowledge is assumed.
 
-**Before the session**, install and check the following. Setup problems are much easier to solve before the live session than during it.
+Before you begin, install and check the following so that you can focus on the Python work rather than environment setup.
 
 1. **uv** (0.13 or newer), using the official installer:
 
@@ -62,7 +62,7 @@ Understanding the runtime and environment model now saves you hours in every lat
 
 You do **not** need to install Python from python.org, or use `pip`, for this course.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -75,17 +75,8 @@ By the end of this session you will be able to:
 7. **Configure** an LLM provider (OpenAI by default, or Anthropic, OpenRouter or Ollama) through environment variables, and **explain** why API keys and model IDs belong in configuration rather than code.
 8. **Generate** text embeddings with OpenAI or locally with fastembed, **rank** documents by cosine similarity, and **explain** why vectors from different models must never be mixed.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook, Parts 1–7 (revision on your own) | 45 minutes |
-| Concepts notebook, Parts 8–9: LLM providers and embeddings (self-study) | 40 minutes |
-| Practice quiz | 30 minutes |
-| Workbook assignment | 1.5–2 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -100,27 +91,9 @@ By the end of this session you will be able to:
 | LLM provider configuration: `.env`, API keys, OpenAI-compatible `base_url`, provider-specific model IDs, model tiers and cost | Awareness (implemented in Session 09) |
 | Embeddings: OpenAI `text-embedding-3-small`, local fastembed, cosine similarity | Working knowledge (used from Session 11) |
 
-### Live session plan
 
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 20 min | The "works on my machine" scenario; Python's global-by-default model |
-| Visual explanation and demo | 25 min | Execution model and import search; virtual environments; anatomy of a uv project |
-| Guided coding | 40 min | Everyone creates a uv project, adds dependencies and inspects the lockfile, live |
-| Debugging challenge | 20 min | Reproduce and diagnose "but I installed it!" |
-| Recap and assignment briefing | 15 min | Key takeaways; a 3-minute preview of LLM provider and embedding setup (Parts 8–9, self-study); walk through the workbook requirements |
 
-## 7. Live demonstration
-
-The instructor will:
-
-1. Run the same script with two different interpreters and show that different packages are visible to each.
-2. Disassemble a function with `dis`, and show that type hints don't prevent a wrong-type call.
-3. Create a project with `uv init --no-package --python 3.13`, add `rich`, and walk through the diff in `pyproject.toml` and `uv.lock`.
-4. Delete `.venv` and rebuild it in seconds with `uv sync --locked`.
-5. Edit `pyproject.toml` by hand and show `uv sync --locked` refusing the drifted lockfile, the same failure a CI pipeline would produce.
-
-## 8. Guided exercises
+## Guided exercises
 
 Work through these in [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb) during and after the session:
 
@@ -136,19 +109,19 @@ Work through these in [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipyn
 
 Then test yourself with [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb).
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: a reproducible `ops-toolkit` project**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Build an environment-check command for the fictional Orbital Logistics platform team. It reports the interpreter, virtual environment and declared dependencies, exits with a meaningful status code, and fails with a clear message (not a traceback) when run with the wrong interpreter. Then prove that the project rebuilds exactly from its lockfile.
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - A Git repository (or a `.zip` without `.venv/`) containing `pyproject.toml`, `uv.lock`, `.python-version`, `main.py`, `README.md`, `.gitignore` and `NOTES.md`.
 - All acceptance criteria in the workbook passing.
 - `NOTES.md` with your milestone answers, the traceback you analysed, and your reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -164,20 +137,20 @@ Build an environment-check command for the fictional Orbital Logistics platform 
 | Comparing embeddings made by different models | Store the model ID with the vectors; re-embed everything when the model changes |
 | Using one provider's model ID with another provider | IDs differ: `claude-haiku-5-5` at Anthropic is `anthropic/claude-haiku-5.5` at OpenRouter |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Python catches only syntax errors before running. What practices would you put in place on a team to make up for the missing compile-time checks?
 2. Why do you think Python's packaging defaults ended up global, when npm's are per project? What does uv change, and what doesn't it change?
 3. When would committing `uv.lock` be the *wrong* choice? (Hint: think about libraries other people install, as opposed to applications.)
 4. In your current ecosystem, what is the equivalent of `uv sync --locked` in CI, and do your pipelines use it?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. "Is Python compiled or interpreted?" Give an answer more precise than either word alone.
 2. What is a virtual environment, physically? What does "activating" one actually do?
@@ -187,7 +160,7 @@ Practise answering these out loud, in two minutes or less each:
 6. How would you make sure CI and production run exactly the dependency versions you tested with?
 7. Your application calls OpenAI today, and the team wants to evaluate a local model through Ollama. What should have to change in the code, and what in configuration?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 02: Python Language Essentials** covers variables and object references, mutability, Python's core collections (list, tuple, dict, set), comprehensions, slicing and truthiness.
 
@@ -196,3 +169,22 @@ Before the session:
 - Finish the Session 01 workbook. You'll use the same uv workflow for every exercise from now on.
 - Make sure `uv sync` still works in the course repository, so that your notebook kernel is ready.
 - Think about one data-transformation task you've written recently in your main language (grouping, filtering, aggregating records). We'll rewrite tasks like that in idiomatic Python.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

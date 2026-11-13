@@ -6,7 +6,7 @@ Official documentation first. Each link says *why* it's worth your time, so you 
 
 | Resource | Read it for |
 |---|---|
-| [Python tutorial: An Informal Introduction](https://docs.python.org/3/tutorial/introduction.html) | Numbers, strings, slicing and lists, in fifteen minutes |
+| [Python tutorial: An Informal Introduction](https://docs.python.org/3/tutorial/introduction.html) | A concise overview of numbers, strings, slicing and lists |
 | [Python tutorial: More Control Flow Tools](https://docs.python.org/3/tutorial/controlflow.html) | `if`, `for`, `range`, `break`/`continue`/`else` on loops, and a first look at `match` |
 | [Python tutorial: Data Structures](https://docs.python.org/3/tutorial/datastructures.html) | Lists, tuples, sets, dicts, comprehensions and looping techniques, all in one chapter |
 | [Data model: objects, values and types](https://docs.python.org/3/reference/datamodel.html#objects-values-and-types) | The precise definition of identity, type and mutability that this session is built on |
@@ -49,3 +49,22 @@ Official documentation first. Each link says *why* it's worth your time, so you 
 |---|---|
 | [PEP 8: Programming recommendations](https://peps.python.org/pep-0008/#programming-recommendations) | The official guidance on `is None`, truthiness checks and more |
 | [PEP 20: The Zen of Python](https://peps.python.org/pep-0020/) | Nineteen lines that explain a lot of Python's design choices. Also available as `import this` |
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

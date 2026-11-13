@@ -41,3 +41,22 @@ Official documentation first. Each link says *why* it's worth your time, so you 
 | [Chroma documentation](https://docs.trychroma.com/) | The embedded vector database from the vector-store notebook: clients, collections, queries and metadata filters |
 | [Chroma: Configuring collections](https://docs.trychroma.com/docs/collections/configure) | Choosing the distance function (`cosine`), and the HNSW index settings |
 | [Malkov and Yashunin: HNSW](https://arxiv.org/abs/1603.09320) | *Optional.* The approximate nearest-neighbour index most vector databases use, for when brute force is too slow |
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

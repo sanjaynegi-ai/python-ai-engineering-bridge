@@ -1,7 +1,6 @@
 # Session 04 Assignment: Project 01, the `incident-report` Package
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2.5–3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), [`03-debugging-lab.ipynb`](../notebooks/03-debugging-lab.ipynb), and your Session 02 and 03 workbooks
 **Milestone:** this completes **Project 01: Python Data Processor**, the first course checkpoint.
 
@@ -100,13 +99,13 @@ cli ──► loading ──► models
 
 Run `uv run pytest` after every milestone; the number of passing tests should go up each time. To run one file, `uv run pytest tests/acceptance/test_models.py`. To see each test's name, add `-v`.
 
-### Milestone 1: Read the project (15 min)
+### Milestone 1: Read the project
 
 1. Open `pyproject.toml`. Find the line that creates the `incident-report` command, the Ruff rule selection, and the pytest settings. In `NOTES.md`, explain what `--import-mode=importlib` is for. (The concepts notebook's common-mistakes table has the answer.)
 2. Open `tests/conftest.py`. What does the `make_record` fixture return, and why is it a function rather than a dict? (Hint: Lab 5 of the debugging lab.)
 3. Open `tests/acceptance/test_models.py`. These tests are your **specification** for Milestone 2. Read every one before you write any code.
 
-### Milestone 2: `models.py` (30 min)
+### Milestone 2: `models.py`
 
 Write the three dataclasses described in the module docstring.
 
@@ -124,7 +123,7 @@ All 13 should pass. Then run the full suite: the collection errors are gone, and
 
 In `NOTES.md`: why does `Ticket` store tags as a tuple rather than a list? Give two reasons, one from Session 02 and one from today.
 
-### Milestone 3: `loading.py` (25 min)
+### Milestone 3: `loading.py`
 
 Move `load_config`, `read_export`, `validate_ticket` and `load_exports` from your Session 03 `incident_report.py`, and move `ConfigError`/`ExportError` usage to the provided `errors.py`. Then adapt them:
 
@@ -136,7 +135,7 @@ Move `load_config`, `read_export`, `validate_ticket` and `load_exports` from you
 uv run pytest tests/acceptance/test_loading.py
 ```
 
-### Milestone 4: `summary.py` (20 min)
+### Milestone 4: `summary.py`
 
 Move `deduplicate`, `team_summary` and `top_tags` from your Session 02 `ticket_summary.py`, and change dict access to attribute access: `ticket["team"]` becomes `ticket.team`. Your editor now autocompletes the field names, which is the point.
 
@@ -144,11 +143,11 @@ Add `breaches(tickets, sla_hours)`: open, breached tickets, oldest first. In Ses
 
 Your Session 02 `is_open` and `is_breached` functions are gone: those rules now live on `Ticket`. Watch out for `ticket.is_open()`, which fails with `TypeError: 'bool' object is not callable`. It's a property, so there are no parentheses.
 
-### Milestone 5: `report.py` (15 min)
+### Milestone 5: `report.py`
 
 Move `build_report` and `write_report`. `build_report` receives `Ticket`s that are already normalised, so it only needs to deduplicate. Use `breaches()` from `summary`, and `rejection.to_dict()` for the `"rejected"` list. The report's shape and values are exactly those of Session 03.
 
-### Milestone 6: `cli.py` (15 min)
+### Milestone 6: `cli.py`
 
 Move `main`. It now uses `config.input_dir` instead of `config["input_dir"]`, and `rejection.problems` instead of `entry["problems"]`. Then run the whole thing three ways:
 
@@ -162,7 +161,7 @@ The first two print the Session 03 summary and exit with `1`; the third exits wi
 
 Look at what you didn't have to write: no `if __name__ == "__main__":` in `cli.py`. Where does that responsibility live now? Answer in `NOTES.md`.
 
-### Milestone 7: Your own unit tests (40 min)
+### Milestone 7: Your own unit tests
 
 The acceptance tests check the agreed behaviour. Your unit tests pin down the **edge cases** that matter to you as the maintainer. Create `tests/unit/` with files such as `test_models.py`, `test_loading.py` and `test_summary.py`.
 
@@ -186,7 +185,7 @@ Rules of thumb: one behaviour per test; arrange, act, assert; a descriptive name
 uv run pytest tests/unit -v
 ```
 
-### Milestone 8: Debug with breakpoints (15 min)
+### Milestone 8: Debug with breakpoints
 
 1. In `summary.py`, add `breakpoint()` as the first line of `team_summary`. Run:
 
@@ -198,7 +197,7 @@ uv run pytest tests/unit -v
 2. Remove the `breakpoint()`. In VS Code, select the project's `.venv` interpreter, set a gutter breakpoint on the same line, and run the same test with **Debug Test** from the Testing view. Inspect a `Ticket` in the Variables panel.
 3. Temporarily break one assertion in one of your unit tests and run `uv run pytest tests/unit --pdb`. pytest stops at the failure. Inspect the values with `p`, quit with `q`, and restore the test.
 
-### Milestone 9: Quality gate and checkpoint (10 min)
+### Milestone 9: Quality gate and checkpoint
 
 ```bash
 uv run ruff format .
@@ -284,3 +283,22 @@ The submission must include:
 - [ ] `pyproject.toml` and `uv.lock`
 - [ ] `NOTES.md` with your milestone answers, the failing-test proofs and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

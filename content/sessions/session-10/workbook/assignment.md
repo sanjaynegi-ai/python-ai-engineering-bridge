@@ -1,7 +1,6 @@
 # Session 10 Assignment: Triage with LangChain, and an Honest Comparison
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2–2.5 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and your Session 09 work on Project 03
 **Project:** **Project 03: LLM-Powered Application** (`incident-triage`), stage 2 of 3
 
@@ -94,7 +93,7 @@ Read `test_langchain.py` before you start. Most of its tests are a **contract**:
 
 ## Implementation milestones
 
-### Milestone 1: Predict (10 min)
+### Milestone 1: Predict
 
 Reread your `llm.py`. In `NOTES.md`, predict:
 
@@ -102,7 +101,7 @@ Reread your `llm.py`. In `NOTES.md`, predict:
 2. Roughly how many lines `LangChainTriager` will need, compared with `OpenAITriager`.
 3. One way the two versions might behave **differently** for the same API response.
 
-### Milestone 2: The prompt (10 min)
+### Milestone 2: The prompt
 
 Define `PROMPT`, a `ChatPromptTemplate` with two messages: `TRIAGE_INSTRUCTIONS` as the system message, and the report as the human message, through one variable, `{report}`.
 
@@ -110,7 +109,7 @@ Define `PROMPT`, a `ChatPromptTemplate` with two messages: `TRIAGE_INSTRUCTIONS`
 uv run pytest tests/acceptance/test_langchain.py -k prompt
 ```
 
-### Milestone 3: `LangChainTriager` (60 min)
+### Milestone 3: `LangChainTriager`
 
 Implement it following the stub's docstrings:
 
@@ -130,7 +129,7 @@ uv run pytest tests/acceptance/test_langchain.py
 uv run pytest
 ```
 
-### Milestone 4: Compare (35 min)
+### Milestone 4: Compare
 
 Write `COMPARISON.md` with these measurements, and a recommendation.
 
@@ -155,7 +154,7 @@ uv run incident-triage data/reports.jsonl --engine langchain --out out/langchain
 
 End with **one paragraph of recommendation** for this tool, as you'd present it in the design review. Either answer can be right; the reasons are what's assessed.
 
-### Milestone 5: Your own tests (20 min)
+### Milestone 5: Your own tests
 
 Create at least **6** test cases in `tests/unit/`. Ideas:
 
@@ -168,7 +167,7 @@ Create at least **6** test cases in `tests/unit/`. Ideas:
 
 Prove that two of your tests can fail, as before.
 
-### Milestone 6: Quality gate (5 min)
+### Milestone 6: Quality gate
 
 ```bash
 uv run ruff format .
@@ -239,3 +238,22 @@ The submission must include:
 - [ ] `COMPARISON.md` with the measurements and your recommendation
 - [ ] `NOTES.md` with your predictions and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

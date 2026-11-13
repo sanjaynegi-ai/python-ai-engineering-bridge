@@ -1,7 +1,6 @@
 # Session 03 Assignment: The Nightly Incident Report
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2–2.5 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and your Session 02 workbook
 
 ---
@@ -160,13 +159,13 @@ How each part is computed:
 
 ## Implementation milestones
 
-### Milestone 1: Read the contract (10 min)
+### Milestone 1: Read the contract
 
 1. Read every docstring in `incident_report.py`, and the exit codes at the top. Together they're the specification.
 2. Open each file in `data/exports/` in your editor. Find, by eye, at least five problems the code will have to handle. Note them in `NOTES.md`, then compare your list with what your finished program reports.
 3. Look at the function signatures. Which parameters are keyword-only? Why would `load_exports(paths, sla_hours=...)` be clearer at the call site than `load_exports(paths, SLA)`?
 
-### Milestone 2: `load_config` (25 min)
+### Milestone 2: `load_config`
 
 Run `uv run check_report.py` after each step; the first four checks are about this function.
 
@@ -177,13 +176,13 @@ Run `uv run check_report.py` after each step; the first four checks are about th
 
 In `NOTES.md`: why resolve paths relative to the config file, rather than to the folder you happen to run the command from? What would break in a scheduled job if you didn't?
 
-### Milestone 3: `read_export` (20 min)
+### Milestone 3: `read_export`
 
 The quiz's Q8 practised this pattern. The differences here are `UnicodeDecodeError`, and that the message must include the line number from the `JSONDecodeError` (`error.lineno`).
 
 Keep the `try` block small: only the open-and-parse step. The shape check comes after it.
 
-### Milestone 4: `validate_ticket` (30 min)
+### Milestone 4: `validate_ticket`
 
 This is the most detailed function. Build it up one check at a time:
 
@@ -195,7 +194,7 @@ This is the most detailed function. Build it up one check at a time:
 
 The checker compares **exact** lists of messages, so copy the formats from the docstring carefully.
 
-### Milestone 5: `load_exports` (20 min)
+### Milestone 5: `load_exports`
 
 Loop over the paths. For each one:
 
@@ -205,14 +204,14 @@ Loop over the paths. For each one:
 
 Return the tuple `(valid, rejected)`.
 
-### Milestone 6: `build_report` and `write_report` (25 min)
+### Milestone 6: `build_report` and `write_report`
 
 - Follow "How each part is computed" above. Your Session 02 functions do most of the work.
 - `write_report`: `path.parent.mkdir(parents=True, exist_ok=True)`, then open the file with `"w"` and `encoding="utf-8"`, and `json.dump(report, file, indent=2, ensure_ascii=False)`. End the file with a newline.
 
 Check that the report survives a round trip: `json.loads(json.dumps(report)) == report` should be `True`. If it isn't, something in it isn't a JSON type, such as a tuple or a datetime.
 
-### Milestone 7: `main` (20 min)
+### Milestone 7: `main`
 
 1. `argv` defaults to `None`. When it's `None`, use `sys.argv[1:]`. Why not `argv=sys.argv[1:]` as the default? (Part 2 of the concepts notebook has the answer, and so does testing: the checker calls `main([...])` directly.)
 2. Load the config. On `ConfigError`, print `error: <message>` to **stderr** (`print(..., file=sys.stderr)`) and return `2`.
@@ -243,7 +242,7 @@ Check the exit code (`echo $?` in Bash, `$LASTEXITCODE` in PowerShell): it shoul
 
 Add `out/` to `.gitignore`. It's generated output, like `.venv/`.
 
-### Milestone 8: Read a chained traceback (10 min)
+### Milestone 8: Read a chained traceback
 
 1. In `load_exports`, temporarily change `except ExportError` to `except KeyError`, so export errors are no longer handled.
 2. Run `uv run incident_report.py` and copy the full traceback into `NOTES.md`.
@@ -251,7 +250,7 @@ Add `out/` to `.gitignore`. It's generated output, like `.venv/`.
 4. Explain in two sentences why `from error` made this traceback more useful than it would have been without it.
 5. Restore `except ExportError`, and confirm the checker passes again.
 
-### Milestone 9: Quality gate (5 min)
+### Milestone 9: Quality gate
 
 ```bash
 uv run ruff format .
@@ -339,3 +338,22 @@ The submission must include:
 - [ ] `check_report.py`, `config.json` and `data/`, unchanged
 - [ ] `NOTES.md` with your Milestone 1, 2 and 8 answers and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

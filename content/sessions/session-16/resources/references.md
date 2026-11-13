@@ -30,3 +30,22 @@ Official documentation first. Each link says *why* it's worth your time.
 - Session 04's [concepts notebook](../../session-04/notebooks/01-concepts.ipynb): pytest, fixtures and the debugger.
 - Session 13's [workbook](../../session-13/workbook/assignment.md): reviewing code you didn't write, including your assistant's.
 - Session 15's [concepts notebook](../../session-15/notebooks/01-concepts.ipynb): the evaluation your logs now complement.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

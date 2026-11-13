@@ -1,7 +1,6 @@
 # Session 12 Assignment: Route the Triage, Twice
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2–2.5 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and your Session 10 work on Project 03
 **Project:** **Project 03: LLM-Powered Application** (`incident-triage`), stage 3 of 3. This completes **Milestone 3**.
 
@@ -96,7 +95,7 @@ Read `test_routing.py` before you start. Most of it is a **contract**: each test
 
 ## Implementation milestones
 
-### Milestone 1: Predict (10 min)
+### Milestone 1: Predict
 
 Read the docstrings in `routing.py` and the diagram in Part 9 of the concepts notebook. In `NOTES.md`, write down the `path` you expect for each of these, then check them against `test_routing.py`:
 
@@ -107,7 +106,7 @@ Read the docstrings in `routing.py` and the diagram in Part 9 of the concepts no
 
 Also predict: which version, plain or graph, will be longer, and by roughly how much?
 
-### Milestone 2: The business rules (15 min)
+### Milestone 2: The business rules
 
 Implement `review_reasons` and `dispatch_for` in `routing.py`. They're plain functions of a `Triage`: no workflow, no LLM.
 
@@ -115,7 +114,7 @@ Implement `review_reasons` and `dispatch_for` in `routing.py`. They're plain fun
 uv run pytest tests/acceptance/test_routing.py -k "rule and not review"
 ```
 
-### Milestone 3: `PlainRouter` (30 min)
+### Milestone 3: `PlainRouter`
 
 Implement `PlainRouter.__init__` and `route` following the docstring. Design questions to settle first, in `NOTES.md`:
 
@@ -127,7 +126,7 @@ Implement `PlainRouter.__init__` and `route` following the docstring. Design que
 uv run pytest tests/acceptance/test_routing.py -k plain
 ```
 
-### Milestone 4: The graph (40 min)
+### Milestone 4: The graph
 
 In `workflow.py`, define `TriageState` and implement `build_workflow`.
 
@@ -149,7 +148,7 @@ uv run python -c "from incident_triage.workflow import build_workflow; from inci
 
 Paste the output into `NOTES.md`. If your editor or Git host renders Mermaid, look at the picture too.
 
-### Milestone 5: `GraphRouter` (20 min)
+### Milestone 5: `GraphRouter`
 
 Implement `GraphRouter`: build the graph once in `__init__`, then in `route`, invoke it with the starting state and `{"recursion_limit": self.recursion_limit}`, and turn the final state into a `Routing`.
 
@@ -160,7 +159,7 @@ uv run pytest tests/acceptance/test_routing.py
 uv run pytest
 ```
 
-### Milestone 6: Run it (15 min)
+### Milestone 6: Run it
 
 1. Route the sample reports with both workflows, and compare the outputs:
 
@@ -183,7 +182,7 @@ uv run pytest
 
 4. **Optional, with an API key:** route the sample reports with the LLM (`--route graph`, without `--offline`). Which reports does the model route differently from the keyword rules? Check `RPT-1010`, the prompt-injection attempt.
 
-### Milestone 7: Compare (20 min)
+### Milestone 7: Compare
 
 Add a section **"Session 12: plain Python or LangGraph?"** to `COMPARISON.md`, with these measurements:
 
@@ -195,7 +194,7 @@ Add a section **"Session 12: plain Python or LangGraph?"** to `COMPARISON.md`, w
 
 End with **one paragraph of recommendation** for this workflow, as you'd present it to the architect, and say what would change your mind. Either answer can be right; the reasons are what's assessed.
 
-### Milestone 8: Your own tests (20 min)
+### Milestone 8: Your own tests
 
 Create at least **6** test cases in `tests/unit/`. Ideas:
 
@@ -208,7 +207,7 @@ Create at least **6** test cases in `tests/unit/`. Ideas:
 
 Prove that two of your tests can fail, as before.
 
-### Milestone 9: Quality gate and Milestone 3 checkpoint (10 min)
+### Milestone 9: Quality gate and Milestone 3 checkpoint
 
 Update your project's `README.md`: add Session 12 to the stages table, the `--route` option to the usage section, and `routing.py` and `workflow.py` to the layout. Then:
 
@@ -287,3 +286,22 @@ The submission must include:
 - [ ] `NOTES.md` with your predictions, design answers, the Mermaid output, a streamed run and the reflection
 - [ ] The updated project `README.md`
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

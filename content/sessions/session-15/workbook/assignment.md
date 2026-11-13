@@ -1,7 +1,6 @@
 # Session 15 Assignment: Capstone Application
 
 **Type:** Milestone 1 is **Independent**: extend your design before you build. Milestones 2 to 6 are **AI-assisted**: you may use Claude Code, or an approved assistant, following the Session 13 workflow. Writing them yourself is just as valid.
-**Estimated time:** 3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), your Session 14 `knowledge-assistant` (tagged `session-14`), Session 09 (structured output) and Session 07 (FastAPI)
 **Project:** **Project 04**, the capstone. This session adds answers, an API, a UI and an evaluation; Session 16 reviews and presents it.
 
@@ -95,7 +94,7 @@ New settings: `ASSISTANT_GENERATOR` (`openai` or `extractive`), `ASSISTANT_TOP_K
 
 ## Implementation milestones
 
-### Milestone 1: Extend the design (15 min, Independent)
+### Milestone 1: Extend the design
 
 Read `schemas.py`, `generation.py`, `prompts.py` and `assistant.py`, and the stubs. Then add a section **"Answering"** to `ARCHITECTURE.md`:
 
@@ -104,7 +103,7 @@ Read `schemas.py`, `generation.py`, `prompts.py` and `assistant.py`, and the stu
 3. Your two levels of "not found", and what each one costs.
 4. What you will log in `answer_question`, and what you won't.
 
-### Milestone 2: Answering (45 min)
+### Milestone 2: Answering
 
 Implement `retrieve`, `build_context` and `answer_question`.
 
@@ -117,7 +116,7 @@ uv run pytest tests/acceptance/test_answering.py
 - `SourceRef` takes the hit's citation and score; the tests compare scores to about three decimal places.
 - Use `ScriptedGenerator` (in `tests/conftest.py`) in your own tests: set `answer`, `citations`, `answerable` or `error`, and read `calls` afterwards.
 
-### Milestone 3: The API (30 min)
+### Milestone 3: The API
 
 Implement `create_app(assistant)`.
 
@@ -132,7 +131,7 @@ Open `http://127.0.0.1:8000/docs`, and ask a question from the interactive page.
 - "Not found" is **200** with `found: false` (notebook Part 4).
 - `--factory` tells uvicorn to call `app_from_settings()` to get the app, so the assistant (and the embedding model) is built at startup, not at import time. A missing key fails at startup, which is what you want for a service.
 
-### Milestone 4: The UI (30 min)
+### Milestone 4: The UI
 
 Implement `ui.py`. Its docstring lists what the page must do.
 
@@ -145,7 +144,7 @@ uv run streamlit run src/knowledge_assistant/ui.py
 - Catch `AssistantError` and show `st.error(...)`: the tests check that a missing key and an index built with other settings each produce a message, not a traceback.
 - Run it from the project folder, so Streamlit finds `.streamlit/config.toml`. Its first lines of output should show only a `localhost` URL.
 
-### Milestone 5: Evaluation (30 min)
+### Milestone 5: Evaluation
 
 Implement `load_questions`, the three `QuestionResult` properties, the four rates and `evaluate`.
 
@@ -155,7 +154,7 @@ uv run pytest tests/acceptance/test_evaluation.py tests/acceptance/test_cli_answ
 
 Quiz Q3 shows the mistake to avoid. Read each property's docstring twice: "of which questions" matters as much as "which ones count".
 
-### Milestone 6: Measure and interpret (30 min)
+### Milestone 6: Measure and interpret
 
 Run the evaluation offline, with the real embedder:
 
@@ -242,3 +241,22 @@ Your `knowledge-assistant` repository, tagged `session-15`, containing:
 - `EVALUATION.md`: the offline evaluation output, your explanations, the threshold decision with your six new questions, and (optionally) the live comparison.
 
 Session 16 starts from this tag: you'll present the whole assistant and defend its design.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

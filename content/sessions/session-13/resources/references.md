@@ -41,3 +41,22 @@ Official documentation first. Claude Code changes quickly: when something behave
 | [mutmut](https://mutmut.readthedocs.io/) | A mutation-testing tool for Python, automating what the concepts notebook did by hand |
 | [`warnings`](https://docs.python.org/3.13/library/warnings.html) | Turning deprecation warnings into errors to find outdated APIs |
 | [`statistics.quantiles`](https://docs.python.org/3.13/library/statistics.html#statistics.quantiles) | The `exclusive` and `inclusive` methods from the concepts notebook's Common Mistake |
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

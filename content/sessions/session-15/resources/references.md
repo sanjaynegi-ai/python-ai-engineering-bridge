@@ -33,3 +33,22 @@ Official documentation first. Each link says *why* it's worth your time. The cap
 - Session 11's [concepts notebook](../../session-11/notebooks/01-concepts.ipynb): numbered contexts, citations and evaluation.
 - Session 07's [workbook](../../session-07/workbook/assignment.md): FastAPI routes, models and tests.
 - Session 14's [concepts notebook](../../session-14/notebooks/01-concepts.ipynb): the index this session reads.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

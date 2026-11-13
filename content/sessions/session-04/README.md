@@ -1,20 +1,20 @@
 # Session 04: Modules, Packages, Classes and Testing
 
-**Phase 1: Python for Experienced Developers** · Weekend 2 · 2-hour live session · **Milestone 1: Project 01**
+**Phase 1: Python for Experienced Developers** · **Milestone 1: Project 01**
 
-## 1. Session overview
+## Session overview
 
 Your incident report works, but it's a pair of scripts held together by string keys and checked by hand-written checker scripts. This session gives it the structure of professional Python software: a `src/`-layout **package** with one responsibility per module, **dataclasses** for tickets, rejections and configuration, a **pytest** test suite, and project-wide **Ruff** configuration. You'll also learn to debug with breakpoints instead of print statements.
 
 The workbook completes **Project 01**, the course's first checkpoint: a tested, installable Python tool that you could hand to a colleague.
 
-## 2. Why this matters
+## Why this matters
 
 Every Python codebase you'll meet in AI engineering, from FastAPI services and LLM integrations to RAG pipelines, is organised as packages and modules, models its data with classes, and is guarded by pytest. Reading those codebases means understanding how imports resolve, why a module runs only once, and where a fixture comes from. Contributing to them means writing tests that fail for the right reasons.
 
 The most common problems at this stage are structural: a shadowed module, a circular import, a package that works in the terminal but not in the IDE, tests that pass alone and fail together. This session reproduces each one so that you'll recognise it when it happens for real.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Sessions 01–03 completed. Your Session 03 `incident_report.py` and Session 02 `ticket_summary.py` pass their checkers, because you'll move that code into the package.
 
@@ -23,7 +23,7 @@ The most common problems at this stage are structural: a shadowed module, a circ
 1. In the course repository, run `uv sync`. This session's notebooks run pytest and Ruff, which come with the course environment's `dev` dependency group.
 2. In VS Code, make sure you can select a project's `.venv` as the interpreter (Session 01, Part 6). You'll use the debugger.
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -35,17 +35,8 @@ By the end of this session you will be able to:
 6. **Configure** Ruff in `pyproject.toml`, and **interpret** its findings.
 7. **Debug** with `breakpoint()`, `pytest --pdb` and the VS Code debugger.
 
-## 5. Estimated time
 
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision on your own) | 60 minutes |
-| Debugging lab | 45 minutes |
-| Practice quiz | 35 minutes |
-| Workbook assignment (Project 01) | 2.5–3 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -62,28 +53,9 @@ By the end of this session you will be able to:
 | `breakpoint()`, pdb commands, `pytest --pdb`, the VS Code debugger | Independent implementation |
 | Coverage and type checkers | Awareness (extension) |
 
-### Live session plan
 
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 20 min | A new colleague, a `KeyError: 'teams'`, and a codebase nobody can test; the Java/C# equivalents of what we need |
-| Visual explanation and demo | 20 min | How imports resolve; the `src/` layout; dataclasses replacing dicts; how pytest runs a test |
-| Guided coding | 40 min | Start Project 01 together: copy the starter, run the failing acceptance tests, write `models.py` until `test_models.py` passes |
-| Debugging challenge | 25 min | The debugging lab: shadowing, a script run inside a package, a circular import, and tests that can't fail |
-| Recap and assignment briefing | 15 min | Key takeaways; the remaining workbook milestones; what "Project 01 complete" means |
 
-## 7. Live demonstration
-
-The instructor will:
-
-1. Import a module three times and show its top-level code running once, then show `__name__` in a script versus a module.
-2. Run a `src/`-layout package without and with the editable install, and explain why the failure is a feature.
-3. Replace a ticket dict with a frozen dataclass, and show an editor catching `ticket.teams` before anything runs.
-4. Trigger the dataclass mutable-default `ValueError` and fix it with `default_factory`.
-5. Run a parametrized pytest suite with a failing boundary case, and read the assertion-rewriting output.
-6. Set a breakpoint in a test with VS Code's **Debug Test**, and inspect a dataclass in the Variables panel.
-
-## 8. Guided exercises
+## Guided exercises
 
 1. [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb):
    - **Import once:** predict how often a module's code runs.
@@ -94,20 +66,20 @@ The instructor will:
 2. [`notebooks/03-debugging-lab.ipynb`](notebooks/03-debugging-lab.ipynb): five broken projects to diagnose and fix (shadowing, script versus module, circular import, a test that can't fail, tests that share state).
 3. [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb): 10 self-check questions.
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: Project 01, the `incident-report` package**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Restructure your Session 02 and 03 code into an installable package with typed dataclasses, make 48 provided acceptance tests pass, write at least 12 unit tests of your own (and prove they can fail), and debug the code with breakpoints. The starter project is in [`projects/01-python-data-processor`](../../projects/01-python-data-processor/README.md).
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - The `incident-report` project, with `src/incident_report/` complete and tagged `project-01` in Git.
 - `uv run pytest` passing: the 48 acceptance tests, unchanged, plus at least 12 of your own.
 - `uv run ruff check .` and `uv run ruff format --check .` passing with the project's configuration.
 - `NOTES.md` with milestone answers, two failing-test proofs and your reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -122,20 +94,20 @@ Restructure your Session 02 and 03 code into an installable package with typed d
 | A test you've never seen fail | Break the code once and watch it fail |
 | `breakpoint()` left in committed code | Remove it before committing |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Python has no `private` keyword. What keeps a large Python codebase maintainable without it?
 2. When would you still pass a dict rather than a dataclass in Python code?
 3. What would you look for when reviewing a colleague's pytest tests?
 4. How is the `src/` layout's protection similar to Maven's or .NET's separation of `src/main` and `src/test`, and how is it different?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. What happens, step by step, when Python executes `import mypackage.utils`?
 2. What is a circular import, how does it fail, and how do you fix one?
@@ -145,7 +117,7 @@ Practise answering these out loud, in two minutes or less each:
 6. What is a pytest fixture, and how does it differ from `setUp` in JUnit or xUnit?
 7. How do you debug a failing test in Python?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 05: HTTP and API Integration** starts Phase 2. You'll call REST APIs with HTTPX, handle timeouts and error status codes, keep credentials in environment variables, and test an API client without touching the network.
 
@@ -153,3 +125,22 @@ Before the session:
 
 - Finish Project 01 and tag it. Project 02 builds on the same domain, and a checkpoint version is provided so that nobody is blocked.
 - Make sure `uv sync` works in the course repository; Session 05 adds HTTPX to it.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

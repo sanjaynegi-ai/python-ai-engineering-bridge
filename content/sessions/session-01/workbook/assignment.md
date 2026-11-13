@@ -1,7 +1,6 @@
 # Session 01 Assignment: A Reproducible `ops-toolkit` Project
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 1.5–2 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), Parts 1–7
 
 ---
@@ -27,7 +26,7 @@ By completing this assignment you will:
 
 ## Prerequisites
 
-- `uv` installed (`uv --version` prints 0.13 or newer). See the [session README](../README.md#3-prerequisites) if not.
+- `uv` installed (`uv --version` prints 0.13 or newer). See the [session README](../README.md#prerequisites) if not.
 - Git installed (`git --version`).
 - VS Code with the Python extension, or another editor you're comfortable with.
 - Concepts notebook Parts 1–7 completed.
@@ -93,7 +92,7 @@ ops-toolkit/
 
 ## Implementation milestones
 
-### Milestone 1: Inspect what `uv init` created (10 min)
+### Milestone 1: Inspect what `uv init` created
 
 1. List the files, including hidden ones (`ls -a` on macOS/Linux, `Get-ChildItem -Force` in PowerShell).
 2. Open `pyproject.toml`, `.python-version` and `main.py`. Note that there is **no `.venv` and no `uv.lock` yet**.
@@ -106,7 +105,7 @@ ops-toolkit/
    Expected output: uv reports creating a virtual environment, then `Hello from ops-toolkit!`.
 4. List the files again. **Predict before you look:** which two new items appeared, and which command step created each one?
 
-### Milestone 2: Add dependencies and read the diff (15 min)
+### Milestone 2: Add dependencies and read the diff
 
 ```bash
 uv add rich
@@ -120,7 +119,7 @@ uv tree
 
 Create `NOTES.md` and write two or three sentences answering: *what is the difference between the `rich` entry in `pyproject.toml` and the `rich` entry in `uv.lock`?*
 
-### Milestone 3: Implement the environment check (40–50 min)
+### Milestone 3: Implement the environment check
 
 Replace the contents of `main.py`. Here is a suggested shape. The function names and signatures are a guide, and the bodies are yours to write:
 
@@ -206,7 +205,7 @@ $LASTEXITCODE
 
 **Experiment (R4):** run `uv add httpx`, then `uv run main.py`, without changing any code. A `Dependency: httpx` row should appear. Then `uv remove httpx`.
 
-### Milestone 4: Break it on purpose (15 min)
+### Milestone 4: Break it on purpose
 
 This is the debugging pattern from Part 6 of the concepts notebook. Practise it on a failure you caused yourself, so you can recognise it later in a real one.
 
@@ -228,7 +227,7 @@ This is the debugging pattern from Part 6 of the concepts notebook. Practise it 
 
 4. **Verify** that `uv run main.py` still works and exits with `0`.
 
-### Milestone 5: Make the failure helpful (R6) (15 min)
+### Milestone 5: Make the failure helpful (R6)
 
 The traceback from Milestone 4 is accurate but unhelpful to a new engineer. Change your script so that, when `rich` can't be imported, it prints something like:
 
@@ -249,7 +248,7 @@ Hints:
 
 Re-run the Milestone 4 command. You should now see your message, and the exit code should be `1`.
 
-### Milestone 6: Prove it's reproducible (R8) (10 min)
+### Milestone 6: Prove it's reproducible (R8)
 
 1. Delete the environment:
 
@@ -285,7 +284,7 @@ Re-run the Milestone 4 command. You should now see your message, and the exit co
 
    Compare the dependency versions with your original. They must be identical. Why, given that only `pyproject.toml` and `uv.lock` were copied? Answer in `NOTES.md`. (Commit your latest changes before cloning, otherwise the clone won't include them.)
 
-### Milestone 7: Quality gate (R7) (5 min)
+### Milestone 7: Quality gate (R7)
 
 ```bash
 uv run ruff format .
@@ -363,3 +362,22 @@ The submission must include:
 - [ ] `pyproject.toml`, `uv.lock`, `.python-version`, `main.py`, `README.md`, `.gitignore`
 - [ ] `NOTES.md` with the Milestone 2 answer, the Milestone 4 traceback and explanation, the Milestone 6 answer, and the reflection answers
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

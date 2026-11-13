@@ -1,7 +1,6 @@
 # Session 07 Assignment: Project 02 Becomes a Service
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2.5–3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and your Session 06 work on Project 02
 **Project:** **Project 02: Python API Service** (`incident-api`), stage 2 of 3
 
@@ -119,7 +118,7 @@ should still report `53 passed`.
 
 ## Implementation milestones
 
-### Milestone 1: Design before code (15 min)
+### Milestone 1: Design before code
 
 In `NOTES.md`, answer:
 
@@ -127,7 +126,7 @@ In `NOTES.md`, answer:
 2. For each row of the API table, which **layer** produces each status code: Pydantic validation, the service (through an exception), or the route?
 3. The service keeps tickets in memory. List two things that will go wrong because of that in production. (Part 9 of the notebook.)
 
-### Milestone 2: The service layer (35 min)
+### Milestone 2: The service layer
 
 First, add two exceptions to `errors.py`:
 
@@ -147,7 +146,7 @@ uv run pytest tests/acceptance/test_service.py
 
 15 tests. Notice that none of them involves HTTP: business rules are tested where they live.
 
-### Milestone 3: API schemas (20 min)
+### Milestone 3: API schemas
 
 In `schemas.py`, define:
 
@@ -165,7 +164,7 @@ Why not return `Ticket` directly? Because `TicketOut` is the **public contract**
 uv run pytest tests/acceptance/test_schemas.py
 ```
 
-### Milestone 4: Read endpoints (35 min)
+### Milestone 4: Read endpoints
 
 In `api.py`, read the provided code first: `get_service`, `ServiceDep`, the `/health` route and `create_app`. Then add:
 
@@ -182,7 +181,7 @@ uv run pytest tests/acceptance/test_api_read.py
 
 17 tests. If many fail at once, read the first failure's response body: `print(response.json())` in a quick test shows FastAPI's explanation.
 
-### Milestone 5: Creating tickets (25 min)
+### Milestone 5: Creating tickets
 
 1. `POST /tickets` on the `tickets` router: the body is a `Ticket`; the status is `201`; the response is a `TicketOut`. Document `409` with `responses=`.
 2. A handler that turns `DuplicateTicketError` into `409`.
@@ -195,7 +194,7 @@ uv run pytest tests/acceptance/test_api_write.py
 
 The last test in that file builds the app and **overrides** `get_service` with a hand-made service. Read it: it's the pattern for your own tests in Milestone 8.
 
-### Milestone 6: Documentation and startup (10 min)
+### Milestone 6: Documentation and startup
 
 ```bash
 uv run pytest tests/acceptance/test_api_docs.py
@@ -206,7 +205,7 @@ These tests read the OpenAPI document: the title, paths, tags, query parameters,
 
 All 116 acceptance tests should now pass.
 
-### Milestone 7: Run it for real (15 min)
+### Milestone 7: Run it for real
 
 Start the server:
 
@@ -251,7 +250,7 @@ $env:INCIDENT_SLA_HOURS='{"P1": 30, "P2": 24, "P3": 72, "P4": 168}'; uv run fast
 Remove-Item Env:INCIDENT_SLA_HOURS
 ```
 
-### Milestone 8: Your own tests (25 min)
+### Milestone 8: Your own tests
 
 Create `tests/unit/test_api.py` (or several files) with at least **10** test cases. At least one must use `app.dependency_overrides` with a `TicketService` you build by hand. Ideas:
 
@@ -266,7 +265,7 @@ Create `tests/unit/test_api.py` (or several files) with at least **10** test cas
 
 As before, prove that two of your tests can fail, and record the failures in `NOTES.md`.
 
-### Milestone 9: Quality gate (5 min)
+### Milestone 9: Quality gate
 
 ```bash
 uv run ruff format .
@@ -341,3 +340,22 @@ The submission must include:
 - [ ] `tests/acceptance/` unchanged, and your `tests/unit/` with at least 10 new test cases
 - [ ] `NOTES.md` with your milestone answers and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

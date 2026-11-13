@@ -1,7 +1,6 @@
 # Session 13 Assignment: Build with an Assistant, Review an Assistant
 
 **Type:** Part A is **AI-assisted**: use Claude Code. Part B is **AI-review**: review code an assistant wrote, by hand first, then with Claude Code.
-**Estimated time:** 3–3.5 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and your Project 03 (`incident-triage`, tagged `session-12`)
 **Project:** **Project 03** again, on its own branch and tags. Project 03 itself was completed in Session 12.
 
@@ -88,7 +87,7 @@ The feature, as the team lead specified it. The acceptance tests are the definit
 
 ## Milestones
 
-### Milestone A1: Set up Claude Code for the project (15 min)
+### Milestone A1: Set up Claude Code for the project
 
 1. Start Claude Code in the project folder (`claude`), in **plan mode** (`Shift+Tab` until the status bar shows plan mode, or `claude --permission-mode plan`).
 2. Run `/init` to draft a `CLAUDE.md`. Then **edit it yourself** until it's short and correct. It should contain what the assistant can't guess: how to run the tests and Ruff (`uv run ...`), that `tests/acceptance/` and `tests/conftest.py` must never be changed, that no test may call a real API, that data is synthetic and must stay so, and where the main modules are. Delete anything it could learn by reading the code.
@@ -97,7 +96,7 @@ The feature, as the team lead specified it. The acceptance tests are the definit
 
 In `NOTES.md`, record what `/init` produced that you **removed**, and why.
 
-### Milestone A2: Understand (15 min)
+### Milestone A2: Understand
 
 Still in plan mode, ask Claude Code to explain:
 
@@ -106,13 +105,13 @@ Still in plan mode, ask Claude Code to explain:
 
 Write its answers into `NOTES.md` in your own words, then **verify three of its claims** against the code yourself (open the file, find the line). Record each claim, where you checked it, and whether it was right. If anything was wrong or vague, note how you'd have caught it.
 
-### Milestone A3: Plan (15 min)
+### Milestone A3: Plan
 
 Write your implementation request in `NOTES.md` first, using the structure from the concepts notebook (Part 2): goal, context, constraints, acceptance criteria, verification, out of scope. Then give it to Claude Code, still in plan mode, and ask for a plan.
 
 Review the plan before approving it. Does it change only what it should? Does it say how it will meet requirement A4? Does it plan to touch the tests? Edit the plan if needed (`Ctrl+G` opens it in your editor). Record the plan, and what you changed, in `NOTES.md`.
 
-### Milestone A4: Implement and test (40 min)
+### Milestone A4: Implement and test
 
 Switch to **Manual mode** and approve the plan. Work in small steps: approve each edit and command only after reading it. After each step:
 
@@ -125,7 +124,7 @@ Commit when a step works. Ask Claude Code to add your **own** tests (A8) too, th
 
 If something goes wrong twice, stop: `/clear` (or `/rewind`), understand the failure yourself, and write a better request (concepts notebook, Part 1).
 
-### Milestone A5: Review (25 min)
+### Milestone A5: Review
 
 Review the complete change as you would a colleague's pull request:
 
@@ -145,7 +144,7 @@ uv run pytest
 git diff session-13-start -- tests/acceptance tests/conftest.py   # must print nothing
 ```
 
-### Milestone A6: Explain (15 min)
+### Milestone A6: Explain
 
 In `NOTES.md`, without asking the assistant, answer:
 
@@ -191,7 +190,7 @@ The pull request's 8 tests pass, as its description says.
 
 ## Milestones
 
-### Milestone B1: Review it yourself (45 min, no assistant)
+### Milestone B1: Review it yourself
 
 Review **without** Claude Code first: this is the review you'd do on a colleague's pull request, and the one you'll compare the assistant's with.
 
@@ -200,7 +199,7 @@ Review **without** Claude Code first: this is the review you'd do on a colleague
 3. Write `PR-REVIEW.md` with your findings. For each one: what's wrong, **why it matters** to the on-call team, a **severity** (must fix, should fix, optional), and the **evidence**: a command and its output, or a test.
 4. In `tests/unit/test_duplicates_review.py`, write a test for each of **at least five** findings that **fails** against the pull request's code and would pass once the finding is fixed.
 
-### Milestone B2: Review it with Claude Code (20 min)
+### Milestone B2: Review it with Claude Code
 
 Start a **fresh** Claude Code session on the branch, in plan mode, and review only the pull request's commit:
 
@@ -219,7 +218,7 @@ Add a section to `PR-REVIEW.md`:
 - findings it reported that were **wrong** or not worth fixing;
 - anything in the files that seemed to try to influence a reviewer, and whether the assistant was influenced by it.
 
-### Milestone B3: Decide (10 min)
+### Milestone B3: Decide
 
 End `PR-REVIEW.md` with your decision, **approve**, **request changes** or **reject**, and a short message to the author: what must change before you'd approve, in priority order. Write it the way you'd want to receive it.
 
@@ -293,3 +292,22 @@ The submission must include:
 - [ ] The `review/duplicates` branch with `PR-REVIEW.md` and at least 5 failing review tests
 - [ ] `NOTES.md` with every item from the acceptance criteria and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

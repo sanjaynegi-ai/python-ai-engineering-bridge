@@ -38,3 +38,22 @@ Official documentation first. Each link says *why* it's worth your time, so you 
 | [RFC 9110: HTTP semantics, status codes](https://www.rfc-editor.org/rfc/rfc9110.html#name-status-codes) | The definitive source, including `409` and `422` |
 | [OpenAPI specification](https://spec.openapis.org/oas/latest.html) | The format behind `/openapi.json`, for when you need to read it closely |
 | [Uvicorn](https://uvicorn.dev/) | The ASGI server that runs FastAPI applications |
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

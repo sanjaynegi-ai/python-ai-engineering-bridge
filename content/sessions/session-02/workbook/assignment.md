@@ -1,7 +1,6 @@
 # Session 02 Assignment: The Morning Incident Summary
 
 **Type:** Independent. Complete this without an AI coding assistant; Session 13 covers AI-assisted work.
-**Estimated time:** 2 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb) and [`03-collections-deep-dive.ipynb`](../notebooks/03-collections-deep-dive.ipynb)
 
 ---
@@ -112,13 +111,13 @@ Keep everything in `ticket_summary.py` for this assignment. Splitting code into 
 
 ## Implementation milestones
 
-### Milestone 1: Read before you write (10 min)
+### Milestone 1: Read before you write
 
 1. Open `ticket_summary.py` and read every docstring. Each one is a specification.
 2. Open `sample_tickets.py`. Note that `CLOSED_STATUSES` is a **set** and `SLA_HOURS` is a **dict**. Why is each the right type for how it will be used? (`03-collections-deep-dive.ipynb`, Part 1.)
 3. Run `uv run ruff check .`. It reports that the imports in `ticket_summary.py` are unused. That's expected: you'll use them as you implement the functions, and the warnings will go away.
 
-### Milestone 2: Explore the data (15 min)
+### Milestone 2: Explore the data
 
 Before cleaning data, find out *how* it's dirty. Start an interactive session with the data loaded:
 
@@ -135,7 +134,7 @@ uv run python -i sample_tickets.py
 
 Leave with `exit()`. In `NOTES.md`, list **at least five** data-quality problems you found, and the expression you used to find each.
 
-### Milestone 3: `normalise_ticket` (20 min)
+### Milestone 3: `normalise_ticket`
 
 Implement it so that the first four checks pass.
 
@@ -152,18 +151,18 @@ Run the checker after each change:
 uv run check_summary.py
 ```
 
-### Milestone 4: `deduplicate`, `is_open` and `is_breached` (20 min)
+### Milestone 4: `deduplicate`, `is_open` and `is_breached`
 
 - `deduplicate`: the "seen set" pattern from the deep-dive notebook, Part 5. Why is `set(tickets)` not an option here? (Try it and read the error.)
 - `is_open`: one line. It receives tickets that are already normalised, so you don't need to lower-case again.
 - `is_breached`: watch the boundary. A P2 ticket that is exactly 24 hours old has **not** breached.
 
-### Milestone 5: `count_by` and `group_by_team` (15 min)
+### Milestone 5: `count_by` and `group_by_team`
 
 - `count_by` takes the **field name** as a parameter, so `count_by(tickets, "priority")` and `count_by(tickets, "status")` use the same code. `Counter` returns a `dict` subclass; the checker accepts either.
 - `group_by_team`: `defaultdict(list)` is the standard group-by. Convert it back to a plain `dict` before returning it, so callers aren't surprised when a missing key silently creates an entry.
 
-### Milestone 6: `team_summary` (25 min)
+### Milestone 6: `team_summary`
 
 This is the hardest function. Work it out on paper for one team before you code it.
 
@@ -173,7 +172,7 @@ This is the hardest function. Work it out on paper for one team before you code 
 - `max()` of an empty sequence raises `ValueError`. Look up the `default=` parameter.
 - An assignee counts as unassigned only if it is `None`, because `normalise_ticket` already turned blanks into `None`. This is the payoff for cleaning first.
 
-### Milestone 7: `top_tags`, then `main` (25 min)
+### Milestone 7: `top_tags`, then `main`
 
 - `Counter.most_common(n)` looks like the answer, but run the checker. Its tie order is "first seen", not alphabetical. Sort the counter's `items()` yourself with a tuple key: count descending, tag ascending.
 - `main()` runs the whole pipeline: normalise every raw ticket, **then** deduplicate, then build the report. Tags are counted on **open** tickets only. Your output must match this:
@@ -202,7 +201,7 @@ Top tags on open tickets: latency (3), network (3), api (2)
 
 Teams are ranked by breaches (most first), then alphabetically. The column layout uses f-string alignment such as `{team:<12}` and `{count:>6}` (`01-concepts.ipynb`, Part 3). Exact spacing isn't checked, but the content and order are.
 
-### Milestone 8: Break it on purpose (10 min)
+### Milestone 8: Break it on purpose
 
 Once all 16 checks pass, introduce each of these bugs **one at a time**, run the checker, record which checks fail, then undo the change:
 
@@ -212,7 +211,7 @@ Once all 16 checks pass, introduce each of these bugs **one at a time**, run the
 
 For each one, write in `NOTES.md`: which checks failed, and **why that check catches that bug**. Then answer: bug 1 changes the team to the right value, so why does it matter? Who would be surprised, and when?
 
-### Milestone 9: Quality gate (5 min)
+### Milestone 9: Quality gate
 
 ```bash
 uv run ruff format .
@@ -302,3 +301,22 @@ The submission must include:
 - [ ] `sample_tickets.py` and `check_summary.py`, unchanged
 - [ ] `NOTES.md` with your answers to Milestones 2, 3 and 8, and the reflection
 - [ ] All acceptance criteria passing
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

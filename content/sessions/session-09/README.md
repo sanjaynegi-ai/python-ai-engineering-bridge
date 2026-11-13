@@ -1,30 +1,30 @@
 # Session 09: Direct LLM API Integration
 
-**Phase 3: Python for AI Applications** · Weekend 5 · 2-hour live session · **Project 03 begins**
+**Phase 3: Python for AI Applications** · **Project 03 begins**
 
-## 1. Session overview
+## Session overview
 
 This session calls a large language model from Python directly, with the provider's SDK and no framework. You'll see an LLM API for what it is from an engineer's side: an HTTP API that's slow, metered by the token, occasionally unavailable, and whose output must be validated before you trust it. You'll get **structured output** as a Pydantic model, handle refusals, truncation and rule-breaking output, record what each request costs, and test it all without an API key.
 
 The workbook starts **Project 03**: an incident-triage tool that turns free-text reports into validated, structured triage.
 
-## 2. Why this matters
+## Why this matters
 
 Most AI features in real products are a direct LLM call wrapped in ordinary engineering: configuration, validation, error handling, cost control and tests. Frameworks (Session 10) are built on the same calls, so understanding them directly is what lets you debug a framework when it misbehaves.
 
 Many AI prototypes fail in production for engineering reasons rather than model quality: no timeout, unvalidated output, a crash on the first refusal, a surprise invoice, a prompt injection. This session addresses each of these.
 
-## 3. Prerequisites
+## Prerequisites
 
 **Knowledge:** Sessions 01–08. In particular, Session 01 Part 8 (providers and keys), Session 05 (HTTP clients, errors, mocking), Session 06 (Pydantic) and Session 08 (partial failure).
 
-**Before the session:**
+Before you begin:
 
 1. In the course repository, run `uv sync`.
 2. **Optional:** an OpenAI API key in the course repository's `.env`, as set up in Session 01 Part 8, with a monthly budget set in the provider's dashboard. Everything in this session also works without a key, against fakes.
 3. Finish Project 02 (Session 08).
 
-## 4. Learning objectives
+## Learning objectives
 
 By the end of this session you will be able to:
 
@@ -36,16 +36,7 @@ By the end of this session you will be able to:
 6. **Test** LLM code without paid calls, with fakes at the interface and HTTP levels, and **validate** the fakes against the SDK's types.
 7. **Recognise** prompt injection, and **apply** basic mitigations.
 
-## 5. Estimated time
-
-| Activity | Time |
-|---|---:|
-| Live session | 2 hours |
-| Concepts notebook (revision on your own) | 70 minutes |
-| Practice quiz | 35 minutes |
-| Workbook assignment (Project 03, stage 1) | 2.5–3 hours |
-
-## 6. Concepts covered
+## Concepts covered
 
 | Concept | Depth |
 |---|---|
@@ -59,28 +50,7 @@ By the end of this session you will be able to:
 | Conversations, reasoning tokens, prompt caching | Awareness |
 | Prompt injection and data protection | Awareness, with basic mitigations applied |
 
-### Live session plan
-
-| Segment | Time | What happens |
-|---|---:|---|
-| Problem and intuition | 20 min | Free-text reports and the cost of triaging them by hand; an LLM call as "just another HTTP API" |
-| Visual explanation and demo | 25 min | One request and response, field by field; retries; structured output and the four checks |
-| Guided coding | 40 min | Together: the `TriageResult` contract, then the first half of `OpenAITriager` until the request tests pass |
-| Debugging challenge | 20 min | A refusal that crashes, a truncated reply, a key leaked in an error message, and an injection attempt |
-| Recap and assignment briefing | 15 min | Key takeaways; the error table; running live versus offline |
-
-## 7. Live demonstration
-
-The instructor will:
-
-1. Make one Responses API call and show the request JSON the SDK sends and the response it gets back.
-2. Show the SDK's default timeout, and watch it retry a `503` and a `429`.
-3. Get a `TriageResult` back from `responses.parse`, and show the strict schema it sent.
-4. Feed it a refusal, a truncated reply and an over-long summary, and show what each does.
-5. Work out the monthly cost of a triage workload, and what a longer prompt adds.
-6. Send the prompt-injection report, live if a key is available, and discuss the result.
-
-## 8. Guided exercises
+## Guided exercises
 
 1. [`notebooks/01-concepts.ipynb`](notebooks/01-concepts.ipynb) (runs free against an example API; live calls are opt-in):
    - **Anatomy:** one call, the request and response, and three providers compared.
@@ -93,19 +63,19 @@ The instructor will:
    - **Anthropic:** the same call with another SDK.
 2. [`notebooks/02-practice-quiz.ipynb`](notebooks/02-practice-quiz.ipynb): 10 self-check questions.
 
-## 9. Independent assignment
+## Independent assignment
 
 [**Workbook: Project 03 begins, LLM-assisted triage**](workbook/assignment.md) (*Independent*: no AI coding assistant)
 
 Design the triage contract, implement `OpenAITriager` with full error mapping, write the batch service, and compare the LLM with a keyword baseline. 67 acceptance tests are provided, and none of them needs an API key. The starter is in [`projects/03-llm-application`](../../projects/03-llm-application/README.md).
 
-## 10. Expected deliverables
+## Expected deliverables
 
 - The `incident-triage` project with `TriageResult`, `Usage`, `Settings`, `OpenAITriager` and `triage_all` implemented, tagged `session-09`.
 - `uv run pytest` passing with no key: 67 acceptance tests, unchanged, plus at least 8 of your own.
 - `NOTES.md` with the baseline analysis, the comparison and your reflection.
 
-## 11. Common mistakes
+## Common mistakes
 
 | Mistake | Instead |
 |---|---|
@@ -118,20 +88,20 @@ Design the triage contract, implement `OpenAITriager` with full error mapping, w
 | Not recording usage | Tokens per request, totalled per run |
 | Tests that call the real API | Fakes; check them against the SDK's types |
 
-## 12. Reading resources
+## Reading resources
 
 Curated official documentation for this session: [`resources/references.md`](resources/references.md).
 
-## 13. Reflection questions
+## Reflection questions
 
 1. Which of the failure cases in this session have you seen in production integrations in your own work, with other APIs?
 2. Where would a wrong triage cause real harm, and how would you design for that?
 3. What would you need to know before sending real incident reports to an external LLM provider?
 4. Is the cost of this tool worth it compared with a person's time? What would you measure to decide?
 
-## 14. Interview questions
+## Interview questions
 
-Practise answering these out loud, in two minutes or less each:
+Practise answering these out loud and support each answer with clear engineering reasoning:
 
 1. Walk through an LLM API request and response. What does each field do?
 2. How do you get reliable structured data out of an LLM?
@@ -141,11 +111,30 @@ Practise answering these out loud, in two minutes or less each:
 6. What is prompt injection, and how do you reduce the risk?
 7. When would you call a provider's SDK directly rather than use a framework such as LangChain?
 
-## 15. Next-session preparation
+## Next-session preparation
 
 **Session 10: LangChain fundamentals** rebuilds this session's triage with LangChain: prompt templates, chat models, structured output and composition. You'll compare the two versions on code size, debuggability, testability and lock-in.
 
-Before the session:
+Before continuing:
 
 - Finish this workbook and tag `session-09`.
 - Write down, in a few lines, what you'd want a framework to do for you, having written the direct version.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

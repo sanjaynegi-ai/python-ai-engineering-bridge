@@ -1,7 +1,6 @@
 # Session 14 Assignment: Capstone Ingestion
 
 **Type:** Milestone 1 is **Independent**: design before you build, without an assistant. Milestones 2 to 6 are **AI-assisted**: you may use Claude Code, or an approved assistant, following the Session 13 workflow. Writing them yourself is just as valid.
-**Estimated time:** 3 hours
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and Session 11's `handbook-search`
 **Project:** **Project 04**, the capstone: the Internal Knowledge Assistant (`knowledge-assistant`). This session builds its ingestion; Session 15 adds the answers.
 
@@ -94,7 +93,7 @@ Each stub's docstring is the precise contract, and its test file is the executab
 
 ## Implementation milestones
 
-### Milestone 1: Design (20 min, Independent)
+### Milestone 1: Design
 
 Before writing code, read `models.py`, `embedding.py`, `cli.py` and the four stubs. Then create `ARCHITECTURE.md` in the project root with these sections, in your own words:
 
@@ -110,7 +109,7 @@ Before writing code, read `models.py`, `embedding.py`, `cli.py` and the four stu
 
 Commit it. You'll revise it in Milestone 6, and you'll present it in Session 16.
 
-### Milestone 2: Documents (30 min)
+### Milestone 2: Documents
 
 Implement `discover`, `content_hash` and `load_document`.
 
@@ -123,7 +122,7 @@ uv run pytest tests/acceptance/test_documents.py
 - `encoding="utf-8-sig"` reads UTF-8 and drops a byte-order mark if there is one. Files saved by Windows Notepad often start with one.
 - pypdf raises `PdfReadError` (and subclasses) for corrupt files. Translate exactly that, plus `OSError`, into `DocumentError`; don't catch `Exception` (notebook Part 5).
 
-### Milestone 3: Chunking (25 min)
+### Milestone 3: Chunking
 
 Implement `chunk_document`.
 
@@ -138,7 +137,7 @@ Two reasonable routes:
 
 Either way, the tests check behaviour, not implementation: size limits, sections, pages, overlap, and that no word of the document is lost.
 
-### Milestone 4: The store (45 min)
+### Milestone 4: The store
 
 Implement `ChunkStore` over Chroma, the only module that imports `chromadb`.
 
@@ -152,7 +151,7 @@ uv run pytest tests/acceptance/test_store.py
 - `replace` is the heart of R6: an edited document must not keep old chunks, whether it grew or shrank. Notebook Part 2 shows what `add` and `upsert` alone get wrong. Decide your order of operations (Milestone 1) and write it in a comment.
 - Chroma returns cosine **distance**; `Hit.score` is **similarity**.
 
-### Milestone 5: Ingestion (40 min)
+### Milestone 5: Ingestion
 
 Implement `ingest`.
 
@@ -168,7 +167,7 @@ Follow the docstring and the flow diagram in the notebook. The tests check what 
 
 Then write **at least three tests of your own** in `tests/unit/`, for behaviour you decided in Milestone 1 that the acceptance tests don't pin down (for example: your order of operations in `replace`, a helper you wrote, or what your logs say about a removed file).
 
-### Milestone 6: Run it for real (20 min)
+### Milestone 6: Run it for real
 
 The real embedder, the real corpus, and the provided CLI. Run each step and keep the output for your deliverables:
 
@@ -263,3 +262,22 @@ Submit your `knowledge-assistant` repository, tagged `session-14`, containing:
 - The output of the Milestone 6 runs (paste it into `ARCHITECTURE.md`, or save it as `RUNS.md`).
 
 Don't commit the `index/` folder or `.env`: the starter's `.gitignore` already excludes them.
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

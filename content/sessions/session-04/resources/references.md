@@ -53,3 +53,22 @@ Official documentation first. Each link says *why* it's worth your time, so you 
 | [`breakpoint()`](https://docs.python.org/3/library/functions.html#breakpoint) | How the built-in works, and `PYTHONBREAKPOINT` |
 | [Python debugging in VS Code](https://code.visualstudio.com/docs/python/debugging) | Debug configurations, including `"module"` launch |
 | [Python testing in VS Code](https://code.visualstudio.com/docs/python/testing) | The Testing view, running and debugging pytest tests |
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->

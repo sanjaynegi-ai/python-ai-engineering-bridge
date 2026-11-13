@@ -1,7 +1,6 @@
 # Session 16 Assignment: Capstone Completion
 
-**Type:** Part A (before the session) and Part B (the final assessment, in the session) are **Independent**. Part C (after the session) is **AI-assisted**: you may use Claude Code, or an approved assistant, following the Session 13 workflow.
-**Estimated time:** 30 minutes before the session; about 3 hours after it
+**Type:** Parts A and B are **Independent**. Part C is **AI-assisted**: you may use Claude Code, or an approved assistant, following the Session 13 workflow.
 **Builds on:** [`01-concepts.ipynb`](../notebooks/01-concepts.ipynb), and your `knowledge-assistant`, tagged `session-15`
 **Project:** **Project 04**, the capstone. This assignment completes it: **Milestone 4**.
 
@@ -9,7 +8,7 @@
 
 ## Business scenario
 
-The IT operations team wants to roll the Internal Knowledge Assistant out to every on-call engineer. Before they do, the platform team has two conditions: an end-to-end test suite that shows the parts work together when the documents change, and logs that let the on-call engineer for the assistant itself answer "is it slow, is it answering, and what happened to this request?" without reading anyone's question. And your team lead wants five minutes from you on how it works and where it's weak.
+The IT operations team wants to roll the Internal Knowledge Assistant out to every on-call engineer. Before they do, the platform team has two conditions: an end-to-end test suite that shows the parts work together when the documents change, and logs that let the on-call engineer for the assistant itself answer "is it slow, is it answering, and what happened to this request?" without reading anyone's question. Your team lead also wants you to explain how it works and where it is weak.
 
 ## Learning objectives
 
@@ -28,26 +27,26 @@ By completing this assignment you will:
 
 ---
 
-## Part A: Before the session (30 min, Independent)
+## Part A: Readiness preparation
 
-You'll demonstrate your capstone in five minutes, from its `session-15` state. Create `PRESENTATION.md` with:
+Prepare to demonstrate your capstone from its `session-15` state. Create `PRESENTATION.md` with:
 
 1. The problem, in one sentence.
 2. A diagram of **your** modules and the path of one question. Text or Mermaid in the Markdown file is fine.
 3. Two decisions you'd defend, each with the alternative you rejected and why.
-4. What you'll show live: one answered question and one "not found" (offline mode is fine: `ASSISTANT_GENERATOR=extractive`), and one number from `EVALUATION.md`.
+4. What you'll demonstrate: one answered question and one "not found" (offline mode is fine: `ASSISTANT_GENERATOR=extractive`), and one number from `EVALUATION.md`.
 5. Two known limitations, and what you'd do about each.
 
-Rehearse once against a timer. Notebook Part 5 has examples of weak and strong statements, and the [capstone rubric](../../../assessments/capstone-rubric.md) is what the demonstration is assessed against.
+Review the presentation once for clarity. Notebook Part 5 has examples of weak and strong statements, and the [capstone rubric](../../../assessments/capstone-rubric.md) is what the demonstration is assessed against.
 
-## Part B: In the session
+## Part B: Readiness assessment and capstone demonstration
 
-- **The final assessment:** 60 minutes, without AI assistants. Read [`assessments/final-assessment.md`](../../../assessments/final-assessment.md) and work through the checklist in [`assessments/python-readiness.md`](../../../assessments/python-readiness.md) beforehand. Check that you can switch off your editor's AI features.
-- **Demonstrations:** five minutes each, then questions.
+- **The final assessment:** complete it without AI assistants. Read [`assessments/final-assessment.md`](../../../assessments/final-assessment.md), work through the checklist in [`assessments/python-readiness.md`](../../../assessments/python-readiness.md), and check that you can switch off your editor's AI features.
+- **Capstone demonstration:** present the application and answer questions about your engineering decisions.
 
 ---
 
-## Part C: After the session, complete the capstone
+## Part C: Complete the capstone
 
 ### Project setup
 
@@ -78,7 +77,7 @@ The copy **replaces** the provided `cli.py` (it now configures logging, and has 
 | `tests/acceptance/test_events.py` | Milestone 3 |
 | Your `ingestion.py`, `answering.py` and `api.py` | **Yours to extend** (Milestone 3) |
 
-### Milestone 1: The logging setup (40 min)
+### Milestone 1: The logging setup
 
 Implement `JsonFormatter` and `configure_logging` in `logging_setup.py`; their docstrings are the specification.
 
@@ -93,7 +92,7 @@ uv run pytest          # Session 14 and 15 CLI tests pass again
 - "Replaces any handler this function added before": you need a way to recognise your own handler. An attribute on it, or a small subclass, both work.
 - An exception is logged **by type only**. Before you move on, write down why: what can an exception's message contain?
 
-### Milestone 2: Integration tests (30 min)
+### Milestone 2: Integration tests
 
 ```bash
 uv run pytest tests/integration
@@ -106,7 +105,7 @@ Then:
 1. In `ARCHITECTURE.md`, add a section **"Found by integration tests"**: each failure, its cause, and its fix. If nothing failed, say so, and name the integration test you think was most likely to catch a bug in your design, and why.
 2. Write **one integration test of your own** in `tests/integration/`, for a behaviour that crosses modules and that no provided test covers. Some ideas: `status` after a file is deleted; the UI (with `AppTest`) and the API giving the same answer from one index; an evaluation run before and after a document changes.
 
-### Milestone 3: Events (40 min)
+### Milestone 3: Events
 
 Extend **your own** modules so they log these events, each as one record whose message and `event` field are the event's name, with the other fields passed in `extra=`. This table and the tests define them:
 
@@ -131,7 +130,7 @@ uv run pytest tests/acceptance/test_events.py
 - `time.perf_counter()` is the right clock for durations; `time.time()` can jump.
 - Finally, make `app_from_settings()` call `configure_logging(logging.INFO, json_format=True)`, so the service logs JSON when uvicorn runs it.
 
-### Milestone 4: Observe (25 min)
+### Milestone 4: Observe
 
 Generate some logs, and answer questions from them:
 
@@ -147,7 +146,7 @@ Then start the API (`uv run uvicorn --factory knowledge_assistant.api:app_from_s
 
 Add a section **"Operations"** to `ARCHITECTURE.md`: your report's output, the three alerts you'd set up first (notebook Part 4), and one question your logs **can't** answer yet.
 
-### Milestone 5: Final documents (25 min)
+### Milestone 5: Final documents
 
 - **`ARCHITECTURE.md`:** make it match the code. Put the known limitations in priority order, each with what you'd do about it.
 - **`PRESENTATION.md`:** update it with anything the demonstration and its questions taught you.
@@ -216,3 +215,22 @@ Your `knowledge-assistant` repository, tagged `session-16`, with:
 - `ARCHITECTURE.md` (including "Found by integration tests" and "Operations"), `EVALUATION.md`, `PRESENTATION.md`, an updated `README.md`, and your reflection.
 
 This completes **Milestone 4**. Together with the final assessment, it's the evidence for the readiness decision in [`assessments/python-readiness.md`](../../../assessments/python-readiness.md).
+
+---
+
+<!-- skillup-branding:start -->
+## About the mentor
+
+**Sanjay Negi** brings 23+ years of industry experience and helps experienced software engineers and technology leaders transition into high-value AI roles, including **AI Engineer**, **Forward Deployed Engineer**, and **GenAI Architect**. He has trained more than 1,100 experienced engineers.
+
+<p align="center">
+  <img src="../../../assets/diagrams/SkillUpWithSanjay.png" alt="#SkillUpWithSanjay logo" width="60">
+</p>
+
+<p align="center">
+  <strong>#SkillUpWithSanjay</strong><br>
+  <a href="https://www.sanjaynegi.in" target="_blank" rel="noopener noreferrer">Website</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://www.linkedin.com/in/sanjay-negi-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</p>
+<!-- skillup-branding:end -->
