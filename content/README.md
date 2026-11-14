@@ -1,6 +1,5 @@
 # Python to AI Engineering Bridge
 
-**SkillUp · for experienced developers · 8 weekends · 16 live sessions of 2 hours**
 
 You already build software professionally, in Java, C#, JavaScript or TypeScript, or another language. This course closes the gap between that experience and the Python that AI engineering is written in. By the end, you'll read, write, test and debug professional Python, and build applications that call LLMs, serve APIs and retrieve from your own documents.
 
